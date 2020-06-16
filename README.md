@@ -1,5 +1,9 @@
 # titech-2020
 
+## 進め方
+- 各Lessonの開始時、終了時の状態をブランチで残す
+- コミットはこまめに積む
+
 ## Vue3のセットアップ
 こちらの手順に従って行いました。
 https://www.vuemastery.com/blog/vue-3-start-using-it-today/
