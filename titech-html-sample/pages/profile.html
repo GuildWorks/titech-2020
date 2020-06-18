@@ -3,11 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title>プロフィール</title>
+    <style>
+      .trim-image-to-circle {
+        background-image: url("../images/profile.png");  /* 表示する画像 */
+        width:  300px;       /* ※縦横を同値に */
+        height: 300px;       /* ※縦横を同値に */
+        border-radius: 80%;  /* 角丸半径を50%にする(=円形にする) */
+        background-position: center top;  /* 横長画像の左上を基準に表示 */
+        display: inline-block;          /* 複数の画像を横に並べたい場合 */
+      }
+    </style>
   </head>
   <body>
     <!-- プロフィール項目は相談 -->
     <h1>プロフィール</h1>
-    <img src="../images/profile.png" alt="Toko's profile picture"> 
+    <p class="trim-image-to-circle"></p>
     <ul>
       <li>名前: 東工 大</li>
       <li>大学: 東京工業大学</li>
@@ -18,9 +28,7 @@
     <h2>意気込み</h2> 
       <p>プログラミングの経験はありませんが、アプリが作りたいです。</p>
       <p>みんなで協力してがんばりましょう。</p>
-      <!-- aタグ、imgタグ -->
     <h2>好きなWebサイト</h2>
       <a href='https://www.google.com/'>Google</a>
-    
   </body>
 </html>
