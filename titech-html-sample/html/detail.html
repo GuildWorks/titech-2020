@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>メンバープロフィール | TOTAL Sample Project</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="TOTAL Sample Project" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-white flex flex-col font-sans">
+    <div class="container mx-auto">
+      <header class="flex items-center justify-between relative pl-4 sm:pl-0 py-6">
+        <p class="leading-none">
+          <a href="index.html" class="text-xl sm:text-2xl font-bold uppercase text-blue-900 hover:text-blue-800">
+            TOTAL Sample Project
+          </a>
+        </p>
+        <nav class="hidden md:flex text-lg">
+          <a href="list.html" class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold">
+            メンバーリスト
+          </a>
+          <a href="detail.html" class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold">
+            メンバープロフィール
+          </a>
+        </nav>
+        <button class="flex md:hidden flex-col absolute top-0 right-0 py-6 px-4 focus:outline-none">
+          <span class="w-6 h-1 mb-1 bg-gray-500"></span>
+          <span class="w-6 h-1 mb-1 bg-gray-500"></span>
+          <span class="w-6 h-1 mb-1 bg-gray-500"></span>
+        </button>
+      </header>
+      <main>
+        <div class="container mx-auto">
+          <h1 class="text-2xl sm:text-3xl text-blue-900 p-4 mb-4 md:mb-8 border-b">メンバープロフィール</h1>
+          <div class="lg:w-11/12 mx-auto flex flex-wrap">
+            <div class="p-4 lg:px-8 lg:w-1/2 w-full">
+              <div class="flex items-start">
+                <div class="relative shadow-lg h-20 w-20 sm:h-24 sm:w-24 border-white rounded-full overflow-hidden border-4 mr-4">
+                  <img src="https://images.unsplash.com/photo-1577409873799-29f8be1311dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1834&q=80" class="object-cover w-full h-full" alt="プロフィール画像" />
+                </div>
+                <div>
+                  <h3 class="text-sm title-font text-gray-500 tracking-widest">NAME</h3>
+                  <h2 class="text-blue-900 text-2xl sm:text-3xl title-font font-medium mb-1">仁和 泰也</h2>
+                  <div class="flex mb-4">
+                    <span class="flex">
+                      <a href="#" class="text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-5 h-5">
+                          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                        </svg>
+                      </a>
+                      <a href="#" class="ml-2 text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-5 h-5">
+                          <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                        </svg>
+                      </a>
+                      <a href="#" class="ml-2 text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-5 h-5">
+                          <path d="M0 0h24v24H0z" fill="none"></path>
+                          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path>
+                        </svg>
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <hr class="my-4 sm:my-8" />
+              <p class="leading-relaxed">こんにちは。仁和泰也といいます。友人からはにわりんと呼ばれているので、にわりんと呼んでください。住まいは新宿で、大学4回生です。趣味は、写真を撮ることが好きなので、休日は山に登り、風景や草花をカメラに収めています。また、自粛生活が続いたとき、料理くらいできないとと思い、夏から料理教室に通っています。得意料理はカレーライスです。</p>
+            </div>
+            <div class="profile-table p-4 bg-gray-100 mt-8 lg:w-1/2 w-full">
+              <div class="shadow-md rounded overflow-y-auto">
+                <table class="w-full text-md bg-white">
+                  <tbody>
+                    <tr class="border-b bg-gray-100">
+                      <th class="p-4 whitespace-no-wrap text-left">生年月日</th>
+                      <td class="p-4">2000年10月10日</td>
+                    </tr>
+                    <tr class="border-b bg-gray-100">
+                      <th class="p-4 whitespace-no-wrap text-left">血液型</th>
+                      <td class="p-4">A型</td>
+                    </tr>
+                    <tr class="border-b bg-gray-100">
+                      <th class="p-4 whitespace-no-wrap text-left">出身地</th>
+                      <td class="p-4">東京都</td>
+                    </tr>
+                    <tr class="border-b bg-gray-100">
+                      <th class="p-4 whitespace-no-wrap text-left">所属・部署</th>
+                      <td class="p-4">東京工業大学 情報理工学院</td>
+                    </tr>
+                    <tr class="border-b bg-gray-100">
+                      <th class="p-4 whitespace-no-wrap text-left">星座</th>
+                      <td class="p-4">天秤座</td>
+                    </tr>
+                    <tr class="border-b bg-gray-100">
+                      <th class="p-4 whitespace-no-wrap text-left">趣味</th>
+                      <td class="p-4">写真・料理</td>
+                    </tr>
+                    <tr class="border-b bg-gray-100">
+                      <th class="p-4 whitespace-no-wrap text-left">ニックネーム</th>
+                      <td class="p-4">にわりん</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="p-4">
+        <p class="text-gray-500 font-xs text-center">
+            <span class="inline-block pt-2 border-t md:pt-8 md:border-none">
+              provided by Guild Works Volunteers
+            </span>
+          </p>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
