@@ -1,0 +1,64 @@
+{
+  "userlistData": [
+    {
+      "id": "0001",
+      "name": "仁和 泰也",
+      "email": "niwa@example.com",
+      "role": "admin"
+    },
+    {
+      "id": "0002",
+      "name": "川面 崇義",
+      "email": "kawadura@example.com",
+      "role": "member"
+    },
+    {
+      "id": "0003",
+      "name": "石北 俊寛",
+      "email": "kitaishi@example.com",
+      "role": "member"
+    },
+    {
+      "id": "0004",
+      "name": "岸 美貴",
+      "email": "kishi@example.com",
+      "role": "member"
+    },
+    {
+      "id": "0005",
+      "name": "大内田 結貴",
+      "email": "ohdauchi@example.com",
+      "role": "member"
+    }
+  ],
+  "userprofileData": [
+    {
+      "title": "生年月日",
+      "detail": "2000年10月10日"
+    },
+    {
+      "title": "血液型",
+      "detail": "A型"
+    },
+    {
+      "title": "出身地",
+      "detail": "東京都"
+    },
+    {
+      "title": "所属・部署",
+      "detail": "東京工業大学 情報理工学院"
+    },
+    {
+      "title": "星座",
+      "detail": "天秤座"
+    },
+    {
+      "title": "趣味",
+      "detail": "写真・料理"
+    },
+    {
+      "title": "ニックネーム",
+      "detail": "にわりん"
+    }
+  ]
+}
