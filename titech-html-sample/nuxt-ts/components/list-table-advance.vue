@@ -16,7 +16,7 @@
           class="border-b bg-gray-100"
         >
           <td class="py-1 px-2 md:py-2 md:px-3">
-            <input type="text" v-model="user.name" class="bg-transparent p-2" />
+            <input v-model="user.name" type="text" class="bg-transparent p-2" />
           </td>
           <td class="py-1 px-2 md:py-2 md:px-3">
             <input
@@ -64,7 +64,9 @@
                     />
                   </svg>
                 </span>
-                <span class="text-xs text-gray-600 font-bold leading-none pt-1">Profile</span>
+                <span class="text-xs text-gray-600 font-bold leading-none pt-1">
+                  Profile
+                </span>
               </a>
             </div>
           </td>
@@ -81,6 +83,11 @@ type UserList = {
   name: string
   email: string
   role: string
+  iconUrl: string
+  profile: {
+    title: string
+    detail: string
+  }[]
 }
 export default defineComponent({
   name: 'ListTableAdvance',

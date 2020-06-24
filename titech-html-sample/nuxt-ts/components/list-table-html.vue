@@ -15,8 +15,8 @@
           :key="index"
           class="border-b bg-gray-100"
         >
-          <td class="py-1 px-2 md:py-3 md:px-5">{{user.name}}</td>
-          <td class="py-1 px-2 md:py-3 md:px-5">{{user.email}}</td>
+          <td class="py-1 px-2 md:py-3 md:px-5">{{ user.name }}</td>
+          <td class="py-1 px-2 md:py-3 md:px-5">{{ user.email }}</td>
           <td class="py-1 px-2 md:py-3 md:px-5">
             <template v-if="user.role === 'admin'">リーダー</template>
             <template v-else>メンバー</template>
@@ -59,6 +59,11 @@ type UserList = {
   name: string
   email: string
   role: string
+  iconUrl: string
+  profile: {
+    title: string
+    detail: string
+  }[]
 }
 export default defineComponent({
   name: 'ListTableHtml',

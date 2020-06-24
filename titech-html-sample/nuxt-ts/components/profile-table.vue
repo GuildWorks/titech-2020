@@ -4,15 +4,15 @@
       <table class="w-full text-md bg-white">
         <tbody>
           <tr
-            v-for="(profile, index) in userProfile"
+            v-for="(profile, index) in userProfile()"
             :key="index"
             class="border-b bg-gray-100"
           >
             <th class="p-4 whitespace-no-wrap text-left">
-              {{profile.title}}
+              {{ profile.title }}
             </th>
             <td class="p-4">
-              {{profile.detail}}
+              {{ profile.detail }}
             </td>
           </tr>
         </tbody>
@@ -21,16 +21,27 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from 'nuxt-composition-api'
+import { defineComponent, reactive, SetupContext } from 'nuxt-composition-api'
 import userlistJson from '@/mock/userlist.json'
-type UserProfile = {
-  title: string
-  detail: string
+type UserList = {
+  id: string
+  name: string
+  email: string
+  role: string
+  iconUrl: string
+  profile: {
+    title: string
+    detail: string
+  }[]
 }
 export default defineComponent({
   name: 'ProfileTable',
-  setup(_) {
-    const userProfile = reactive<UserProfile[]>(userlistJson.userprofileData)
+  setup(_, { root }: SetupContext) {
+    const userList = reactive<UserList[]>(userlistJson.userlistData)
+    const userProfile = (): any => {
+      return userList.filter((user) => user.id === root.$route.params.id)[0]
+        .profile
+    }
     return {
       userProfile,
     }

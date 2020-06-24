@@ -3,17 +3,16 @@
     <div
       class="relative shadow-lg h-20 w-20 sm:h-24 sm:w-24 border-white rounded-full overflow-hidden border-4 mr-4"
     >
-      <img
-        class="object-cover w-full h-full"
-        src="https://images.unsplash.com/photo-1577409873799-29f8be1311dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1834&q=80"
-      />
+      <img class="object-cover w-full h-full" :src="props.iconUrl" />
     </div>
     <div>
       <h3 class="text-sm title-font text-gray-500 tracking-widest">
         NAME
       </h3>
-      <h2 class="text-blue-900 text-2xl sm:text-3xl title-font font-medium mb-1">
-        仁和 泰也
+      <h2
+        class="text-blue-900 text-2xl sm:text-3xl title-font font-medium mb-1"
+      >
+        {{ props.userName }}
       </h2>
       <div class="flex mb-4">
         <span class="flex">
@@ -45,7 +44,7 @@
               ></path>
             </svg>
           </a>
-          <a href="#" class="ml-2 text-gray-500">
+          <a :href="'mailto:' + props.email" class="ml-2 text-gray-500">
             <svg
               fill="currentColor"
               stroke-linecap="round"
@@ -65,3 +64,18 @@
     </div>
   </div>
 </template>
+<script lang="ts">
+import { defineComponent } from 'nuxt-composition-api'
+export default defineComponent({
+  props: {
+    iconUrl: { type: String },
+    userName: { type: String },
+    email: { type: String },
+  },
+  setup(props) {
+    return {
+      props,
+    }
+  }
+})
+</script>
