@@ -10,8 +10,9 @@
 
 - index.html（トップ）
 - list.html（一覧）
-- list-advance.html（一覧・編集可能）
 - detail.html（詳細）
+- list-advance.html（一覧・編集可能）
+- style.css(CSS)
 
 ## 参考サイト
 
