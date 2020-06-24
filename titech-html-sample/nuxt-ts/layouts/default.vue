@@ -18,7 +18,7 @@
             メンバーリスト
           </a>
           <a
-            href="/detail"
+            href="/user/0"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
             メンバープロフィール

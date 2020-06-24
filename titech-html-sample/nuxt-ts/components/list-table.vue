@@ -13,7 +13,8 @@
         <tr
           v-for="(user, index) in userList"
           :key="index"
-          class="border-b bg-gray-100"
+          class="border-b bg-gray-100 hover:bg-orange-100 cursor-pointer"
+          @click="userLink(user.id)"
         >
           <td class="py-1 px-2 md:py-3 md:px-5">{{user.name}}</td>
           <td class="py-1 px-2 md:py-3 md:px-5">{{user.email}}</td>
@@ -24,7 +25,7 @@
           <td class="py-1 px-2 md:py-3 md:pl-5">
             <div class="flex justify-end items-center">
               <a
-                href="/detail"
+                :href="'/user/' + user.id"
                 class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline flex items-center"
               >
                 <span
@@ -64,8 +65,12 @@ export default defineComponent({
   name: 'ListTable',
   setup(_) {
     const userList = reactive<UserList[]>(userlistJson.userlistData)
+    const userLink = (uid: string): void => {
+      window.location.href = '/user/' + uid
+    }
     return {
       userList,
+      userLink,
     }
   },
 })

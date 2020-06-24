@@ -1,5 +1,5 @@
 <template>
-  <div class="list-table-advance shadow-md sm:rounded overflow-y-auto">
+  <div class="list-table shadow-md sm:rounded overflow-y-auto">
     <table class="w-full text-md bg-white">
       <thead>
         <tr class="border-b bg-blue-900 text-white">
@@ -15,42 +15,20 @@
           :key="index"
           class="border-b bg-gray-100"
         >
-          <td class="py-1 px-2 md:py-2 md:px-3">
-            <input type="text" v-model="user.name" class="bg-transparent p-2" />
+          <td class="py-1 px-2 md:py-3 md:px-5">{{user.name}}</td>
+          <td class="py-1 px-2 md:py-3 md:px-5">{{user.email}}</td>
+          <td class="py-1 px-2 md:py-3 md:px-5">
+            <template v-if="user.role === 'admin'">リーダー</template>
+            <template v-else>メンバー</template>
           </td>
-          <td class="py-1 px-2 md:py-2 md:px-3">
-            <input
-              v-model="user.email"
-              type="text"
-              class="bg-transparent p-2 pr-8"
-            />
-          </td>
-          <td class="py-1 px-2 md:py-2 md:px-3">
-            <select value="user.role" class="bg-transparent leading-none p-2">
-              <option value="user" class="inline-block">メンバー</option>
-              <option value="admin" class="inline-blockx">リーダー</option>
-            </select>
-          </td>
-          <td class="py-1 px-2 md:py-2 md:px-3">
+          <td class="py-1 px-2 md:py-3 md:pl-5">
             <div class="flex justify-end items-center">
-              <button
-                type="button"
-                class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-              >
-                Save
-              </button>
-              <button
-                type="button"
-                class="mr-3 text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-              >
-                Delete
-              </button>
               <a
                 :href="'/user/' + user.id"
-                class="inline-flex flex-col items-center justify-center pt-1 hover:opacity-75"
+                class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline flex items-center"
               >
                 <span
-                  class="rounded-full w-6 h-6 bg-gray-600 p-0 border-0 inline-flex items-center justify-center text-white"
+                  class="rounded-full w-5 h-5 bg-white p-0 border-px border-white inline-flex items-center justify-center text-blue-500 mr-2"
                 >
                   <svg
                     fill="currentColor"
@@ -64,7 +42,7 @@
                     />
                   </svg>
                 </span>
-                <span class="text-xs text-gray-600 font-bold leading-none pt-1">Profile</span>
+                Profile
               </a>
             </div>
           </td>
@@ -83,7 +61,7 @@ type UserList = {
   role: string
 }
 export default defineComponent({
-  name: 'ListTableAdvance',
+  name: 'ListTableHtml',
   setup(_) {
     const userList = reactive<UserList[]>(userlistJson.userlistData)
     return {
