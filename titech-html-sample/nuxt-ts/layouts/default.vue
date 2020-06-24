@@ -1,7 +1,9 @@
 <template>
   <div class="bg-white flex flex-col font-sans">
     <div class="container mx-auto">
-      <header class="flex items-center justify-between relative pl-4 sm:pl-0 py-6">
+      <header
+        class="flex items-center justify-between relative pl-4 sm:pl-0 py-6"
+      >
         <p class="leading-none">
           <a
             href="/"
@@ -18,7 +20,7 @@
             メンバーリスト
           </a>
           <a
-            href="/user/0"
+            href="/user/0001"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
             メンバープロフィール
