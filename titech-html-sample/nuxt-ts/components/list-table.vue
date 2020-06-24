@@ -16,17 +16,21 @@
           class="border-b bg-gray-100 hover:bg-orange-100 cursor-pointer"
           @click="userLink(user.id)"
         >
-          <td class="py-1 px-2 md:py-3 md:px-5">{{ user.name }}</td>
-          <td class="py-1 px-2 md:py-3 md:px-5">{{ user.email }}</td>
-          <td class="py-1 px-2 md:py-3 md:px-5">
+          <td class="py-3 px-5 whitespace-no-wrap sm:whitespace-normal">
+            {{ user.name }}
+          </td>
+          <td class="py-3 px-5 whitespace-no-wrap sm:whitespace-normal">
+            {{ user.email }}
+          </td>
+          <td class="py-3 px-5 whitespace-no-wrap sm:whitespace-normal">
             <template v-if="user.role === 'admin'">リーダー</template>
             <template v-else>メンバー</template>
           </td>
-          <td class="py-1 px-2 md:py-3 md:pl-5">
+          <td class="py-3 px-5">
             <div class="flex justify-end items-center">
               <a
                 :href="'/user/' + user.id"
-                class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline flex items-center"
+                class="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline flex items-center"
               >
                 <span
                   class="rounded-full w-5 h-5 bg-white p-0 border-px border-white inline-flex items-center justify-center text-blue-500 mr-2"
