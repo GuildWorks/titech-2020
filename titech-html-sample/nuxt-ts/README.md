@@ -1,5 +1,15 @@
 # NuxtTS
 
+## 構成
+
+JSONのモックデータを読み込んで、リストとプロフィールを表示させています。
+
+- [Nuxt.JS v.2.13.0](https://nuxtjs.org/) (mode: SSR /  target:Static)
+- [Nuxt TypeScript](https://typescript.nuxtjs.org/)
+- [Nuxt Composition API](https://github.com/nuxt-community/composition-api)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+
 ## Build Setup
 
 ```bash
