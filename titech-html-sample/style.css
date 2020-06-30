@@ -1,0 +1,41 @@
+html {
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  color: #4a5568;
+}
+/* ListTable */
+
+.list-table tbody tr:nth-child(odd) {
+  background-color: white;
+}
+/* ListTableAdvance */
+.list-table-advance tbody tr:nth-child(odd) {
+  background-color: white;
+}
+
+.list-table-advance tbody tr:nth-child(odd):hover {
+  background-color: #fffaf0;
+}
+.list-table-advance input[type='text'],
+.list-table-advance select {
+  outline-color: #a0aec0;
+}
+/* ProfileTable */
+.profile-table tbody tr:nth-child(odd) {
+  background-color: white;
+}
