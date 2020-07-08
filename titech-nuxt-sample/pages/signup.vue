@@ -46,7 +46,7 @@ export default defineComponent({
   },
 })
 </script>
-<style>
+<style scoped>
 .signup {
   margin-top: 20px;
   display: flex;
