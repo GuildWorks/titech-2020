@@ -25,6 +25,12 @@
           >
             メンバープロフィール
           </a>
+          <a
+            href="/signup"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            ユーザー登録
+          </a>
         </nav>
         <button
           class="flex md:hidden flex-col absolute top-0 right-0 py-6 px-4 focus:outline-none"
