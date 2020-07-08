@@ -26,6 +26,12 @@
             メンバープロフィール
           </a>
           <a
+            href="/signin"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            ログイン
+          </a>
+          <a
             href="/signup"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
