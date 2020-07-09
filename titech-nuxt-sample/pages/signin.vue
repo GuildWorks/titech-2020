@@ -1,7 +1,7 @@
 <template>
   <div>
-    <PageHeading>ユーザー登録</PageHeading>
-    <div class="signup">
+    <PageHeading>ログイン</PageHeading>
+    <div class="signin">
       <input
         v-model="username"
         type="text"
@@ -18,7 +18,7 @@
         class="text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 mt-2 rounded focus:outline-none focus:shadow-outline flex items-center"
         @click="submit"
       >
-        登録する
+        ログイン
       </button>
     </div>
   </div>
@@ -47,7 +47,7 @@ export default defineComponent({
 })
 </script>
 <style scoped>
-.signup {
+.signin {
   margin-top: 20px;
   display: flex;
   flex-flow: column nowrap;
