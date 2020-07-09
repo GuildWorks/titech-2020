@@ -15,7 +15,7 @@
         placeholder="Password"
       />
       <button
-        class="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline flex items-center"
+        class="text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 mt-2 rounded focus:outline-none focus:shadow-outline flex items-center"
         @click="submit"
       >
         登録する
@@ -32,8 +32,8 @@ export default defineComponent({
     PageHeading,
   },
   setup(props) {
-    const username = ref(null)
-    const password = ref(null)
+    const username = ref('')
+    const password = ref('')
     function submit() {
       // TODO
     }
