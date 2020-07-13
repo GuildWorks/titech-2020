@@ -14,13 +14,13 @@
         </p>
         <nav class="hidden md:flex text-lg">
           <a
-            href="/list"
+            href="/users"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
             メンバーリスト
           </a>
           <a
-            href="/user/0001"
+            href="/users/0001"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
             メンバープロフィール
