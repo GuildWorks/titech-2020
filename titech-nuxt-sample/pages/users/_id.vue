@@ -8,7 +8,7 @@
           :user-name="userData().name"
           :email="userData().email"
         />
-        <hr class="my-4 sm:my-8">
+        <hr class="my-4 sm:my-8" />
         <p class="leading-relaxed">{{ userData().comment }}</p>
       </div>
       <ProfileTable
@@ -68,7 +68,7 @@ export default defineComponent({
     return {
       userData,
     }
-  }
+  },
 })
 </script>
 <style></style>
