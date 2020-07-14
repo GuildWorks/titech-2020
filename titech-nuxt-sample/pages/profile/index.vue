@@ -46,11 +46,9 @@ export default defineComponent({
   setup(_, { root }: SetupContext) {
     const userList = reactive<UserList[]>(userlistJson.userlistData)
     const userData = (): UserList => {
-      if (
-        userList.filter((user) => user.id === root.$route.params.id).length > 0
-      )
-        return userList.filter((user) => user.id === root.$route.params.id)[0]
-      else
+      if (userList.filter((user) => user.id === '0001').length > 0) {
+        return userList.filter((user) => user.id === '0001')[0]
+      } else
         return {
           id: '',
           name: '',
