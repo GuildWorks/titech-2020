@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto">
-    <PageHeading>メンバープロフィール</PageHeading>
+    <PageHeading>あなたのプロフィール</PageHeading>
     <div class="lg:w-11/12 mx-auto flex flex-wrap">
       <div class="p-4 lg:px-8 lg:w-1/2 w-full">
         <ProfileNameIcon
@@ -46,11 +46,9 @@ export default defineComponent({
   setup(_, { root }: SetupContext) {
     const userList = reactive<UserList[]>(userlistJson.userlistData)
     const userData = (): UserList => {
-      if (
-        userList.filter((user) => user.id === root.$route.params.id).length > 0
-      )
-        return userList.filter((user) => user.id === root.$route.params.id)[0]
-      else
+      if (userList.filter((user) => user.id === '0001').length > 0) {
+        return userList.filter((user) => user.id === '0001')[0]
+      } else
         return {
           id: '',
           name: '',

@@ -3,8 +3,6 @@
     <PageHeading>メンバーリスト</PageHeading>
     <ListTable class="my-4 lg:w-11/12 mx-auto" />
     <hr class="my-12" />
-    <p class="my-4">HTML用（行でリンクしない）</p>
-    <ListTableHtml class="my-4 lg:w-11/12 mx-auto" />
   </div>
 </template>
 <script lang="ts">
