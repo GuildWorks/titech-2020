@@ -7,43 +7,15 @@
       "role": "admin",
       "iconUrl": "https://images.unsplash.com/photo-1577409873799-29f8be1311dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1834&q=80",
       "comment": "こんにちは。仁和 泰也といいます。友人からはにわりんと呼ばれているので、にわりんと呼んでください。住まいは新宿で、大学4回生です。趣味は、写真を撮ることが好きなので、休日は山に登り、風景や草花をカメラに収めています。また、自粛生活が続いたとき、料理くらいできないとと思い、夏から料理教室に通っています。得意料理はカレーライスです。",
-      "profile": [
-        {
-          "key": "birthday",
-          "title": "生年月日",
-          "detail": "2000年10月10日"
-        },
-        {
-          "key": "bloodtype",
-          "title": "血液型",
-          "detail": "A型"
-        },
-        {
-          "key": "birthplace",
-          "title": "出身地",
-          "detail": "東京都"
-        },
-        {
-          "key": "belongs",
-          "title": "所属・部署",
-          "detail": "東京工業大学 情報理工学院"
-        },
-        {
-          "key": "sign",
-          "title": "星座",
-          "detail": "天秤座"
-        },
-        {
-          "key": "hobby",
-          "title": "趣味",
-          "detail": "写真・料理"
-        },
-        {
-          "key": "nickname",
-          "title": "ニックネーム",
-          "detail": "にわりん"
-        }
-      ]
+      "profile": {
+        "belongs": "東京工業大学 情報理工学院",
+        "nickname": "にわりん",
+        "birthplace": "東京都",
+        "birthday": "2000年10月10日",
+        "bloodType": "A型",
+        "sign": "天秤座",
+        "hobby": "写真・料理"
+      }
     },
     {
       "id": "0002",
@@ -52,43 +24,15 @@
       "role": "member",
       "iconUrl": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80",
       "comment": "こんにちは。川面 崇義といいます。友人からはかわさんと呼ばれているので、かわさんと呼んでください。住まいは新宿で、大学4回生です。趣味は、写真を撮ることが好きなので、休日は山に登り、風景や草花をカメラに収めています。また、自粛生活が続いたとき、料理くらいできないとと思い、夏から料理教室に通っています。得意料理はカレーライスです。",
-      "profile": [
-        {
-          "key": "birthday",
-          "title": "生年月日",
-          "detail": "2000年10月10日"
-        },
-        {
-          "key": "bloodtype",
-          "title": "血液型",
-          "detail": "A型"
-        },
-        {
-          "key": "birthplace",
-          "title": "出身地",
-          "detail": "東京都"
-        },
-        {
-          "key": "belongs",
-          "title": "所属・部署",
-          "detail": "東京工業大学 情報理工学院"
-        },
-        {
-          "key": "sign",
-          "title": "星座",
-          "detail": "天秤座"
-        },
-        {
-          "key": "hobby",
-          "title": "趣味",
-          "detail": "写真・料理"
-        },
-        {
-          "key": "nickname",
-          "title": "ニックネーム",
-          "detail": "かわさん"
-        }
-      ]
+      "profile": {
+        "belongs": "東京工業大学 情報理工学院",
+        "nickname": "かわさん",
+        "birthplace": "福岡県",
+        "birthday": "2000年11月11日",
+        "bloodType": "B型",
+        "sign": "蠍座",
+        "hobby": "一人旅"
+      }
     },
     {
       "id": "0003",
@@ -97,42 +41,15 @@
       "role": "member",
       "iconUrl": "https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1900&q=80",
       "comment": "こんにちは。石北 俊寛といいます。友人からはいしとしと呼ばれているので、いしとしと呼んでください。住まいは新宿で、大学4回生です。趣味は、写真を撮ることが好きなので、休日は山に登り、風景や草花をカメラに収めています。また、自粛生活が続いたとき、料理くらいできないとと思い、夏から料理教室に通っています。得意料理はカレーライスです。",
-      "profile": [
-        {
-          "title": "生年月日",
-          "detail": "2000年10月10日"
-        },
-        {
-          "key": "bloodtype",
-          "title": "血液型",
-          "detail": "A型"
-        },
-        {
-          "key": "birthplace",
-          "title": "出身地",
-          "detail": "東京都"
-        },
-        {
-          "key": "belongs",
-          "title": "所属・部署",
-          "detail": "東京工業大学 情報理工学院"
-        },
-        {
-          "key": "sign",
-          "title": "星座",
-          "detail": "天秤座"
-        },
-        {
-          "key": "hobby",
-          "title": "趣味",
-          "detail": "写真・料理"
-        },
-        {
-          "key": "nickname",
-          "title": "ニックネーム",
-          "detail": "いしとし"
-        }
-      ]
+      "profile": {
+        "belongs": "東京工業大学 情報理工学院",
+        "nickname": "いしとし",
+        "birthplace": "京都府",
+        "birthday": "2000年12月12日",
+        "bloodType": "O型",
+        "sign": "射手座",
+        "hobby": "野球"
+      }
     },
     {
       "id": "0004",
@@ -141,43 +58,15 @@
       "role": "member",
       "iconUrl": "https://images.unsplash.com/photo-1519742866993-66d3cfef4bbd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1762&q=80",
       "comment": "こんにちは。岸 美貴といいます。友人からはキッシーと呼ばれているので、キッシーと呼んでください。住まいは新宿で、大学4回生です。趣味は、写真を撮ることが好きなので、休日は山に登り、風景や草花をカメラに収めています。また、自粛生活が続いたとき、料理くらいできないとと思い、夏から料理教室に通っています。得意料理はカレーライスです。",
-      "profile": [
-        {
-          "key": "birthday",
-          "title": "生年月日",
-          "detail": "2000年10月10日"
-        },
-        {
-          "key": "bloodtype",
-          "title": "血液型",
-          "detail": "A型"
-        },
-        {
-          "key": "birthplace",
-          "title": "出身地",
-          "detail": "東京都"
-        },
-        {
-          "key": "belongs",
-          "title": "所属・部署",
-          "detail": "東京工業大学 情報理工学院"
-        },
-        {
-          "key": "sign",
-          "title": "星座",
-          "detail": "天秤座"
-        },
-        {
-          "key": "hobby",
-          "title": "趣味",
-          "detail": "写真・料理"
-        },
-        {
-          "key": "nickname",
-          "title": "ニックネーム",
-          "detail": "キッシー"
-        }
-      ]
+      "profile": {
+        "belongs": "東京工業大学 情報理工学院",
+        "nickname": "キッシー",
+        "birthplace": "栃木県",
+        "birthday": "2001年2月1日",
+        "bloodType": "AB型",
+        "sign": "水瓶座",
+        "hobby": "テニス"
+      }
     },
     {
       "id": "0005",
@@ -186,43 +75,15 @@
       "role": "member",
       "iconUrl": "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1834&q=80",
       "comment": "こんにちは。大内田 結貴といいます。友人からはゆうきと呼ばれているので、ゆうきと呼んでください。住まいは新宿で、大学4回生です。趣味は、写真を撮ることが好きなので、休日は山に登り、風景や草花をカメラに収めています。また、自粛生活が続いたとき、料理くらいできないとと思い、夏から料理教室に通っています。得意料理はカレーライスです。",
-      "profile": [
-        {
-          "key": "birthday",
-          "title": "生年月日",
-          "detail": "2000年10月10日"
-        },
-        {
-          "key": "bloodtype",
-          "title": "血液型",
-          "detail": "A型"
-        },
-        {
-          "key": "birthplace",
-          "title": "出身地",
-          "detail": "東京都"
-        },
-        {
-          "key": "belongs",
-          "title": "所属・部署",
-          "detail": "東京工業大学 情報理工学院"
-        },
-        {
-          "key": "sign",
-          "title": "星座",
-          "detail": "天秤座"
-        },
-        {
-          "key": "hobby",
-          "title": "趣味",
-          "detail": "写真・料理"
-        },
-        {
-          "key": "nickname",
-          "title": "ニックネーム",
-          "detail": "ゆうき"
-        }
-      ]
+      "profile": {
+        "belongs": "東京工業大学 情報理工学院",
+        "nickname": "ゆうき",
+        "birthplace": "神奈川県",
+        "birthday": "2001年3月3日",
+        "bloodType": "A型",
+        "sign": "魚座",
+        "hobby": "ゲーム（フォートナイト）"
+      }
     }
   ]
 }
