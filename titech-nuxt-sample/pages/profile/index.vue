@@ -40,9 +40,14 @@ type UserList = {
   role: string
   iconUrl: string
   profile: {
-    title: string
-    detail: string
-  }[]
+    belongs: string
+    nickname: string
+    birthplace: string
+    birthday: string
+    bloodType: string
+    sign: string
+    hobby: string
+  }
 }
 
 export default defineComponent({
@@ -63,12 +68,15 @@ export default defineComponent({
           email: '',
           role: '',
           iconUrl: '',
-          profile: [
-            {
-              title: '',
-              detail: '',
-            },
-          ],
+          profile: {
+            belongs: '',
+            nickname: '',
+            birthplace: '',
+            birthday: '',
+            bloodType: '',
+            sign: '',
+            hobby: ''
+          }
         }
     }
     return {

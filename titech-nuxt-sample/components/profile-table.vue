@@ -3,16 +3,60 @@
     <div class="shadow-md rounded overflow-y-auto">
       <table class="w-full text-md bg-white">
         <tbody>
-          <tr
-            v-for="(profile, index) in profile"
-            :key="index"
-            class="border-b bg-gray-100"
-          >
+          <tr class="border-b bg-gray-100">
             <th class="p-4 whitespace-no-wrap text-left">
-              {{ profile.title }}
+              所属・部署
             </th>
             <td class="p-4">
-              {{ profile.detail }}
+              {{ profile.belongs }}
+            </td>
+          </tr>
+          <tr class="border-b bg-gray-100">
+            <th class="p-4 whitespace-no-wrap text-left">
+              ニックネーム
+            </th>
+            <td class="p-4">
+              {{ profile.nickname }}
+            </td>
+          </tr>
+          <tr class="border-b bg-gray-100">
+            <th class="p-4 whitespace-no-wrap text-left">
+              出身地
+            </th>
+            <td class="p-4">
+              {{ profile.birthplace }}
+            </td>
+          </tr>
+          <tr class="border-b bg-gray-100">
+            <th class="p-4 whitespace-no-wrap text-left">
+              生年月日
+            </th>
+            <td class="p-4">
+              {{ profile.birthday }}
+            </td>
+          </tr>
+          <tr class="border-b bg-gray-100">
+            <th class="p-4 whitespace-no-wrap text-left">
+              血液型
+            </th>
+            <td class="p-4">
+              {{ profile.bloodType }}
+            </td>
+          </tr>
+          <tr class="border-b bg-gray-100">
+            <th class="p-4 whitespace-no-wrap text-left">
+              星座
+            </th>
+            <td class="p-4">
+              {{ profile.sign }}
+            </td>
+          </tr>
+          <tr class="border-b bg-gray-100">
+            <th class="p-4 whitespace-no-wrap text-left">
+              趣味
+            </th>
+            <td class="p-4">
+              {{ profile.hobby }}
             </td>
           </tr>
         </tbody>
@@ -30,9 +74,14 @@ type UserList = {
   role: string
   iconUrl: string
   profile: {
-    title: string
-    detail: string
-  }[]
+    belongs: string
+    nickname: string
+    birthplace: string
+    birthday: string
+    bloodType: string
+    sign: string
+    hobby: string
+  }
 }
 export default defineComponent({
   name: 'ProfileTable',
