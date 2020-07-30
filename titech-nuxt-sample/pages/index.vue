@@ -20,10 +20,6 @@
         と
         <a href="/profile" class="text-blue-900">プロフィール</a>
       </p>
-      <p class="text-gray-600 leading-relaxed mb-12 text-sm">
-        メンバーリストアドバンス→
-        <a href="/list-advance" class="text-blue-900">編集可能 ver.</a>
-      </p>
     </div>
     <div class="mb-16 sm:mb-0 mt-8 sm:mt-0 sm:w-3/5 sm:pl-12">
       <SvgImage />
