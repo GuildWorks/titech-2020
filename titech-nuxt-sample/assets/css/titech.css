@@ -6,3 +6,9 @@
     border-width: 1px;
     width: 300px;
 }
+
+.profile-edit-textarea {
+    border-width: 1px;
+    width: 520px;
+    height: 250px;
+}
