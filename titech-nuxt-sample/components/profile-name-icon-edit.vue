@@ -1,9 +1,17 @@
 <template>
-  <div class="flex items-start">
+  <div class="relative flex items-start">
     <div
-      class="relative shadow-lg h-20 w-20 sm:h-24 sm:w-24 border-white rounded-full overflow-hidden border-4 mr-4"
+      class="relative shadow-lg h-20 w-20 sm:h-24 sm:w-24 border-white rounded-full overflow-hidden border-4 mr-4 flex justify-center items-center"
     >
-      <img class="object-cover w-full h-full" :src="props.iconUrl" />
+      <img ref="icon" v-show="props.hasIconUrl" class="object-cover w-full h-full" :src="props.iconUrl" />
+      <div ref="upload" v-show="!props.hasIconUrl" class="block text-sm">ここに画像を<br />アップロード</div>
+    </div>
+    <div class="absolute flex bottom-0">
+      <button
+        class="w-24 text-center text-xs bg-blue-500 hover:bg-blue-700 text-white 1 px-2 mt-1 rounded focus:outline-none focus:shadow-outline"
+        @click="clearIcon"
+      >画像クリア
+      </button>
     </div>
     <div>
       <h3 class="text-sm title-font text-gray-500 tracking-widest">
@@ -16,60 +24,20 @@
       </h2>
       <div class="flex mb-4">
         <span class="flex">
-          <a href="#" class="text-gray-500">
-            <svg
-              fill="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              class="w-5 h-5"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
-              ></path>
-            </svg>
-          </a>
-          <input class="profile-edit-input" />
-        </span>
-      </div>
-      <div class="flex mb-4">
-        <span class="flex">
-          <a href="#" class="ml-2 text-gray-500">
-            <svg
-              fill="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              class="w-5 h-5"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"
-              ></path>
-            </svg>
-          </a>
-          <input class="profile-edit-input" />
-        </span>
-      </div>
-      <div class="flex mb-4">
-        <span class="flex">
-          <a :href="'mailto:' + props.email" class="ml-2 text-gray-500">
-            <svg
-              fill="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              class="w-5 h-5"
-              viewBox="0 0 24 24"
-            >
-              <path d="M0 0h24v24H0z" fill="none" />
-              <path
-                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
-              />
-            </svg>
-          </a>
-          <input class="profile-edit-input" />
+          <svg
+            fill="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            class="w-5 h-5 mr-2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+            />
+          </svg>
+          <input class="profile-edit-input" :value="props.email" />
         </span>
       </div>
     </div>
@@ -80,6 +48,7 @@ import { defineComponent } from 'nuxt-composition-api'
 export default defineComponent({
   props: {
     iconUrl: { type: String },
+    hasIconUrl: {type: Boolean},
     userName: { type: String },
     email: { type: String },
   },
@@ -88,5 +57,14 @@ export default defineComponent({
       props,
     }
   },
+  methods: {
+    hasIconUrl(): void {
+      this.$props.hasIconUrl = this.$props.iconUrl !== null && this.$props.iconUrl !== '';
+    },
+    clearIcon(): void {
+      this.$props.hasIconUrl = false;
+    }
+  }
 })
+
 </script>
