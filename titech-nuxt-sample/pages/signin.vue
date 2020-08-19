@@ -26,6 +26,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'nuxt-composition-api'
 import PageHeading from '@/components/page-heading.vue'
+import firebase from '@/plugins/firebase.ts'
 
 export default defineComponent({
   components: {
@@ -35,7 +36,18 @@ export default defineComponent({
     const username = ref('')
     const password = ref('')
     function submit() {
-      // TODO
+      // Test
+      const db = firebase.firestore()
+      const dbUsers = db.collection('users')
+      dbUsers
+        .add({
+          username,
+          password,
+        })
+        .then((ref) => {
+          // eslint-disable-next-line no-console
+          console.log('Add ID: ', ref.id)
+        })
     }
     return {
       props,
