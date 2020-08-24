@@ -41,8 +41,8 @@ export default defineComponent({
       const dbUsers = db.collection('users')
       dbUsers
         .add({
-          username,
-          password,
+          username: username.value,
+          password: password.value,
         })
         .then((ref) => {
           // eslint-disable-next-line no-console
