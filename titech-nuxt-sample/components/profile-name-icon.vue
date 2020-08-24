@@ -76,6 +76,6 @@ export default defineComponent({
     return {
       props,
     }
-  }
+  },
 })
 </script>

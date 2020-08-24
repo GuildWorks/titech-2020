@@ -14,16 +14,28 @@
         </p>
         <nav class="hidden md:flex text-lg">
           <a
-            href="/list"
+            href="/users"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
             メンバーリスト
           </a>
           <a
-            href="/user/0001"
+            href="/profile"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
-            メンバープロフィール
+            あなたのプロフィール
+          </a>
+          <a
+            href="/signin"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            ログイン
+          </a>
+          <a
+            href="/signup"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            ユーザー登録
           </a>
         </nav>
         <button

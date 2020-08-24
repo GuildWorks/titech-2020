@@ -28,7 +28,7 @@
           <td class="py-3 px-5">
             <div class="flex justify-end items-center">
               <a
-                :href="'/user/' + user.id"
+                :href="'/users/' + user.id"
                 class="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline flex items-center"
               >
                 <span

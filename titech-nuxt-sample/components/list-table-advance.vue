@@ -46,7 +46,7 @@
                 Delete
               </button>
               <a
-                :href="'/user/' + user.id"
+                :href="'/users/' + user.id"
                 class="inline-flex flex-col items-center justify-center pt-1 hover:opacity-75"
               >
                 <span

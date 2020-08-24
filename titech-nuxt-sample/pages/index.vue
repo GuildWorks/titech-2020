@@ -16,13 +16,9 @@
         HTML/CSS
       </h2>
       <p class="text-gray-600 leading-relaxed mb-6">
-        <a href="/list" class="text-blue-900">メンバーリスト</a>
+        <a href="/users" class="text-blue-900">メンバーリスト</a>
         と
-        <a href="/user/0001" class="text-blue-900">プロフィール</a>
-      </p>
-      <p class="text-gray-600 leading-relaxed mb-12 text-sm">
-        メンバーリストアドバンス→
-        <a href="/list-advance" class="text-blue-900">編集可能 ver.</a>
+        <a href="/profile" class="text-blue-900">プロフィール</a>
       </p>
     </div>
     <div class="mb-16 sm:mb-0 mt-8 sm:mt-0 sm:w-3/5 sm:pl-12">

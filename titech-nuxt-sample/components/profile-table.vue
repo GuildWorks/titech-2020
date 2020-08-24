@@ -4,7 +4,7 @@
       <table class="w-full text-md bg-white">
         <tbody>
           <tr
-            v-for="(profile, index) in userProfile()"
+            v-for="(profile, index) in profile"
             :key="index"
             class="border-b bg-gray-100"
           >
@@ -36,14 +36,12 @@ type UserList = {
 }
 export default defineComponent({
   name: 'ProfileTable',
-  setup(_, { root }: SetupContext) {
-    const userList = reactive<UserList[]>(userlistJson.userlistData)
-    const userProfile = (): any => {
-      return userList.filter((user) => user.id === root.$route.params.id)[0]
-        .profile
-    }
+  props: {
+    profile: {},
+  },
+  setup(props, { root }: SetupContext) {
     return {
-      userProfile,
+      props,
     }
   },
 })
