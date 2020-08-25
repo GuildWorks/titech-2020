@@ -49,6 +49,13 @@ export default defineComponent({
           console.log('Add ID: ', ref.id)
         })
     }
+    // getのテスト
+    const db = firebase.firestore()
+    const docUsers = db.collection('users').doc('vKV5ojTyW9E5ti5m1Dei')
+    docUsers.get().then(function (doc) {
+      // eslint-disable-next-line no-console
+      console.log('userName', doc.data().username)
+    })
     return {
       props,
       username,
