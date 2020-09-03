@@ -3,8 +3,15 @@
     <div
       class="relative shadow-lg h-20 w-20 sm:h-24 sm:w-24 border-white rounded-full overflow-hidden border-4 mr-4 flex justify-center items-center"
     >
-      <img ref="icon" v-show="props.hasIconUrl" class="object-cover w-full h-full" :src="props.iconUrl" />
-      <div ref="upload" v-show="!props.hasIconUrl" class="block text-sm">ここに画像を<br />アップロード</div>
+      <img v-show="uploadedImage" class="object-cover w-full h-full"
+        :src="uploadedImage" 
+        @dragover.prevent 
+        @drop.prevent="onFileChange" />
+      <div v-show="!uploadedImage" class="drag-area" 
+        @dragover.prevent
+        @drop.prevent="onFileChange">
+        <span>{{ iconUploadAreaMessage }}</span>
+      </div>
     </div>
     <div class="absolute flex bottom-0">
       <button
@@ -45,26 +52,49 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'nuxt-composition-api'
+import defaultVue from '../../../insides/insides/layouts/default.vue';
 export default defineComponent({
   props: {
-    iconUrl: { type: String },
-    hasIconUrl: {type: Boolean},
+    iconUrl: {
+      type: String
+    },
     userName: { type: String },
     email: { type: String },
+    iconUploadAreaMessage: {
+      type: String,
+      default: "Your Image!"
+    }
+  },
+  data() {
+    return {
+      uploadedImage: ''
+    }
   },
   setup(props) {
     return {
       props,
     }
   },
+  created() {
+    this.uploadedImage = this.$props.iconUrl;
+  },
   methods: {
-    hasIconUrl(): void {
-      this.$props.hasIconUrl = this.$props.iconUrl !== null && this.$props.iconUrl !== '';
-    },
     clearIcon(): void {
-      this.$props.hasIconUrl = false;
+      this.uploadedImage = '';
+    },
+    onFileChange(event) {
+      event.stopPropagation();
+      const files = event.target.files || event.dataTransfer.files;
+      this.createImage(files[0]);
+      this.$emit('onFileChange', files[0])
+    },
+    createImage(file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        this.uploadedImage = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 })
-
 </script>

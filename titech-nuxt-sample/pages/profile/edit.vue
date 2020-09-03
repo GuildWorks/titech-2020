@@ -7,6 +7,7 @@
           :icon-url="userData().iconUrl"
           :user-name="userData().name"
           :email="userData().email"
+          @onFileChange="onFileChange"
         />
         <hr class="my-4 sm:my-8">
         <p class="leading-relaxed">
@@ -75,6 +76,15 @@ export default defineComponent({
     }
     return {
       userData,
+    }
+  },
+  methods: {
+    onFileChange(file: File) {
+      console.log("emit upload start!!");
+      console.log(file);
+      console.log("-----------------");
+      if (!file) return;
+      console.log("emit upload finish!!");
     }
   }
 })
