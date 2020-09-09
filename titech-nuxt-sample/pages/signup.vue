@@ -2,12 +2,7 @@
   <div>
     <PageHeading>ユーザー登録</PageHeading>
     <div class="signup">
-      <input
-        v-model="username"
-        type="text"
-        required="true"
-        placeholder="Username"
-      />
+      <input v-model="email" type="text" required="true" placeholder="email" />
       <input
         v-model="password"
         type="password"
@@ -26,20 +21,32 @@
 <script lang="ts">
 import { defineComponent, ref } from 'nuxt-composition-api'
 import PageHeading from '@/components/page-heading.vue'
+import firebase from '@/plugins/firebase.ts'
 
 export default defineComponent({
   components: {
     PageHeading,
   },
   setup(props) {
-    const username = ref('')
+    const email = ref('')
     const password = ref('')
     function submit() {
       // TODO
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email.value, password.value)
+        .catch(function (error: any) {
+          // Handle Errors here.
+          // eslint-disable-next-line no-console
+          console.log(error.code)
+          // eslint-disable-next-line no-console
+          console.log(error.message)
+          // ...
+        })
     }
     return {
       props,
-      username,
+      email,
       password,
       submit,
     }
