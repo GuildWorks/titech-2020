@@ -1,6 +1,14 @@
 <template>
   <div class="container mx-auto">
-    <PageHeading>プロフィール編集</PageHeading>
+    <PageHeading>
+      プロフィール編集
+      <button
+        class="w-20 text-center text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 mt-2 rounded focus:outline-none focus:shadow-outline"
+        @click="updateProfile"
+      >
+        登録
+      </button>
+    </PageHeading>
     <div class="lg:w-11/12 mx-auto flex flex-wrap">
       <div class="p-4 lg:px-8 lg:w-1/2 w-full">
         <ProfileNameIconEdit
@@ -28,7 +36,7 @@ import ProfileNameIconEdit from '@/components/profile-name-icon-edit.vue'
 import ProfileTableEdit from '@/components/profile-table-edit.vue'
 import userlistJson from '@/mock/userlist.json'
 
-type UserList = {
+type User = {
   id: string
   name: string
   email: string
@@ -52,8 +60,8 @@ export default defineComponent({
     ProfileNameIconEdit,
   },
   setup(_, { root }: SetupContext) {
-    const userList = reactive<UserList[]>(userlistJson.userlistData)
-    const userData = (): UserList => {
+    const userList = reactive<User[]>(userlistJson.userlistData)
+    const userData = (): User => {
       if (userList.filter((user) => user.id === '0001').length > 0) {
         return userList.filter((user) => user.id === '0001')[0]
       }
@@ -78,13 +86,20 @@ export default defineComponent({
       userData,
     }
   },
+  data() {
+    return {
+      iconFile: null
+    }
+  },
   methods: {
-    onFileChange(file: File) {
-      console.log("emit upload start!!");
-      console.log(file);
-      console.log("-----------------");
+    onFileChange(file: File): void {
+      this.iconFile = file;
+      console.log(this.iconFile);
       if (!file) return;
-      console.log("emit upload finish!!");
+      // TODO 画像アップロード
+    },
+    updateProfile(): void {
+      // TODO Firebase とつないでユーザ情報更新処理
     }
   }
 })

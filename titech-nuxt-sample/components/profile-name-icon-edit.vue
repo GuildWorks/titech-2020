@@ -15,8 +15,10 @@
     </div>
     <div class="absolute flex bottom-0">
       <button
-        class="w-24 text-center text-xs bg-blue-500 hover:bg-blue-700 text-white 1 px-2 mt-1 rounded focus:outline-none focus:shadow-outline"
-        @click="clearIcon"
+        class="w-24 text-center text-xs bg-blue-500 hover:bg-blue-700 text-white 1 px-2 mt-1 rounded"
+        v-bind:class="{ 'focus:outline-none': !cleared, 'focus:shadow-outline': cleared }"
+        @mousedown="clearIcon"
+        @mouseup="clearShadow"
       >画像クリア
       </button>
     </div>
@@ -67,7 +69,8 @@ export default defineComponent({
   },
   data() {
     return {
-      uploadedImage: ''
+      uploadedImage: '',
+      cleared: false
     }
   },
   setup(props) {
@@ -81,6 +84,10 @@ export default defineComponent({
   methods: {
     clearIcon(): void {
       this.uploadedImage = '';
+      this.cleared = true;
+    },
+    clearShadow(): void {
+      this.cleared = false;
     },
     onFileChange(event) {
       event.stopPropagation();
