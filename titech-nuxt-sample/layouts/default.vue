@@ -60,6 +60,22 @@
   </div>
 </template>
 
+<script lang='ts'>
+import { defineComponent, ref } from 'nuxt-composition-api'
+import firebase from '@/plugins/firebase.ts'
+
+export default defineComponent({
+  middleware: ['isAuth'],
+  setup(_, { root }) {
+    // TODO
+    // 認証済みかどうかを取得して、メニューを出し分たい
+    // やりかたの案
+    // 1. utilにセッションストレージへアクセスする関数をまとめて、その中にtokenの有無を見てtrue/falseを返す関数を用意する
+    // 2. このファイル内で同じことをやる
+  },
+})
+</script>
+
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
