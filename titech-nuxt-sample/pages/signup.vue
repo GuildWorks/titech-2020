@@ -31,17 +31,21 @@ export default defineComponent({
     const email = ref('')
     const password = ref('')
     function submit() {
-      // TODO
       firebase
         .auth()
-        .createUserWithEmailAndPassword(email.value, password.value)
-        .catch(function (error: any) {
-          // Handle Errors here.
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() =>
+          firebase
+            .auth()
+            .createUserWithEmailAndPassword(email.value, password.value)
+        )
+        .then(() => (location.href = '/'))
+        .catch(function (error) {
+          const errorCode = error.code
+          const errorMessage = error.message
           // eslint-disable-next-line no-console
-          console.log(error.code)
-          // eslint-disable-next-line no-console
-          console.log(error.message)
-          // ...
+          console.log(errorCode, errorMessage)
+          alert('ユーザー登録失敗')
         })
     }
     return {

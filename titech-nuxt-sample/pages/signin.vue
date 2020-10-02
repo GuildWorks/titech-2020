@@ -3,10 +3,10 @@
     <PageHeading>ログイン</PageHeading>
     <div class="signin">
       <input
-        v-model="username"
+        v-model="email"
         type="text"
         required="true"
-        placeholder="Username"
+        placeholder="email"
       />
       <input
         v-model="password"
@@ -33,32 +33,29 @@ export default defineComponent({
     PageHeading,
   },
   setup(props) {
-    const username = ref('')
+    const email = ref('')
     const password = ref('')
     function submit() {
-      // Test
-      const db = firebase.firestore()
-      const dbUsers = db.collection('users')
-      dbUsers
-        .add({
-          username: username.value,
-          password: password.value,
-        })
-        .then((ref) => {
+      firebase
+        .auth()
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() =>
+          firebase
+            .auth()
+            .signInWithEmailAndPassword(email.value, password.value)
+        )
+        .then(() => (location.href = '/'))
+        .catch(function (error) {
+          const errorCode = error.code
+          const errorMessage = error.message
           // eslint-disable-next-line no-console
-          console.log('Add ID: ', ref.id)
+          console.log(errorCode, errorMessage)
+          alert('ログイン失敗')
         })
     }
-    // getのテスト
-    const db = firebase.firestore()
-    const docUsers = db.collection('users').doc('vKV5ojTyW9E5ti5m1Dei')
-    docUsers.get().then(function (doc) {
-      // eslint-disable-next-line no-console
-      console.log('userName', doc.data().username)
-    })
     return {
       props,
-      username,
+      email,
       password,
       submit,
     }
