@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 <template>
   <div class="container mx-auto">
     <PageHeading>
@@ -78,30 +79,30 @@ export default defineComponent({
           birthday: '',
           bloodType: '',
           sign: '',
-          hobby: ''
-        }
+          hobby: '',
+        },
       }
+    }
+    let iconFile = reactive({})
+    const onFileChange = (file: File): void => {
+      iconFile = file
+      // eslint-disable-next-line no-console
+      console.log(iconFile)
+      if (!file) return
+      // TODO 画像アップロード
+      // eslint-disable-next-line no-console
+      console.log('unnecessary return')
+    }
+    const updateProfile = (): void => {
+      // TODO Firebase とつないでユーザ情報更新処理
     }
     return {
       userData,
+      iconFile,
+      onFileChange,
+      updateProfile,
     }
   },
-  data() {
-    return {
-      iconFile: null
-    }
-  },
-  methods: {
-    onFileChange(file: File): void {
-      this.iconFile = file;
-      console.log(this.iconFile);
-      if (!file) return;
-      // TODO 画像アップロード
-    },
-    updateProfile(): void {
-      // TODO Firebase とつないでユーザ情報更新処理
-    }
-  }
 })
 </script>
 <style></style>

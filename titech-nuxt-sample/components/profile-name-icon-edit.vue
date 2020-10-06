@@ -53,55 +53,59 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'nuxt-composition-api'
+import { defineComponent, onBeforeMount, ref, reactive } from 'nuxt-composition-api'
 import defaultVue from '../../../insides/insides/layouts/default.vue';
 export default defineComponent({
   props: {
     iconUrl: {
-      type: String
+      type: String,
     },
     userName: { type: String },
     email: { type: String },
     iconUploadAreaMessage: {
       type: String,
-      default: "Your Image!"
-    }
+      default: 'Your Image!',
+    },
   },
-  data() {
-    return {
-      uploadedImage: '',
-      cleared: false
+  setup(props, context) {
+    let uploadedImage = ref('')
+    const cleared = ref(false)
+
+    onBeforeMount(() => {
+      uploadedImage.value = props.iconUrl
+    })
+
+    const clearIcon = (): void => {
+      uploadedImage.value = ''
+      cleared.value = true
     }
-  },
-  setup(props) {
+    const clearShadow = (): void => {
+      cleared.value = false
+    }
+    const onFileChange = (event: any) => {
+      event.stopPropagation()
+      const files = event.target.files || event.dataTransfer.files
+      createImage(files[0])
+      context.emit('onFileChange', files[0])
+    }
+    const createImage = (file: any) => {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        if (e && e.target) {
+          uploadedImage.value = e.target.result[0]
+        }
+      }
+      reader.readAsDataURL(file)
+    }
     return {
       props,
+      uploadedImage,
+      cleared,
+      clearIcon,
+      clearShadow,
+      onFileChange,
+      createImage,
     }
   },
-  created() {
-    this.uploadedImage = this.$props.iconUrl;
-  },
-  methods: {
-    clearIcon(): void {
-      this.uploadedImage = '';
-      this.cleared = true;
-    },
-    clearShadow(): void {
-      this.cleared = false;
-    },
-    onFileChange(event) {
-      event.stopPropagation();
-      const files = event.target.files || event.dataTransfer.files;
-      this.createImage(files[0]);
-      this.$emit('onFileChange', files[0])
-    },
-    createImage(file) {
-      const reader = new FileReader();
-      reader.onload = e => {
-        this.uploadedImage = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
 })
 </script>
