@@ -7,56 +7,56 @@
             <th class="p-4 whitespace-no-wrap text-left">
               所属・部署
             </th>
-            <td class="p-4">
-              {{ profile.belongs }}
+            <td class="p-4 profile-edit-td">
+              <input class="profile-edit-input" :value="profile.belongs" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
             <th class="p-4 whitespace-no-wrap text-left">
               ニックネーム
             </th>
-            <td class="p-4">
-              {{ profile.nickname }}
+            <td class="p-4 profile-edit-td">
+              <input class="profile-edit-input" :value="profile.nickname" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
             <th class="p-4 whitespace-no-wrap text-left">
               出身地
             </th>
-            <td class="p-4">
-              {{ profile.birthplace }}
+            <td class="p-4 profile-edit-td">
+              <input class="profile-edit-input" :value="profile.birthplace" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
             <th class="p-4 whitespace-no-wrap text-left">
               生年月日
             </th>
-            <td class="p-4">
-              {{ profile.birthday }}
+            <td class="p-4 profile-edit-td">
+              <input class="profile-edit-input" :value="profile.birthday" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
             <th class="p-4 whitespace-no-wrap text-left">
               血液型
             </th>
-            <td class="p-4">
-              {{ profile.bloodType }}
+            <td class="p-4 profile-edit-td">
+              <input class="profile-edit-input" :value="profile.bloodType" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
             <th class="p-4 whitespace-no-wrap text-left">
               星座
             </th>
-            <td class="p-4">
-              {{ profile.sign }}
+            <td class="p-4 profile-edit-td">
+              <input class="profile-edit-input" :value="profile.sign" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
             <th class="p-4 whitespace-no-wrap text-left">
               趣味
             </th>
-            <td class="p-4">
-              {{ profile.hobby }}
+            <td class="p-4 profile-edit-td">
+              <input class="profile-edit-input" :value="profile.hobby" />
             </td>
           </tr>
         </tbody>
