@@ -44,7 +44,7 @@ export default defineComponent({
             .auth()
             .signInWithEmailAndPassword(email.value, password.value)
         )
-        .then(() => (location.href = '/'))
+        .then(() => (location.href = '/users'))
         .catch(function (error) {
           const errorCode = error.code
           const errorMessage = error.message
