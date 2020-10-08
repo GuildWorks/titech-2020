@@ -14,28 +14,39 @@
         </p>
         <nav class="hidden md:flex text-lg">
           <a
+            v-if="isSignedIn()"
             href="/users"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
             メンバーリスト
           </a>
           <a
+            v-if="isSignedIn()"
             href="/profile"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
             あなたのプロフィール
           </a>
           <a
+            href="/signup"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            ユーザー登録
+          </a>
+          <a
+            v-if="!isSignedIn()"
             href="/signin"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
             ログイン
           </a>
           <a
-            href="/signup"
+            v-if="isSignedIn()"
+            href="#"
+            @click="signOut"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
-            ユーザー登録
+            ログアウト
           </a>
         </nav>
         <button
@@ -61,18 +72,23 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref } from 'nuxt-composition-api'
+import { defineComponent } from 'nuxt-composition-api'
 import firebase from '@/plugins/firebase.ts'
 
 export default defineComponent({
   middleware: ['isAuth'],
-  setup(_, { root }) {
-    // TODO
-    // 認証済みかどうかを取得して、メニューを出し分たい
-    // やりかたの案
-    // 1. utilにセッションストレージへアクセスする関数をまとめて、その中にtokenの有無を見てtrue/falseを返す関数を用意する
-    // 2. このファイル内で同じことをやる
-  },
+  setup(_, { root: { $store } }) {
+    const isSignedIn = (): boolean => {
+      return $store.state.signedIn
+    }    
+    const signOut = (): void => {
+      firebase.auth().signOut()
+    }
+    return {
+      isSignedIn,
+      signOut
+    }
+  }
 })
 </script>
 

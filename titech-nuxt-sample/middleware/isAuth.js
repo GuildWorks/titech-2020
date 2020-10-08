@@ -1,14 +1,18 @@
 import firebase from '@/plugins/firebase.ts'
 export const skipAuthPaths = ['/signin', '/signup']
 
-export default function ({ redirect, route }) {
-  firebase.auth().onAuthStateChanged(function (user1) {
+export default function ({ redirect, route, store }) {
+  firebase.auth().onAuthStateChanged(function (user) {
     // eslint-disable-next-line no-console
-    if (user1) {
+    if (user) {
       // User is signed in.
-    } else if (!skipAuthPaths.includes(route.path)) {
+      store.commit('signedIn', true);
+    } else {
       // No user is signed in.
-      redirect('/signin')
+      store.commit('signedIn', false);
+      if (!skipAuthPaths.includes(route.path)) {
+        redirect('/signin')
+      }
     }
   })
 }
