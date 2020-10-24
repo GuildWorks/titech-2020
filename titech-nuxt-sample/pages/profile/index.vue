@@ -1,6 +1,14 @@
 <template>
   <div class="container mx-auto">
-    <PageHeading>あなたのプロフィール</PageHeading>
+    <PageHeading>
+      あなたのプロフィール
+      <nuxt-link
+        class="w-20 text-center text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 mt-2 rounded focus:outline-none focus:shadow-outline"
+        to="/profile/edit"
+      >
+        編集
+      </nuxt-link>
+    </PageHeading>
     <div class="lg:w-11/12 mx-auto flex flex-wrap">
       <div class="p-4 lg:px-8 lg:w-1/2 w-full">
         <ProfileNameIcon
@@ -32,9 +40,14 @@ type UserList = {
   role: string
   iconUrl: string
   profile: {
-    title: string
-    detail: string
-  }[]
+    belongs: string
+    nickname: string
+    birthplace: string
+    birthday: string
+    bloodType: string
+    sign: string
+    hobby: string
+  }
 }
 
 export default defineComponent({
@@ -55,12 +68,15 @@ export default defineComponent({
           email: '',
           role: '',
           iconUrl: '',
-          profile: [
-            {
-              title: '',
-              detail: '',
-            },
-          ],
+          profile: {
+            belongs: '',
+            nickname: '',
+            birthplace: '',
+            birthday: '',
+            bloodType: '',
+            sign: '',
+            hobby: ''
+          }
         }
     }
     return {

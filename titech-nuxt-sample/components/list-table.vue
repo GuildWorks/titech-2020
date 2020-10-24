@@ -29,7 +29,7 @@
           <td class="py-3 px-5">
             <div class="flex justify-end items-center">
               <a
-                :href="'/users/' + user.id"
+                :href="userLinkPath(user.id)"
                 class="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline flex items-center"
               >
                 <span
@@ -66,19 +66,29 @@ type UserList = {
   role: string
   iconUrl: string
   profile: {
-    title: string
-    detail: string
-  }[]
+    belongs: string
+    nickname: string
+    birthplace: string
+    birthday: string
+    bloodType: string
+    sign: string
+    hobby: string
+  }
 }
 export default defineComponent({
   name: 'ListTable',
   setup(_) {
     const userList = reactive<UserList[]>(userlistJson.userlistData)
+    const currentUserId = '0001' // TODO ログイン情報から取得
+    const userLinkPath = (userId: string): string => {
+      return (userId === currentUserId) ? '/profile' : '/users/' + userId
+    }
     const userLink = (userId: string): void => {
-      window.location.href = '/users/' + userId
+      window.location.href = userLinkPath(userId)
     }
     return {
       userList,
+      userLinkPath,
       userLink,
     }
   },
