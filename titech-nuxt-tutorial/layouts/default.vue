@@ -12,27 +12,6 @@
             TOTAL Sample Project
           </a>
         </p>
-        <nav class="hidden md:flex text-lg">
-          <a
-            href="/list"
-            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
-          >
-            メンバーリスト
-          </a>
-          <a
-            href="/user/0001"
-            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
-          >
-            メンバープロフィール
-          </a>
-        </nav>
-        <button
-          class="flex md:hidden flex-col absolute top-0 right-0 py-6 px-4 focus:outline-none"
-        >
-          <span class="w-6 h-1 mb-1 bg-gray-500"></span>
-          <span class="w-6 h-1 mb-1 bg-gray-500"></span>
-          <span class="w-6 h-1 mb-1 bg-gray-500"></span>
-        </button>
       </header>
       <main>
         <nuxt />
