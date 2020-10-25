@@ -8,7 +8,17 @@ page_number: true
 paginate: true
 ---
 
+**Programming Boot Camp #2**
+
 # 第2回： JavaScriptで動きのある画面をつくろう(Vue.js編)
+
+**東京工業大学 2020/10/31**
+　
+　
+　
+　
+　
+　　　　　　　　　　　　　　　　　　　　　　　　**Junichiro Ueno**
 
 ---
 
@@ -50,7 +60,7 @@ paginate: true
 ### :jack_o_lantern: 最新のデータを取得しよう :jack_o_lantern:
 
 :white_check_mark: 保存先の titech-2020 フォルダに移動して
-`git bash` or `Terminal`で以下のコマンドを打ってみましょう。
+`git bash` or `Terminal`で以下のコマンドを実行してみましょう。
 
 ```
 git pull
@@ -75,8 +85,8 @@ git pull
 :white_check_mark: 前回、環境構築で既に`npm run dev`できるようにまでします。
 今回はこのコマンドを常に実行しておきます。
 
-:white_check_mark: `titech-2020/titech-nuxt-tutorial`フォルダに移動して
-`git bash` or `Terminal`で以下のコマンドを打ってみましょう。
+:scroll: `titech-2020/titech-nuxt-tutorial`フォルダに移動して
+`git bash` or `Terminal`で以下のコマンドを実行してみましょう。
 
 ```
 npm run dev
@@ -96,7 +106,7 @@ npm run dev
 :white_check_mark: **ソースコードの確認**
 
 Visual Studio Codeで以下のファイルを開いてみよう。
-`titech-2020/titech-nuxt-tutorial/pages/index.vue`
+:scroll: `titech-2020/titech-nuxt-tutorial/pages/index.vue`
 
 ---
 
@@ -290,12 +300,19 @@ export default defineComponent({
 ### :jack_o_lantern: 演習 :jack_o_lantern:
 
 :white_check_mark: なんとなく概要は理解できたかもしれませんが、まだ良くわからないと思います。
-
+　
+　
+　
+　
+　
+　
 :muscle: 具体的に手を動かしてみましょう。
 
 ---
 
-:white_check_mark: `titech-nuxt-tutorial/pages/list.vue`を開きましょう
+### :jack_o_lantern: 一覧ページの作成 :jack_o_lantern:
+
+:scroll: `titech-nuxt-tutorial/pages/list.vue`
 
 ```
 <template>
@@ -310,7 +327,6 @@ export default defineComponent({
 ```
 
 :innocent: まだ中身は何もありません。
-
 :pencil2: コードを追加していきましょう。
 
 ---
@@ -479,16 +495,22 @@ console.log(name[1])                         // "今橋"
 ---
 
 一旦、基礎編は以上です:dash:
-
+　
+　
+　
 :white_check_mark: 不明な点はありますか:question::question::question:
-
+　
+　
+　
+　
+　
 :muscle: では再び手を動かしていきましょう。
 
 ---
 
 ### :jack_o_lantern: ダミーデータの用意 :jack_o_lantern:
 
-:white_check_mark: `titech-nuxt-template/mock/userlist.json`ファイルを開きます。
+:scroll: `titech-nuxt-template/mock/userlist.json`ファイルを開きます。
 
 ```
 {
@@ -508,7 +530,7 @@ console.log(name[1])                         // "今橋"
 
 ### :jack_o_lantern: ダミーデータの取込 :jack_o_lantern:
 
-:white_check_mark: `titech-nuxt-tutorial/pages/list.vue`に追記していきます。
+:scroll: `titech-nuxt-tutorial/pages/list.vue`に追記していきます。
 
 :white_check_mark: まずはコピペしましょう。
 そして中身を見ていきましょう。
@@ -598,7 +620,7 @@ export default defineComponent({
 const userList = reactive<UserList[]>(userlistJson.userlistData)
 ```
 
-:white_check_mark: `titech-nuxt-tutorial/mock/userlist.json`のファイルの中から
+:scroll: `titech-nuxt-tutorial/mock/userlist.json`のファイルの中から
 `userlistJson.userlistData`でダミーデータを取得しています。
 
 ---
@@ -860,12 +882,405 @@ hover:bg-orange-100 cursor-pointer
 
 ちょっとした改善で結構使い勝手が変わりますね:thumbsup:
 
-いろいろ考えて、良いものを生み出していくのが楽しいのです:heart:
-
+いろいろ考えて、良いものを生み出していくのが楽しいのですね:heart:
+　
+　
+　
+　
 :white_check_mark: これで一覧は終わりです、次は詳細に進みましょう:sparkles:
 
 ---
 
+### :cookie: 詳細ページの作成 :ghost:
+
+:scroll: `titech-nuxt-tutorial/pages/user/_id.vue`
+
+```
+<template>
+
+</template>
+<script lang="ts">
+
+</script>
+<style>
+
+</style>
+```
+
+:innocent: また中身は何もありません。
+
+---
+
+:bulb: よく見るとファイル名がちょっと違和感ありますね。
+
+`_id.vue`
+
+詳細なので、`detail.vue`ではないのでしょうか。
+
+実は`_id.vue`にすることで、urlが`/0001`のような可変なものを対応できるようになります。
+
+:bulb: ブラウザで [http://localhost:3000/0001](http://localhost:3000/0001) を表示してみましょう。
+
+:white_check_mark: 空ではあるものの画面は表示されますね。
+
+:pencil2: ではコードを追加していきましょう。
+
+---
+
+:white_check_mark: その前にもう一度、完成イメージを見ておきましょう。
+
+![w:1000px](images/2-1-2.png)
+
+---
+
+```
+<template>
+  <div class="container mx-auto">
+    <h1 class="text-2xl sm:text-3xl text-blue-900 p-4 mb-4 md:mb-8 border-b">
+      メンバープロフィール
+    </h1>
+  </div>
+</template>
+```
+
+:white_check_mark: メンバープロフィールの見出しが表示されましたね。
+
+:warning: これ一覧でも同じ見出しですよね。。。
+
+:bangbang: それに気がついた時は共通化のチャンスです:bangbang:
+
+:bulb: そう言えば、コンポーネントがって話ありましたよね:chocolate_bar::chocolate_bar::chocolate_bar:
+
+---
+
+#### :cookie: コンポーネントの作成 :ghost:
+
+:scroll: `titech-nuxt-template/components/page-heading.vue`
+
+```
+<template>
+  <h1 class="text-2xl sm:text-3xl text-blue-900 p-4 mb-4 md:mb-8 border-b">
+    <slot></slot>
+  </h1>
+</template>
+```
+
+:bulb: `<h1>`の部分と同じ内容が既に中身にありますね。
+
+:white_check_mark: 初見の`<slot></slot>`ってコードがありますね。
+これは呼び出しのときに一緒に説明します。
+
+---
+
+:scroll: `titech-nuxt-tutorial/pages/user/_id.vue`
+
+```
+<script lang="ts">
+import { defineComponent, reactive, SetupContext } from 'nuxt-composition-api'
+import PageHeading from '@/components/page-heading.vue'
+
+export default defineComponent({
+  components: {
+    PageHeading,
+  },
+})
+</script>
+```
+
+```
+import PageHeading from '@/components/page-heading.vue'
+```
+
+:white_check_mark: ここで定義してます。
 
 
 ---
+
+```
+components: {
+  PageHeading,
+},
+```
+
+:white_check_mark: ここで利用コンポーネントを登録しています。
+
+```
+<template>
+  <div class="container mx-auto">
+    <PageHeading>メンバープロフィール</PageHeading>
+  </div>
+</template>
+```
+
+:white_check_mark: `template`の中身を`h1`タグから`PageHeading`タグに変更します。
+
+---
+
+:bulb: コンポーネントに指定したことで`PageHeading`タグを利用できるようになりました。
+
+```
+<PageHeading>メンバープロフィール</PageHeading>
+```
+
+```
+<h1 class="text-2xl sm:text-3xl text-blue-900 p-4 mb-4 md:mb-8 border-b">
+  <slot></slot>
+</h1>
+```
+
+:white_check_mark: `slot`の部分は`PageHeading`タグの間の`メンバープロフィール`に置き換わります。
+
+---
+
+:white_check_mark: 一覧の方は`メンバーリスト`をセットしてあげればいいですね。
+
+:scroll: `titech-nuxt-tutorial/pages/list.vue`
+　
+　
+　
+:doughnut: ここでは省略しますが、同じように変更すると共通化の完了です:custard:
+
+---
+
+:white_check_mark: 続きを進めていきます。
+
+:scroll: `titech-nuxt-tutorial/pages/user/_id.vue`
+
+:black_joker: `script`の中を一気に置き換えましょう。
+
+---
+
+```
+<script lang="ts">
+import { defineComponent, reactive, SetupContext } from 'nuxt-composition-api'
+import PageHeading from '@/components/page-heading.vue'
+import ProfileNameIcon from '@/components/profile-name-icon.vue'
+import ProfileTable from '@/components/profile-table.vue'
+import userlistJson from '@/mock/userlist.json'
+
+type UserList = {
+  id: string
+  name: string
+  email: string
+  role: string
+  iconUrl: string
+  profile: {
+    title: string
+    detail: string
+  }[]
+}
+
+export default defineComponent({
+  components: {
+    PageHeading,
+    ProfileTable,
+    ProfileNameIcon,
+  },
+  setup(_, { root }: SetupContext) {
+    const userList = reactive<UserList[]>(userlistJson.userlistData)
+    const userData = (): UserList => {
+      if (
+        userList.filter((user) => user.id === root.$route.params.id).length > 0
+      )
+        return userList.filter((user) => user.id === root.$route.params.id)[0]
+      else
+        return {
+          id: '',
+          name: '',
+          email: '',
+          role: '',
+          iconUrl: '',
+          profile: [
+            {
+              title: '',
+              detail: '',
+            },
+          ],
+        }
+    }
+    return {
+      userData,
+    }
+  }
+})
+</script>
+```
+
+---
+
+:white_check_mark: 見慣れないのはこのあたりでしょうか。
+
+```
+const userData = (): UserList => {
+  if (
+    userList.filter((user) => user.id === root.$route.params.id).length > 0
+  )
+    return userList.filter((user) => user.id === root.$route.params.id)[0]
+  else
+    return {
+      id: '',
+      ...
+    }
+}
+```
+
+:bulb: `if`は`templete`のときに説明したものと基本一緒です。
+
+---
+
+```
+if (
+  userList.filter((user) => user.id === root.$route.params.id).length > 0
+)
+```
+
+:white_check_mark: `filter`はダミーデータの配列から特定の条件を抽出します。
+
+:pushpin: `user.id`と`root.$route.params.id`が一致するものがあるかをチェックしています。
+
+:o: [http://localhost:3000/user/0001](http://localhost:3000/user/0001)
+:x: [http://localhost:3000/user/0009](http://localhost:3000/user/0009)
+
+`0001`は存在するので`true`、`0009`は存在しないので`false`になります。
+
+---
+
+#### :cookie: Tips :ghost:
+
+:question: ロジック書いても、中身ってどうなっているの:question::question::question:
+
+:white_check_mark: ログを出すことで確認できるのです。
+
+```
+console.log()
+```
+
+例えば
+```
+console.log(userList.filter((user) => user.id === root.$route.params.id).length > 0)
+```
+
+:bulb: ブラウザで表示してみましょう。
+
+---
+
+:white_check_mark: Chromeならデベロッパーツールを表示してみましょう。
+
+以下のurlを表示すると、`console`に`true` or `false`と表示されます。
+
+:o: [http://localhost:3000/user/0001](http://localhost:3000/user/0001)は`true`
+:x: [http://localhost:3000/user/0009](http://localhost:3000/user/0009)は`false`
+
+:bug: 頭の中だけで考えるのではなく、実際のデータを見ながら開発ができるようになります。
+
+:gift: 何が入っているんだろうというときには試してみてください。
+　
+　
+:back: 説明に戻ります。
+
+---
+
+```
+<template>
+  <div class="container mx-auto">
+    <PageHeading>メンバープロフィール</PageHeading>
+    <div class="lg:w-11/12 mx-auto flex flex-wrap">
+      <div class="p-4 lg:px-8 lg:w-1/2 w-full">
+        <ProfileNameIcon
+          :icon-url="userData().iconUrl"
+          :user-name="userData().name"
+          :email="userData().email"
+        />
+        <hr class="my-4 sm:my-8">
+        <p class="leading-relaxed">{{ userData().comment }}</p>
+      </div>
+      <ProfileTable
+        class="mt-8 lg:w-1/2 w-full"
+        :profile="userData().profile"
+      />
+    </div>
+  </div>
+</template>
+```
+
+---
+
+:scroll: `titech-nuxt-tutorial/pages/user/_id.vue`
+
+:black_joker: `template`も一気に置き換えましょう。
+
+# :runner::running::runner::running::runner::running::runner::running::runner::running::runner::running::runner::running::runner:
+
+# :clock12::clock1::clock2::clock3::clock4::clock5::clock6::clock7::clock8::clock9::clock10::clock11::clock12::clock1::clock2:
+
+# :sushi::sushi::sushi::sushi::sushi::sushi::sushi::sushi::sushi::sushi::sushi::sushi::sushi::sushi::sushi:
+
+# :jack_o_lantern::ghost::jack_o_lantern::ghost::jack_o_lantern::ghost::jack_o_lantern::ghost::jack_o_lantern::ghost::jack_o_lantern::ghost::jack_o_lantern::ghost::jack_o_lantern:
+---
+
+![w:900px](images/2-1-8.png)
+
+:white_check_mark: 動きとしては完成しました。
+
+---
+
+:eyes: ポイントになりそうなところは見ておきましょう。
+
+:scroll: `titech-nuxt-tutorial/pages/user/_id.vue`
+
+```
+<ProfileNameIcon
+  :icon-url="userData().iconUrl"
+  :user-name="userData().name"
+  :email="userData().email"
+/>
+```
+
+`ProfileNameIcon`タグでは以下の3つのパラメータを連携しています。
+　`:icon-url`
+　`:user-name`
+　`:email`
+
+---
+
+:scroll: `titech-nuxt-tutorial/components/profile-name-icon.vue`
+
+```
+<script lang="ts">
+import { defineComponent } from 'nuxt-composition-api'
+export default defineComponent({
+  props: {
+    iconUrl: { type: String },
+    userName: { type: String },
+    email: { type: String },
+  },
+  setup(props) {
+    return {
+      props,
+    }
+  }
+})
+</script>
+```
+
+---
+
+:lollipop: `props`でパラメータを受け取っています。
+
+:ice_cream: `setup`の引数に指定することで、`return`しています。
+
+:candy: 利用方法は変数と同じで`{{ props.userName }}`になります。
+
+---
+
+### :cookie: まとめ :ghost:
+
+:white_check_mark: 一覧と詳細は多くのWebサイトの基本になります。
+
+:point_up: 次回は会員登録、ログイン周りができればほぼ網羅できるのではないでしょうか。
+
+:shaved_ice: 長時間お疲れさまでした:bow:
+　
+　
+　
+:tada: 世界を変えるなにかにつながることを楽しみにしております :tada:
