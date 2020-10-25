@@ -19,7 +19,7 @@
       <footer class="p-4">
         <p class="text-gray-500 font-xs text-center">
           <span class="inline-block pt-2 border-t md:pt-8 md:border-none">
-            Copyright GuildWorks
+            Copyright GuildWorks Inc.
           </span>
         </p>
       </footer>
