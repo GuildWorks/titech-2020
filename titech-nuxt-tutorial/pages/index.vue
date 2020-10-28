@@ -6,19 +6,19 @@
       class="sm:w-2/5 flex flex-col items-center sm:items-start text-center sm:text-left"
     >
       <h1
-        class="uppercase text-6xl text-blue-900 font-bold leading-none tracking-wide mb-2"
+        class="text-6xl text-blue-900 font-bold leading-none tracking-wide mb-2"
       >
-        List &amp; Detail
+        Programming Boot Camp #2
       </h1>
       <h2
-        class="uppercase text-4xl text-blue-500 text-secondary tracking-widest mb-6"
+        class="text-4xl text-blue-500 text-secondary tracking-widest mb-6"
       >
-        HTML/CSS
+        Vue.js/Nuxt.js
       </h2>
       <p class="text-gray-600 leading-relaxed mb-6">
-        <a href="/list" class="text-blue-900">メンバーリスト</a>
+        <a href="https://vuejs.org/index.html" class="text-blue-900">Vue.js</a>
         と
-        <a href="/user/0001" class="text-blue-900">プロフィール</a>
+        <a href="https://ja.nuxtjs.org/" class="text-blue-900">Nuxt.js</a>
       </p>
     </div>
     <div class="mb-16 sm:mb-0 mt-8 sm:mt-0 sm:w-3/5 sm:pl-12">
