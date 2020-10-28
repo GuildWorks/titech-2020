@@ -2,7 +2,7 @@
 marp: true
 theme: gaia
 size: 16:9
-header: 'Copyright Junichiro Ueno'
+header: '　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　Copyright Junichiro Ueno'
 
 page_number: true
 paginate: true
@@ -19,6 +19,27 @@ paginate: true
 　
 　
 　　　　　　　　　　　　　　　　　　　　　　　　**Junichiro Ueno**
+
+---
+
+<!--
+_color: white
+_footer: 'Photo by https://pixabay.com/images/id-975513/'
+-->
+
+**Programming Boot Camp #2**
+
+# 第2回： JavaScriptで動きのある画面をつくろう(Vue.js編)
+
+**東京工業大学 2020/10/31**
+　
+　
+　
+　
+　
+　　　　　　　　　　　　　　　　　　　　　　　　**Junichiro Ueno**
+
+![bg contrast:0.8 brightness:0.6](https://cdn.pixabay.com/photo/2015/10/07/00/06/halloween-975513_1280.jpg)
 
 ---
 
@@ -43,7 +64,7 @@ paginate: true
 1つ1つコードを書きながら必要なものは説明しますが、
 不明点があれば質問してください。
 
-:dart: **誰も質問しないとこっちから振る可能性もあります**:dart:
+:imp: **誰も質問しないとこっちから振る可能性もあります**:dart:
 
 ---
 
@@ -87,6 +108,12 @@ git pull
 
 :scroll: `titech-2020/titech-nuxt-tutorial`フォルダに移動して
 `git bash` or `Terminal`で以下のコマンドを実行してみましょう。
+
+```
+npm install
+```
+
+終わったら
 
 ```
 npm run dev
@@ -479,7 +506,7 @@ label2 = "Change" // OK
 
 ```
 const name: string[] = ["上野", "今橋", "京極"]
-name.push("金"))                              // 配列の最後に`4`を追加する
+name.push("金")                               // 配列の最後に`金`を追加する
 
 console.log(name)                            // ["上野", "今橋", "京極", "金"]
 console.log(name[1])                         // "今橋"
@@ -487,7 +514,7 @@ console.log(name[1])                         // "今橋"
 
 複数のデータを持つ場合は配列を利用しましょう。
 
-:jack_o_lantern:配列の先頭は`0`から始まるので注意
+:warning: 配列の先頭は`0`から始まるので注意
 
 **補足**
 `shift()`は先頭を削除、`pop()`は末尾を削除
@@ -510,7 +537,7 @@ console.log(name[1])                         // "今橋"
 
 ### :jack_o_lantern: ダミーデータの用意 :jack_o_lantern:
 
-:scroll: `titech-nuxt-template/mock/userlist.json`ファイルを開きます。
+:scroll: `titech-nuxt-template/mock/userlist.json`
 
 ```
 {
@@ -1279,7 +1306,7 @@ export default defineComponent({
 
 :point_up: 次回は会員登録、ログイン周りができればほぼ網羅できるのではないでしょうか。
 
-:shaved_ice: 長時間お疲れさまでした:bow:
+:shaved_ice: 本日は長時間お疲れさまでした:bow:
 　
 　
 　
