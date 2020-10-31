@@ -8,12 +8,12 @@
 <script lang="ts">
 import { defineComponent } from 'nuxt-composition-api'
 import PageHeading from '@/components/page-heading.vue'
-import ListTableHtml from '@/components/list-table-html.vue'
+import ListTable from '@/components/list-table.vue'
 
 export default defineComponent({
   components: {
     PageHeading,
-    ListTableHtml,
+    ListTable,
   },
 })
 </script>
