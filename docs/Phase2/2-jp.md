@@ -946,7 +946,7 @@ hover:bg-orange-100 cursor-pointer
 
 実は`_id.vue`にすることで、urlが`/0001`のような可変なものを対応できるようになります。
 
-:bulb: ブラウザで [http://localhost:3000/0001](http://localhost:3000/0001) を表示してみましょう。
+:bulb: ブラウザで [http://localhost:3000/user/0001](http://localhost:3000/user/0001) を表示してみましょう。
 
 :white_check_mark: 空ではあるものの画面は表示されますね。
 
