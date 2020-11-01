@@ -16,11 +16,15 @@
           :icon-url="userData.iconUrl"
           :user-name="userData.name"
           :email="userData.email"
+          @changeName="changeName"
           @onFileChange="onFileChange"
         />
         <hr class="my-4 sm:my-8">
         <p class="leading-relaxed">
-          <textarea v-model='userData.comment' class="profile-edit-textarea"></textarea>
+          <textarea
+            v-model="userData.comment"
+            class="profile-edit-textarea"
+          ></textarea>
         </p>
       </div>
       <ProfileTableEdit
@@ -112,6 +116,9 @@ export default defineComponent({
           console.log('Error getting document', err);
         })
     }
+    const changeName = (name) => {
+      userData.name = name
+    }
     let iconFile = reactive({})
     const onFileChange = (file: File): void => {
       iconFile = file
@@ -123,8 +130,6 @@ export default defineComponent({
       console.log('unnecessary return')
     }
     const updateProfile = (): void => {
-      // TODO Firebase とつないでユーザ情報更新処理
-      console.log(userData)
       const data = {
         name: userData.name,
         role: userData.role,
@@ -140,6 +145,7 @@ export default defineComponent({
       iconFile,
       onFileChange,
       updateProfile,
+      changeName,
     }
   },
 })

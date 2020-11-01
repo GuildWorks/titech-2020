@@ -30,7 +30,11 @@
         class="text-blue-900 text-2xl sm:text-3xl title-font font-medium mb-1"
       >
         <!-- TODO: エラー解消 Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "userName" -->
-        <input v-model="props.userName" class="profile-edit-input" />
+        <input
+          v-model="props.userName"
+          class="profile-edit-input"
+          @input="userNameEmitter()"
+        />
       </h2>
       <div class="flex mb-4">
         <span class="flex">
@@ -72,6 +76,10 @@ export default defineComponent({
     let uploadedImage = ref('')
     const cleared = ref(false)
 
+    const userNameEmitter = () => {
+      context.emit('changeName', props.userName)
+    }
+
     onBeforeMount(() => {
       uploadedImage.value = props.iconUrl
     })
@@ -106,6 +114,7 @@ export default defineComponent({
       clearShadow,
       onFileChange,
       createImage,
+      userNameEmitter,
     }
   },
 })
