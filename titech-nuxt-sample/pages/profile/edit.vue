@@ -36,6 +36,7 @@ import PageHeading from '@/components/page-heading.vue'
 import ProfileNameIconEdit from '@/components/profile-name-icon-edit.vue'
 import ProfileTableEdit from '@/components/profile-table-edit.vue'
 import userlistJson from '@/mock/userlist.json'
+import firebase from '@/plugins/firebase.ts'
 
 type User = {
   id: string
@@ -95,6 +96,25 @@ export default defineComponent({
     }
     const updateProfile = (): void => {
       // TODO Firebase とつないでユーザ情報更新処理
+      const userId = firebase.auth().currentUser.uid
+      const db = firebase.firestore()
+      const data = {
+        name: '今橋　陵3',
+        role: 'admin',
+        iconUrl: 'https://images.app.goo.gl/zfHpfXryhRVG62BS8',
+        comment: 'こんにちは。いまはしです。よろしくお願いします。',
+        profile: {
+          belongs: 'ギルドワークス',
+          nickname: 'いまはし',
+          birthplace: '山口県',
+          birthday: '1992年7月24日',
+          bloodType: 'O型',
+          sign: '獅子座',
+          hobby: '猫と遊ぶ・料理',
+        },
+      }
+      // プロフィールデータをデータベースにセット
+      db.collection('users').doc(userId).set(data)
     }
     return {
       userData,
