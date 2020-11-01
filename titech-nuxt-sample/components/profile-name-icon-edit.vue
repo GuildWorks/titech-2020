@@ -29,7 +29,8 @@
       <h2
         class="text-blue-900 text-2xl sm:text-3xl title-font font-medium mb-1"
       >
-        <input class="profile-edit-input" :value="props.userName" />
+        <!-- TODO: エラー解消 Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "userName" -->
+        <input v-model="props.userName" class="profile-edit-input" />
       </h2>
       <div class="flex mb-4">
         <span class="flex">
@@ -46,7 +47,7 @@
               d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
             />
           </svg>
-          <input class="profile-edit-input" :value="props.email" />
+          <p>{{ props.email }}</p>
         </span>
       </div>
     </div>

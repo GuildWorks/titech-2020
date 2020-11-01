@@ -13,25 +13,25 @@
     <div class="lg:w-11/12 mx-auto flex flex-wrap">
       <div class="p-4 lg:px-8 lg:w-1/2 w-full">
         <ProfileNameIconEdit
-          :icon-url="userData().iconUrl"
-          :user-name="userData().name"
-          :email="userData().email"
+          :icon-url="userData.iconUrl"
+          :user-name="userData.name"
+          :email="userData.email"
           @onFileChange="onFileChange"
         />
         <hr class="my-4 sm:my-8">
         <p class="leading-relaxed">
-          <textarea class="profile-edit-textarea">{{ userData().comment }}</textarea>
+          <textarea v-model='userData.comment' class="profile-edit-textarea"></textarea>
         </p>
       </div>
       <ProfileTableEdit
         class="mt-8 lg:w-1/2 w-full"
-        :profile="userData().profile"
+        :profile="userData.profile"
       />
     </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, SetupContext } from 'nuxt-composition-api'
+import { defineComponent, reactive, SetupContext, onBeforeMount } from 'nuxt-composition-api'
 import PageHeading from '@/components/page-heading.vue'
 import ProfileNameIconEdit from '@/components/profile-name-icon-edit.vue'
 import ProfileTableEdit from '@/components/profile-table-edit.vue'
@@ -62,27 +62,55 @@ export default defineComponent({
     ProfileNameIconEdit,
   },
   setup(_, { root }: SetupContext) {
-    const userList = reactive<User[]>(userlistJson.userlistData)
-    const userData = (): User => {
-      if (userList.filter((user) => user.id === '0001').length > 0) {
-        return userList.filter((user) => user.id === '0001')[0]
+    const userData = reactive({
+      id: '',
+      name: '',
+      email: '',
+      role: '',
+      iconUrl: '',
+      comment: '',
+      profile: {
+        belongs: '',
+        nickname: '',
+        birthplace: '',
+        birthday: '',
+        bloodType: '',
+        sign: '',
+        hobby: '',
+      },
+    })
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        getUserData(user)
+      } else {
+        // No user is signed in.
       }
-      return {
-        id: '',
-        name: '',
-        email: '',
-        role: '',
-        iconUrl: '',
-        profile: {
-          belongs: '',
-          nickname: '',
-          birthplace: '',
-          birthday: '',
-          bloodType: '',
-          sign: '',
-          hobby: '',
-        },
-      }
+    })
+    const getUserData = (user) => {
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(user.uid)
+        .get()
+        .then((doc) => {
+          if (!doc.exists) {
+            // eslint-disable-next-line no-console
+            console.log('No such document!')
+          } else {
+            userData.id = user.uid
+            userData.name = doc.data().name
+            userData.email = user.email
+            userData.role = doc.data().role
+            userData.iconUrl = doc.data().iconUrl
+            userData.profile = doc.data().profile
+            userData.comment = doc.data().comment
+          }
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.log('Error getting document', err);
+        })
     }
     let iconFile = reactive({})
     const onFileChange = (file: File): void => {
@@ -96,25 +124,16 @@ export default defineComponent({
     }
     const updateProfile = (): void => {
       // TODO Firebase とつないでユーザ情報更新処理
-      const userId = firebase.auth().currentUser.uid
-      const db = firebase.firestore()
+      console.log(userData)
       const data = {
-        name: '今橋　陵3',
-        role: 'admin',
-        iconUrl: 'https://images.app.goo.gl/zfHpfXryhRVG62BS8',
-        comment: 'こんにちは。いまはしです。よろしくお願いします。',
-        profile: {
-          belongs: 'ギルドワークス',
-          nickname: 'いまはし',
-          birthplace: '山口県',
-          birthday: '1992年7月24日',
-          bloodType: 'O型',
-          sign: '獅子座',
-          hobby: '猫と遊ぶ・料理',
-        },
+        name: userData.name,
+        role: userData.role,
+        iconUrl: userData.iconUrl,
+        comment: userData.comment,
+        profile: userData.profile,
       }
       // プロフィールデータをデータベースにセット
-      db.collection('users').doc(userId).set(data)
+      firebase.firestore().collection('users').doc(userData.id).set(data)
     }
     return {
       userData,
