@@ -3,14 +3,12 @@
     <div
       class="relative shadow-lg h-20 w-20 sm:h-24 sm:w-24 border-white rounded-full overflow-hidden border-4 mr-4 flex justify-center items-center"
     >
-      <img v-show="uploadedImage" class="object-cover w-full h-full"
+      <!-- <img v-show="uploadedImage" class="object-cover w-full h-full"
         :src="uploadedImage" 
         @dragover.prevent 
-        @drop.prevent="onFileChange" />
-      <div v-show="!uploadedImage" class="drag-area" 
-        @dragover.prevent
-        @drop.prevent="onFileChange">
-        <span>{{ iconUploadAreaMessage }}</span>
+        @drop.prevent="onFileChange" /> -->
+      <div class="drag-area" @dragover.prevent @drop.prevent="onFileChange">
+        <span> {{ iconUploadAreaMessage }} </span>
       </div>
     </div>
     <div class="absolute flex bottom-0">
@@ -29,7 +27,12 @@
       <h2
         class="text-blue-900 text-2xl sm:text-3xl title-font font-medium mb-1"
       >
-        <input class="profile-edit-input" :value="props.userName" />
+        <!-- TODO: エラー解消 Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "userName" -->
+        <input
+          v-model="props.userName"
+          class="profile-edit-input"
+          @input="userNameEmitter()"
+        />
       </h2>
       <div class="flex mb-4">
         <span class="flex">
@@ -46,7 +49,7 @@
               d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
             />
           </svg>
-          <input class="profile-edit-input" :value="props.email" />
+          <p>{{ props.email }}</p>
         </span>
       </div>
     </div>
@@ -64,12 +67,16 @@ export default defineComponent({
     email: { type: String },
     iconUploadAreaMessage: {
       type: String,
-      default: 'Your Image!',
+      default: '',
     },
   },
   setup(props, context) {
     let uploadedImage = ref('')
     const cleared = ref(false)
+
+    const userNameEmitter = () => {
+      context.emit('changeName', props.userName)
+    }
 
     onBeforeMount(() => {
       uploadedImage.value = props.iconUrl
@@ -96,6 +103,7 @@ export default defineComponent({
         }
       }
       reader.readAsDataURL(file)
+      props.iconUploadAreaMessage = 'Uploaded'
     }
     return {
       props,
@@ -105,6 +113,7 @@ export default defineComponent({
       clearShadow,
       onFileChange,
       createImage,
+      userNameEmitter,
     }
   },
 })
