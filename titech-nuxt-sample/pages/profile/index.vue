@@ -17,7 +17,7 @@
           :email="userData.email"
         />
         <hr class="my-4 sm:my-8">
-        <p class="leading-relaxed whitespace-pre-wrap">
+        <p class="leading-relaxed whitespace-pre-line">
           {{ userData.comment }}
         </p>
       </div>

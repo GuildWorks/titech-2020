@@ -9,7 +9,7 @@
           :email="userData().email"
         />
         <hr class="my-4 sm:my-8">
-        <p class="leading-relaxed whitespace-pre-wrap">{{ userData().comment }}</p>
+        <p class="leading-relaxed whitespace-pre-line">{{ userData().comment }}</p>
       </div>
       <ProfileTable
         class="mt-8 lg:w-1/2 w-full"

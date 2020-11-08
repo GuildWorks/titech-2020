@@ -46,7 +46,7 @@
           </div>
         </div>
         <hr class="my-4 sm:my-8" />
-        <p class="leading-relaxed whitespace-pre-wrap">
+        <p class="leading-relaxed whitespace-pre-line">
           <textarea
             v-model="userData.comment"
             class="profile-edit-textarea px-1"
