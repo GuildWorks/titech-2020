@@ -32,6 +32,7 @@ import PageHeading from '@/components/page-heading.vue'
 import ProfileNameIcon from '@/components/profile-name-icon.vue'
 import ProfileTable from '@/components/profile-table.vue'
 import userlistJson from '@/mock/userlist.json'
+import firebase from '@/plugins/firebase.ts'
 
 type UserList = {
   id: string
