@@ -18,7 +18,7 @@
       >
         {{ props.userName }}
       </h2>
-      <div class="flex mb-4">
+      <div v-if="props.email" class="flex mb-4">
         <span class="flex">
           <a :href="'mailto:' + props.email" class="ml-2 flex">
             <svg
