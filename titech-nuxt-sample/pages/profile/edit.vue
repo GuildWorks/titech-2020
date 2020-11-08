@@ -48,7 +48,7 @@
         <hr class="my-4 sm:my-8" />
         <textarea
           v-model="userData.comment"
-          class="w-full h-64 border"
+          class="w-full h-64 border px-1"
         ></textarea>
       </div>
       <ProfileTableEdit
