@@ -41,7 +41,7 @@
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            class="w-5 h-5 mr-2"
+            class="w-5 h-5 mr-2 text-gray-500"
             viewBox="0 0 24 24"
           >
             <path d="M0 0h24v24H0z" fill="none" />
