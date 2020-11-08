@@ -119,15 +119,18 @@ export default defineComponent({
     const changeName = (name) => {
       userData.name = name
     }
-    const iconFile = reactive({
-      file: {},
-      fileName: '',
-    })
     const onFileChange = (file: File): void => {
-      iconFile.file = file
-      iconFile.fileName = file.name
-      // eslint-disable-next-line no-console
-      console.log(iconFile)
+      // ストレージのルートへの参照を取得
+      const storageRef = firebase.storage().ref()
+      // プロフィール画像アップロード先への参照を取得
+      const fileRef = storageRef.child('images/profile/' + userData.id + '/' + file.name)
+      // プロフィール画像をストレージにアップロード
+      fileRef.put(file).then(function(snapshot) {
+        // ユーザーデータのURLを更新する
+        snapshot.ref.getDownloadURL().then((url) => {
+          userData.iconUrl = url
+        })
+      })
     }
     const updateProfile = (): void => {
       const data = {
@@ -139,19 +142,9 @@ export default defineComponent({
       }
       // プロフィールデータをデータベースにセット
       firebase.firestore().collection('users').doc(userData.id).set(data)
-
-      // ストレージのルートへの参照を取得
-      const storageRef = firebase.storage().ref()
-      // プロフィール画像アップロード先への参照を取得
-      const fileRef = storageRef.child('images/profile/' + userData.id + '/' + iconFile.fileName)
-      // プロフィール画像をストレージにアップロード
-      fileRef.put(iconFile.file).then(function(snapshot) {
-        console.log('Upload completed')
-      })
     }
     return {
       userData,
-      iconFile,
       onFileChange,
       updateProfile,
       changeName,
