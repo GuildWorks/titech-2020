@@ -18,8 +18,8 @@
           @changeName="changeName"
           @onFileChange="onFileChange"
         />
-        <div class="pt-2 w-full">
-          <label class="text-sm title-font text-gray-500 tracking-widest">
+        <div class="pt-2">
+          <label class="text-sm title-font text-gray-500">
             役割
           </label>
           <div class="relative">
@@ -46,12 +46,10 @@
           </div>
         </div>
         <hr class="my-4 sm:my-8" />
-        <p class="leading-relaxed whitespace-pre-line">
-          <textarea
-            v-model="userData.comment"
-            class="profile-edit-textarea px-1"
-          ></textarea>
-        </p>
+        <textarea
+          v-model="userData.comment"
+          class="w-full h-64 border-2"
+        ></textarea>
       </div>
       <ProfileTableEdit
         class="mt-8 lg:w-1/2 w-full"
