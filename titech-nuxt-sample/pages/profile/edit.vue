@@ -142,6 +142,8 @@ export default defineComponent({
       }
       // プロフィールデータをデータベースにセット
       firebase.firestore().collection('users').doc(userData.id).set(data)
+      // プロフィール画面に戻る
+      window.location.href = '/profile'
     }
     return {
       userData,
