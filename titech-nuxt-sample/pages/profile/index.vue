@@ -77,6 +77,8 @@ export default defineComponent({
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         // User is signed in.
+        userData.id = user.uid
+        userData.email = user.email
         getUserData(user)
       } else {
         // No user is signed in.
@@ -93,9 +95,7 @@ export default defineComponent({
             // eslint-disable-next-line no-console
             console.log('No such document!')
           } else {
-            userData.id = user.uid
             userData.name = doc.data().name
-            userData.email = user.email
             userData.role = doc.data().role
             userData.iconUrl = doc.data().iconUrl
             userData.profile = doc.data().profile
