@@ -92,7 +92,6 @@ export default defineComponent({
           userList.push({
             id: doc.id,
             name: doc.data().name,
-            // TODO: ユーザー登録時にusers.uidへname, email, roleを登録するように修正
             email: doc.data().email,
             role: doc.data().role,
             iconUrl: doc.data().iconUrl,

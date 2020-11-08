@@ -8,7 +8,7 @@
               所属・部署
             </th>
             <td class="p-4 profile-edit-td">
-              <input v-model="profile.belongs" class="profile-edit-input" />
+              <input v-model="profile.belongs" class="profile-edit-input px-1" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
@@ -16,7 +16,7 @@
               ニックネーム
             </th>
             <td class="p-4 profile-edit-td">
-              <input v-model="profile.nickname" class="profile-edit-input" />
+              <input v-model="profile.nickname" class="profile-edit-input px-1" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
@@ -24,7 +24,7 @@
               出身地
             </th>
             <td class="p-4 profile-edit-td">
-              <input v-model="profile.birthplace" class="profile-edit-input" />
+              <input v-model="profile.birthplace" class="profile-edit-input px-1" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
@@ -32,7 +32,7 @@
               生年月日
             </th>
             <td class="p-4 profile-edit-td">
-              <input v-model="profile.birthday" class="profile-edit-input" />
+              <input v-model="profile.birthday" class="profile-edit-input px-1" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
@@ -40,7 +40,7 @@
               血液型
             </th>
             <td class="p-4 profile-edit-td">
-              <input v-model="profile.bloodType" class="profile-edit-input" />
+              <input v-model="profile.bloodType" class="profile-edit-input px-1" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
@@ -48,7 +48,7 @@
               星座
             </th>
             <td class="p-4 profile-edit-td">
-              <input v-model="profile.sign" class="profile-edit-input" />
+              <input v-model="profile.sign" class="profile-edit-input px-1" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
@@ -56,7 +56,7 @@
               趣味
             </th>
             <td class="p-4 profile-edit-td">
-              <input v-model="profile.hobby" class="profile-edit-input" />
+              <input v-model="profile.hobby" class="profile-edit-input px-1" />
             </td>
           </tr>
         </tbody>

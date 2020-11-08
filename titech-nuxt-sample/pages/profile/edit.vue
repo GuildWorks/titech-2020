@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 <template>
   <div class="container mx-auto">
     <PageHeading>
@@ -19,11 +18,38 @@
           @changeName="changeName"
           @onFileChange="onFileChange"
         />
-        <hr class="my-4 sm:my-8">
+        <div class="pt-2 w-full">
+          <label class="text-sm title-font text-gray-500 tracking-widest">
+            役割
+          </label>
+          <div class="relative">
+            <select
+              v-model="userData.role"
+              class="appearance-none bg-white w-full border py-3 px-4 pr-8 rounded focus:outline-none"
+            >
+              <option value="admin">リーダー</option>
+              <option value="member">メンバー</option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+            >
+              <svg
+                class="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4 sm:my-8" />
         <p class="leading-relaxed whitespace-pre-wrap">
           <textarea
             v-model="userData.comment"
-            class="profile-edit-textarea"
+            class="profile-edit-textarea px-1"
           ></textarea>
         </p>
       </div>
@@ -39,7 +65,6 @@ import { defineComponent, reactive, SetupContext, onBeforeMount } from 'nuxt-com
 import PageHeading from '@/components/page-heading.vue'
 import ProfileNameIconEdit from '@/components/profile-name-icon-edit.vue'
 import ProfileTableEdit from '@/components/profile-table-edit.vue'
-import userlistJson from '@/mock/userlist.json'
 import firebase from '@/plugins/firebase.ts'
 
 type User = {
@@ -124,9 +149,11 @@ export default defineComponent({
       // ストレージのルートへの参照を取得
       const storageRef = firebase.storage().ref()
       // プロフィール画像アップロード先への参照を取得
-      const fileRef = storageRef.child('images/profile/' + userData.id + '/' + file.name)
+      const fileRef = storageRef.child(
+        'images/profile/' + userData.id + '/' + file.name
+      )
       // プロフィール画像をストレージにアップロード
-      fileRef.put(file).then(function(snapshot) {
+      fileRef.put(file).then(function (snapshot) {
         // ユーザーデータのURLを更新する
         snapshot.ref.getDownloadURL().then((url) => {
           userData.iconUrl = url
@@ -136,6 +163,7 @@ export default defineComponent({
     const updateProfile = (): void => {
       const data = {
         name: userData.name,
+        email: userData.email,
         role: userData.role,
         iconUrl: userData.iconUrl,
         comment: userData.comment,
