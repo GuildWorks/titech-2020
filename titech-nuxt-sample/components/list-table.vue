@@ -57,14 +57,16 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from 'nuxt-composition-api'
+import { defineComponent, reactive, ref } from 'nuxt-composition-api'
 import userlistJson from '@/mock/userlist.json'
-type UserList = {
+import firebase from '@/plugins/firebase.ts'
+type User = {
   id: string
   name: string
   email: string
   role: string
   iconUrl: string
+  comment: string
   profile: {
     belongs: string
     nickname: string
@@ -78,10 +80,38 @@ type UserList = {
 export default defineComponent({
   name: 'ListTable',
   setup(_) {
-    const userList = reactive<UserList[]>(userlistJson.userlistData)
-    const currentUserId = '0001' // TODO ログイン情報から取得
+    const userList = reactive<User[]>([])
+    firebase
+      .firestore()
+      .collection('users')
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          // eslint-disable-next-line no-console
+          console.log(doc.id, ' => ', doc.data())
+          userList.push({
+            id: doc.id,
+            name: doc.data().name,
+            // TODO: ユーザー登録時にusers.uidへname, email, roleを登録するように修正
+            email: doc.data().email,
+            role: doc.data().role,
+            iconUrl: doc.data().iconUrl,
+            comment: doc.data().comment,
+            profile: doc.data().profile,
+          })
+        })
+      })
+    const currentUserId = ref('')
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        currentUserId.value = user.uid
+      } else {
+        // No user is signed in.
+      }
+    })
     const userLinkPath = (userId: string): string => {
-      return (userId === currentUserId) ? '/profile' : '/users/' + userId
+      return userId === currentUserId.value ? '/profile' : '/users/' + userId
     }
     const userLink = (userId: string): void => {
       window.location.href = userLinkPath(userId)
