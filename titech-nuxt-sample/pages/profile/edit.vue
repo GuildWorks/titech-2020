@@ -48,6 +48,7 @@ type User = {
   email: string
   role: string
   iconUrl: string
+  comment: string
   profile: {
     belongs: string
     nickname: string
@@ -66,7 +67,7 @@ export default defineComponent({
     ProfileNameIconEdit,
   },
   setup(_, { root }: SetupContext) {
-    const userData = reactive({
+    const userData = reactive<User>({
       id: '',
       name: '',
       email: '',
@@ -141,9 +142,15 @@ export default defineComponent({
         profile: userData.profile,
       }
       // プロフィールデータをデータベースにセット
-      firebase.firestore().collection('users').doc(userData.id).set(data)
-      // プロフィール画面に戻る
-      window.location.href = '/profile'
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(userData.id)
+        .set(data)
+        .then(() => {
+          // プロフィール画面に戻る
+          window.location.href = '/profile'
+        })
     }
     return {
       userData,
