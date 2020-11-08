@@ -6,6 +6,7 @@
         <ProfileNameIcon
           :icon-url="userData.iconUrl"
           :user-name="userData.name"
+          :email="userData.email"
         />
         <hr class="my-4 sm:my-8" />
         <p class="leading-relaxed whitespace-pre-line">
@@ -24,7 +25,9 @@ import ProfileTable from '@/components/profile-table.vue'
 import firebase from '@/plugins/firebase.ts'
 
 type User = {
+  id: string
   name: string
+  email: string
   role: string
   iconUrl: string
   comment: string
@@ -47,7 +50,9 @@ export default defineComponent({
   },
   setup(_, { root }: SetupContext) {
     const userData = reactive<User>({
+      id: '',
       name: '',
+      email: '',
       role: '',
       iconUrl: '',
       comment: '',
@@ -71,7 +76,9 @@ export default defineComponent({
           // eslint-disable-next-line no-console
           console.log('No such document!')
         } else {
+          userData.id = root.$route.params.id
           userData.name = doc.data().name
+          userData.email = doc.data().email
           userData.role = doc.data().role
           userData.iconUrl = doc.data().iconUrl
           userData.profile = doc.data().profile
