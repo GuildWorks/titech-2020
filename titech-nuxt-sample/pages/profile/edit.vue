@@ -48,7 +48,7 @@
         <hr class="my-4 sm:my-8" />
         <textarea
           v-model="userData.comment"
-          class="w-full h-64 border-2"
+          class="w-full h-64 border"
         ></textarea>
       </div>
       <ProfileTableEdit
@@ -187,4 +187,22 @@ export default defineComponent({
   },
 })
 </script>
-<style></style>
+<style>
+.drag-area {
+  width: 100%;
+  min-width: 200px;
+  height: 100%;
+  min-height: 200px;
+  border: 1px dotted rgba(0,0,0,0.1);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #F5F5F5;
+}
+
+.drag-area > input {
+  opacity: 0;
+}
+</style>

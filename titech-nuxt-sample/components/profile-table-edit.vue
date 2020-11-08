@@ -7,56 +7,56 @@
             <th class="p-4 whitespace-no-wrap text-left">
               所属・部署
             </th>
-            <td class="p-4 profile-edit-td">
-              <input v-model="profile.belongs" class="profile-edit-input px-1" />
+            <td class="p-4 w-full">
+              <input v-model="profile.belongs" class="border w-full px-1" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
             <th class="p-4 whitespace-no-wrap text-left">
               ニックネーム
             </th>
-            <td class="p-4 profile-edit-td">
-              <input v-model="profile.nickname" class="profile-edit-input px-1" />
+            <td class="p-4 w-full">
+              <input v-model="profile.nickname" class="border w-full px-1" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
             <th class="p-4 whitespace-no-wrap text-left">
               出身地
             </th>
-            <td class="p-4 profile-edit-td">
-              <input v-model="profile.birthplace" class="profile-edit-input px-1" />
+            <td class="p-4 w-full">
+              <input v-model="profile.birthplace" class="border w-full px-1" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
             <th class="p-4 whitespace-no-wrap text-left">
               生年月日
             </th>
-            <td class="p-4 profile-edit-td">
-              <input v-model="profile.birthday" class="profile-edit-input px-1" />
+            <td class="p-4 w-full">
+              <input v-model="profile.birthday" class="border w-full px-1" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
             <th class="p-4 whitespace-no-wrap text-left">
               血液型
             </th>
-            <td class="p-4 profile-edit-td">
-              <input v-model="profile.bloodType" class="profile-edit-input px-1" />
+            <td class="p-4 w-full">
+              <input v-model="profile.bloodType" class="border w-full px-1" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
             <th class="p-4 whitespace-no-wrap text-left">
               星座
             </th>
-            <td class="p-4 profile-edit-td">
-              <input v-model="profile.sign" class="profile-edit-input px-1" />
+            <td class="p-4 w-full">
+              <input v-model="profile.sign" class="border w-full px-1" />
             </td>
           </tr>
           <tr class="border-b bg-gray-100">
             <th class="p-4 whitespace-no-wrap text-left">
               趣味
             </th>
-            <td class="p-4 profile-edit-td">
-              <input v-model="profile.hobby" class="profile-edit-input px-1" />
+            <td class="p-4 w-full">
+              <input v-model="profile.hobby" class="border w-full px-1" />
             </td>
           </tr>
         </tbody>
