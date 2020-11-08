@@ -20,7 +20,7 @@
           @onFileChange="onFileChange"
         />
         <hr class="my-4 sm:my-8">
-        <p class="leading-relaxed">
+        <p class="leading-relaxed whitespace-pre-wrap">
           <textarea
             v-model="userData.comment"
             class="profile-edit-textarea"
