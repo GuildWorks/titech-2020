@@ -3,14 +3,12 @@
     <div
       class="relative shadow-lg h-20 w-20 sm:h-24 sm:w-24 border-white rounded-full overflow-hidden border-4 mr-4 flex justify-center items-center"
     >
-      <img v-show="uploadedImage" class="object-cover w-full h-full"
+      <!-- <img v-show="uploadedImage" class="object-cover w-full h-full"
         :src="uploadedImage" 
         @dragover.prevent 
-        @drop.prevent="onFileChange" />
-      <div v-show="!uploadedImage" class="drag-area" 
-        @dragover.prevent
-        @drop.prevent="onFileChange">
-        <span>{{ iconUploadAreaMessage }}</span>
+        @drop.prevent="onFileChange" /> -->
+      <div class="drag-area" @dragover.prevent @drop.prevent="onFileChange">
+        <span> {{ iconUploadAreaMessage }} </span>
       </div>
     </div>
     <div class="absolute flex bottom-0">
@@ -69,7 +67,7 @@ export default defineComponent({
     email: { type: String },
     iconUploadAreaMessage: {
       type: String,
-      default: 'Your Image!',
+      default: '',
     },
   },
   setup(props, context) {
@@ -105,6 +103,7 @@ export default defineComponent({
         }
       }
       reader.readAsDataURL(file)
+      props.iconUploadAreaMessage = 'Uploaded'
     }
     return {
       props,
