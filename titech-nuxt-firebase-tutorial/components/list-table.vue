@@ -13,7 +13,8 @@
         <tr
           v-for="(user, index) in userList"
           :key="index"
-          class="border-b bg-gray-100"
+          class="border-b bg-gray-100 hover:bg-orange-100 cursor-pointer"
+          @click="userLink(user.id)"
         >
           <td class="py-3 px-5 whitespace-no-wrap sm:whitespace-normal">
             {{ user.name }}
@@ -58,12 +59,13 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'nuxt-composition-api'
 import userlistJson from '@/mock/userlist.json'
-type UserList = {
+type User = {
   id: string
   name: string
   email: string
   role: string
   iconUrl: string
+  comment: string
   profile: {
     belongs: string
     nickname: string
@@ -75,11 +77,15 @@ type UserList = {
   }
 }
 export default defineComponent({
-  name: 'ListTableHtml',
+  name: 'ListTable',
   setup(_) {
-    const userList = reactive<UserList[]>(userlistJson.userlistData)
+    const userList = reactive<User[]>(userlistJson.userlistData)
+    const userLink = (userId: string): void => {
+      window.location.href = '/users/' + userId
+    }
     return {
       userList,
+      userLink,
     }
   },
 })
