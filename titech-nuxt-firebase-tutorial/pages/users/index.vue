@@ -9,13 +9,11 @@
 import { defineComponent } from 'nuxt-composition-api'
 import PageHeading from '@/components/page-heading.vue'
 import ListTable from '@/components/list-table.vue'
-import ListTableHtml from '@/components/list-table-html.vue'
 
 export default defineComponent({
   components: {
     PageHeading,
     ListTable,
-    ListTableHtml,
   },
 })
 </script>
