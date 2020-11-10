@@ -66,23 +66,6 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, SetupContext } from 'nuxt-composition-api'
-import userlistJson from '@/mock/userlist.json'
-type UserList = {
-  id: string
-  name: string
-  email: string
-  role: string
-  iconUrl: string
-  profile: {
-    belongs: string
-    nickname: string
-    birthplace: string
-    birthday: string
-    bloodType: string
-    sign: string
-    hobby: string
-  }
-}
 export default defineComponent({
   name: 'ProfileTable',
   props: {

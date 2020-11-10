@@ -3,10 +3,6 @@
     <div
       class="relative shadow-lg h-20 w-20 sm:h-24 sm:w-24 border-white rounded-full overflow-hidden border-4 mr-4 flex justify-center items-center"
     >
-      <!-- <img v-show="uploadedImage" class="object-cover w-full h-full"
-        :src="uploadedImage" 
-        @dragover.prevent 
-        @drop.prevent="onFileChange" /> -->
       <div class="drag-area" @dragover.prevent @drop.prevent="onFileChange">
         <span> {{ iconUploadAreaMessage }} </span>
       </div>
@@ -27,7 +23,6 @@
       <h2
         class="text-blue-900 text-2xl sm:text-3xl title-font font-medium mb-1"
       >
-        <!-- TODO: エラー解消 Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "userName" -->
         <input
           v-model="props.userName"
           class="border w-full px-1"

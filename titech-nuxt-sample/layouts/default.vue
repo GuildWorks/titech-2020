@@ -76,7 +76,7 @@ import { defineComponent } from 'nuxt-composition-api'
 import firebase from '@/plugins/firebase.ts'
 
 export default defineComponent({
-  middleware: ['isAuth'],
+  middleware: ['Auth'],
   setup(_, { root: { $store } }) {
     const isSignedIn = (): boolean => {
       return $store.state.signedIn

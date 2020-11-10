@@ -26,7 +26,6 @@
 <script lang="ts">
 import { defineComponent, ref } from 'nuxt-composition-api'
 import PageHeading from '@/components/page-heading.vue'
-import firebase from '@/plugins/firebase.ts'
 
 export default defineComponent({
   components: {
@@ -36,22 +35,7 @@ export default defineComponent({
     const email = ref('')
     const password = ref('')
     function submit() {
-      firebase
-        .auth()
-        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
-        .then(() =>
-          firebase
-            .auth()
-            .signInWithEmailAndPassword(email.value, password.value)
-        )
-        .then(() => (location.href = '/users'))
-        .catch(function (error) {
-          const errorCode = error.code
-          const errorMessage = error.message
-          // eslint-disable-next-line no-console
-          console.log(errorCode, errorMessage)
-          alert('ログイン失敗')
-        })
+      // TODO
     }
     return {
       props,

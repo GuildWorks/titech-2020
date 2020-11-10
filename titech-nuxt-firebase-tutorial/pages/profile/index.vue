@@ -30,7 +30,6 @@ import { defineComponent, reactive, SetupContext } from 'nuxt-composition-api'
 import PageHeading from '@/components/page-heading.vue'
 import ProfileNameIcon from '@/components/profile-name-icon.vue'
 import ProfileTable from '@/components/profile-table.vue'
-import firebase from '@/plugins/firebase.ts'
 
 type User = {
   id: string
@@ -74,39 +73,6 @@ export default defineComponent({
         hobby: '',
       },
     })
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        // User is signed in.
-        userData.id = user.uid
-        userData.email = user.email
-        getUserData(user)
-      } else {
-        // No user is signed in.
-      }
-    })
-    const getUserData = (user) => {
-      firebase
-        .firestore()
-        .collection('users')
-        .doc(user.uid)
-        .get()
-        .then((doc) => {
-          if (!doc.exists) {
-            // eslint-disable-next-line no-console
-            console.log('No such document!')
-          } else {
-            userData.name = doc.data().name
-            userData.role = doc.data().role
-            userData.iconUrl = doc.data().iconUrl
-            userData.profile = doc.data().profile
-            userData.comment = doc.data().comment
-          }
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.log('Error getting document', err);
-        })
-    }
     return {
       userData,
     }

@@ -63,7 +63,6 @@ import { defineComponent, reactive, SetupContext, onBeforeMount } from 'nuxt-com
 import PageHeading from '@/components/page-heading.vue'
 import ProfileNameIconEdit from '@/components/profile-name-icon-edit.vue'
 import ProfileTableEdit from '@/components/profile-table-edit.vue'
-import firebase from '@/plugins/firebase.ts'
 
 type User = {
   id: string
@@ -107,76 +106,15 @@ export default defineComponent({
         hobby: '',
       },
     })
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        // User is signed in.
-        userData.id = user.uid
-        userData.email = user.email
-        getUserData(user)
-      } else {
-        // No user is signed in.
-      }
-    })
-    const getUserData = (user) => {
-      firebase
-        .firestore()
-        .collection('users')
-        .doc(user.uid)
-        .get()
-        .then((doc) => {
-          if (!doc.exists) {
-            // eslint-disable-next-line no-console
-            console.log('No such document!')
-          } else {
-            userData.name = doc.data().name
-            userData.role = doc.data().role
-            userData.iconUrl = doc.data().iconUrl
-            userData.profile = doc.data().profile
-            userData.comment = doc.data().comment
-          }
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.log('Error getting document', err);
-        })
-    }
     const changeName = (name) => {
       userData.name = name
     }
     const onFileChange = (file: File): void => {
-      // ストレージのルートへの参照を取得
-      const storageRef = firebase.storage().ref()
-      // プロフィール画像アップロード先への参照を取得
-      const fileRef = storageRef.child(
-        'images/profile/' + userData.id + '/' + file.name
-      )
-      // プロフィール画像をストレージにアップロード
-      fileRef.put(file).then(function (snapshot) {
-        // ユーザーデータのURLを更新する
-        snapshot.ref.getDownloadURL().then((url) => {
-          userData.iconUrl = url
-        })
-      })
+      // TODO
     }
     const updateProfile = (): void => {
-      const data = {
-        name: userData.name,
-        email: userData.email,
-        role: userData.role,
-        iconUrl: userData.iconUrl,
-        comment: userData.comment,
-        profile: userData.profile,
-      }
-      // プロフィールデータをデータベースにセット
-      firebase
-        .firestore()
-        .collection('users')
-        .doc(userData.id)
-        .set(data)
-        .then(() => {
-          // プロフィール画面に戻る
-          window.location.href = '/profile'
-        })
+      // TODO
+      window.location.href = '/profile'
     }
     return {
       userData,

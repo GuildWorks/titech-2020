@@ -29,7 +29,7 @@
           <td class="py-3 px-5">
             <div class="flex justify-end items-center">
               <a
-                :href="userLinkPath(user.id)"
+                :href="'/users/' + user.id"
                 class="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline flex items-center"
               >
                 <span
@@ -57,9 +57,8 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'nuxt-composition-api'
+import { defineComponent, reactive } from 'nuxt-composition-api'
 import userlistJson from '@/mock/userlist.json'
-import firebase from '@/plugins/firebase.ts'
 type User = {
   id: string
   name: string
@@ -80,44 +79,12 @@ type User = {
 export default defineComponent({
   name: 'ListTable',
   setup(_) {
-    const userList = reactive<User[]>([])
-    firebase
-      .firestore()
-      .collection('users')
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          // eslint-disable-next-line no-console
-          console.log(doc.id, ' => ', doc.data())
-          userList.push({
-            id: doc.id,
-            name: doc.data().name,
-            email: doc.data().email,
-            role: doc.data().role,
-            iconUrl: doc.data().iconUrl,
-            comment: doc.data().comment,
-            profile: doc.data().profile,
-          })
-        })
-      })
-    const currentUserId = ref('')
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        // User is signed in.
-        currentUserId.value = user.uid
-      } else {
-        // No user is signed in.
-      }
-    })
-    const userLinkPath = (userId: string): string => {
-      return userId === currentUserId.value ? '/profile' : '/users/' + userId
-    }
+    const userList = reactive<User[]>(userlistJson.userlistData)
     const userLink = (userId: string): void => {
-      window.location.href = userLinkPath(userId)
+      window.location.href = '/users/' + userId
     }
     return {
       userList,
-      userLinkPath,
       userLink,
     }
   },
