@@ -39,7 +39,7 @@ export default defineComponent({
             .auth()
             .createUserWithEmailAndPassword(email.value, password.value)
         )
-        .then(() => (location.href = '/users'))
+        .then(() => (location.href = '/profile/edit'))
         .catch(function (error) {
           const errorCode = error.code
           const errorMessage = error.message

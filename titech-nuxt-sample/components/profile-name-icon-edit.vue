@@ -30,7 +30,7 @@
         <!-- TODO: エラー解消 Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "userName" -->
         <input
           v-model="props.userName"
-          class="profile-edit-input"
+          class="border w-full px-1"
           @input="userNameEmitter()"
         />
       </h2>
@@ -41,7 +41,7 @@
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            class="w-5 h-5 mr-2"
+            class="w-5 h-5 mr-2 text-gray-500"
             viewBox="0 0 24 24"
           >
             <path d="M0 0h24v24H0z" fill="none" />
