@@ -20,7 +20,74 @@ paginate: true
 　
 　　　　　　　　　　　　　　　　　　　　　　　　**Ryo Imahashi**
 
+
 ---
+## 目次
+- 前回までのふりかえり
+- 今回やることの確認
+- Firebaseってなに？
+- Firebaseを使う準備をしよう
+- ユーザー登録をしよう
+- ユーザー認証をしよう
+- データベース連携をしよう
+- 参考
+
+---
+## 前回までのふりかえり
+- 第1回では、HTML、CSS、Javascriptの基礎を学びました。
+  - [参考: 第1回資料](https://github.com/GuildWorks/titech-2020/blob/master/docs/Phase1)
+- 第2回では、Vue.js(Nuxt.js)の基礎を学びました。
+  - [参考: 第2回資料](https://github.com/GuildWorks/titech-2020/blob/master/docs/Phase2)
+
+
+---
+#### 開発環境を整えよう
+- 今回が初参加の方は、ご自身のPCで開発をするための環境構築をしましょう。ギルドワークスのメンバーがフォローしますので、声を掛けてください。
+  - [参考: 環境構築の資料](https://github.com/GuildWorks/titech-2020/blob/master/docs/Phase1/1-1.md)
+- 環境構築ができている方は、[GitHub上のリモートリポジトリ](https://github.com/GuildWorks/titech-2020)から最新のコードを落としてきてください。
+  - `titech-2020`ディレクトリでGitBash(Terminal)を開いて、以下のコマンドを実行しましょう。
+    ```
+    git pull
+    ```
+  
+---
+#### 前回作ったアプリの確認
+- ふりかえりのため、前回作ったアプリを動かして確認しましょう。
+  - GitBash(Terminal)で以下のコマンドを実行しましょう。
+    ```
+    # から始まる行はコメントなので、実行されません
+
+    # 現在位置がtitech-2020ディレクトリの場合、移動する
+    cd titech-nuxt-day2-answer
+
+    # 必要なモジュールをインストール
+    npm install
+
+    # アプリを起動
+    npm run dev
+    ```
+  - その後、http://localhost:3000/ にアクセスしましょう。
+---
+#### トップ画面
+![w:800px](images/3-1.png)
+http://localhost:3000/
+
+---
+#### メンバー一覧
+![w:800px](images/3-2.png)
+http://localhost:3000/list
+
+---
+
+#### メンバー詳細
+![w:800px](images/3-3.png)
+http://localhost:3000/user/0001
+
+---
+- どの画面も、表示しているデータは実際に登録したものではなくダミーデータで、更新ができなかったよね
+
+---
+
 <!-- TODO: Delete -->
 # 骨子
 - これまでやったことの確認
@@ -99,7 +166,7 @@ paginate: true
   - Gmailのエイリアス機能(+でアドレスを増やせるやつ)
   - 作ったアプリをインターネット上に公開したい時の参考記事
   - nuxtのフォルダ構成とそれぞれの意味
----
+--- 
 <!-- TODO: Delete -->
 # 参考にしたものをまとめておく
 https://www.topgate.co.jp/firebase01-what-is-firebase
@@ -108,17 +175,3 @@ https://www.slideshare.net/KenjiroKubota/firebase-129555773
 
 https://ja.wikipedia.org/wiki/Firebase
 Firebase Authenticationは、クライアント側のコードのみでユーザーを認証できるサービスである。ソーシャルログインプロバイダであるFacebook、GitHub、Twitter、Googleをはじめ、Google Play Games、Apple、Yahoo、Microsoftなどのサービスプロバイダをサポートしている。また、ユーザー管理システムを搭載しており、開発者はFirebaseに保存されている電子メールとパスワードによるユーザー認証を有効にすることができる
-
---- 
-# 目次
-- これまでやったことの確認
-- 今回やることの確認
-- Firebaseってなに？
-- Firebaseを使う準備をしよう
-- ユーザー登録をしよう
-- ユーザー認証をしよう
-- データベース連携をしよう
-- 参考
-
-
---- 

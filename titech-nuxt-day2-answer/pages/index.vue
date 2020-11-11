@@ -10,11 +10,6 @@
       >
         List &amp; Detail
       </h1>
-      <h2
-        class="uppercase text-4xl text-blue-500 text-secondary tracking-widest mb-6"
-      >
-        HTML/CSS
-      </h2>
       <p class="text-gray-600 leading-relaxed mb-6">
         <a href="/list" class="text-blue-900">メンバーリスト</a>
         と
