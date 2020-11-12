@@ -337,18 +337,79 @@ http://localhost:3000/user/0001
     ![w:500px](images/3-28.png)
 
 ---
+## ユーザー認証(ログイン)機能を作ろう
+- ここでも、Firebase Authenticationを使います。
+- `/pages/signin.vue` を開きましょう。これが、ログイン画面のファイルです。
+- 「ログイン」ボタンを押した時に実行される `submit()` 関数の中身が空になっています。
+  ```
+      function submit() {
+        // TODO
+      }
+  ```
+  - この関数内で、メールアドレスとパスワードによるログイン処理を呼び出すことで、ログインできるようにします。
+--- 
+- `/pages/signup.vue`内でFirebaseを扱えるようにするために、firebaseをインポートしましょう。
+  ```
+  <script lang="ts">
+  import { defineComponent, ref } from 'nuxt-composition-api'
+  import PageHeading from '@/components/page-heading.vue'
+  import firebase from '@/plugins/firebase.ts' // この行を追加
+  ```
 
-
-
-
-
-
-
+---
+- 以下のリンクを開いてください。
+  https://firebase.google.com/docs/auth/web/password-auth#sign_in_a_user_with_an_email_address_and_password
+  - メールアドレスとパスワードによるログイン処理を呼び出すためのコードが記載されています。
+- コードブロック右上の「Copy code sample」アイコンをクリックして、コピーしてください。
+  ![w:600px](images/3-29.png)
 
 
 ---
-## ユーザー認証(ログイン)機能を作ろう
-  - これも、Firebase Authenticationを使う
+- コピーしたコードを、`submit()`関数内に貼り付けてください。
+  ```
+      const state = reactive({
+        email: '',
+        password: ''
+      })
+      function submit() {
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        });
+      }
+  ```
+
+---
+- `signInWithEmailAndPassword()`の引数`email`を`state.email`に、`password`を`state.password`に変更しましょう。
+- ログイン失敗時のアラートを追加しましょう。
+```
+    const state = reactive({
+      email: '',
+      password: ''
+    })
+    function submit() {
+      firebase.auth().signInWithEmailAndPassword(state.email, state.password).catch(function(error) {
+        // Handle Errors here.
+        alert('ログインが失敗しました。errorCode: ' + error.code + ', errorMessage:' + error.message)
+      });
+    }
+```
+- 画面に入力した`email`,`password`が、`signInWithEmailAndPassword()`に渡され、それらを含めたログイン処理のリクエストが実行されるようになります。
+---
+- 画面を操作して実際にログインしてみましょう。
+  -  メールアドレスとパスワードを入力し、ログインボタンを押してみてください。
+    - 先程作成したユーザーのメールアドレスとパスワードに一致していれば、何も起こらないと思います(ログインに成功しています)。
+    - 先程作成したユーザーとメールアドレスが異なっていれば、`auth/user-not-found`エラーが起きます。
+    - 先程作成したユーザーとメールアドレスが一致し、パスワードが異なっていれば、`auth/wrong-password`エラーが起きます。
+
+---
+- ログイン状態を保持しましょう。
+https://firebase.google.com/docs/auth/web/auth-state-persistence#modifying_the_auth_state_persistence
+
+
+---
   - コードを説明して実装してもらう
 - データベース連携をしよう
   - Cloud Firestoreを使う

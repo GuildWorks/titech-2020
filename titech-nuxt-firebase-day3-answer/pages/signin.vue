@@ -26,6 +26,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'nuxt-composition-api'
 import PageHeading from '@/components/page-heading.vue'
+import firebase from '@/plugins/firebase.ts'
 
 export default defineComponent({
   components: {
@@ -37,7 +38,10 @@ export default defineComponent({
       password: ''
     })
     function submit() {
-      // TODO
+      firebase.auth().signInWithEmailAndPassword(state.email, state.password).catch(function(error) {
+        // Handle Errors here.
+        alert('ログインが失敗しました。errorCode: ' + error.code + ', errorMessage:' + error.message)
+      }).then((res) => console.log(res))
     }
     return {
       props,
