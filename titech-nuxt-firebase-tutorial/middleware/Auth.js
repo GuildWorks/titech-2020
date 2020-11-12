@@ -1,3 +1,3 @@
-export default function ({ redirect, route, store }) {
+export default function () {
   
 }

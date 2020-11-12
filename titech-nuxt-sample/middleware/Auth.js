@@ -3,7 +3,6 @@ export const skipAuthPaths = ['/signin', '/signup']
 
 export default function ({ redirect, route, store }) {
   firebase.auth().onAuthStateChanged(function (user) {
-    // eslint-disable-next-line no-console
     if (user) {
       // User is signed in.
       store.commit('signedIn', true);

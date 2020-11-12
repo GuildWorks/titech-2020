@@ -96,8 +96,8 @@ http://localhost:3000/user/0001
 開発する機能や画面は、以下の通りです。
 - ユーザー登録
 - ログイン
+- ログイン状態による画面の表示制御
 - ログアウト
-- ログイン状態によるメニューの表示制御
 - プロフィール編集
 - あなたのプロフィール
 - メンバーリスト(実際に登録したデータを表示)
@@ -112,7 +112,7 @@ http://localhost:3000/user/0001
 ![w:800px](images/3-5.png)
 
 ---
-#### ログアウト、ログイン状態によるメニューの表示制御
+#### ログイン状態による画面の表示制御、ログアウト
 ログインしている時
 ![w:1200px](images/3-6.png)
 
@@ -382,32 +382,156 @@ http://localhost:3000/user/0001
   ```
 
 ---
-- `signInWithEmailAndPassword()`の引数`email`を`state.email`に、`password`を`state.password`に変更しましょう。
-- ログイン失敗時のアラートを追加しましょう。
-```
-    const state = reactive({
-      email: '',
-      password: ''
-    })
-    function submit() {
-      firebase.auth().signInWithEmailAndPassword(state.email, state.password).catch(function(error) {
-        // Handle Errors here.
-        alert('ログインが失敗しました。errorCode: ' + error.code + ', errorMessage:' + error.message)
-      });
-    }
-```
-- 画面に入力した`email`,`password`が、`signInWithEmailAndPassword()`に渡され、それらを含めたログイン処理のリクエストが実行されるようになります。
+- コードを以下のように変更しましょう。
+  ```
+      const state = reactive({
+        email: '',
+        password: ''
+      })
+      function submit() {
+        firebase.auth().signInWithEmailAndPassword(state.email, state.password)
+        .then(() => (location.href = '/users'))
+        .catch(function(error) {
+          // Handle Errors here.
+          alert('ログインが失敗しました。errorCode: ' + error.code + ', errorMessage:' + error.message)
+        });
+      }
+  ```
+  - `signInWithEmailAndPassword()`の引数`email`を`state.email`に、`password`を`state.password`に変更しています。
+  - ログイン成功時に`/users`(ユーザー一覧)へ遷移させています。
+  - ログイン失敗時のアラートを追加しています。
 ---
 - 画面を操作して実際にログインしてみましょう。
   -  メールアドレスとパスワードを入力し、ログインボタンを押してみてください。
-    - 先程作成したユーザーのメールアドレスとパスワードに一致していれば、何も起こらないと思います(ログインに成功しています)。
+    - 先程作成したユーザーのメールアドレスとパスワードに一致していれば、ユーザー一覧画面へ遷移します。
     - 先程作成したユーザーとメールアドレスが異なっていれば、`auth/user-not-found`エラーが起きます。
     - 先程作成したユーザーとメールアドレスが一致し、パスワードが異なっていれば、`auth/wrong-password`エラーが起きます。
 
 ---
+## ログイン状態による画面の表示制御、ログアウト
+- `/layouts/default.vue`を開きましょう。
+- Nuxt.jsの仕組みにより、このファイルに記載した内容がデフォルトのレイアウトとして各ページに反映されます。
+  https://ja.nuxtjs.org/docs/2.x/concepts/views/#default-layout
+
+---
+ログイン状態に応じて、表示するメニューを変えましょう。
+```
+          <a
+            href="/users"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            メンバーリスト
+          </a>
+          <a
+            href="/profile"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            あなたのプロフィール
+          </a>
+          <a
+            href="/signup"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            ユーザー登録
+          </a>
+          <a
+            href="/signin"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            ログイン
+          </a>
+          <a
+            href="#"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            ログアウト
+          </a>
+```
+--- 
+- ログイン状態の判定には、Nuxt.jsのmiddlewareという仕組みを使います。
+  https://ja.nuxtjs.org/docs/2.x/directory-structure/middleware/
+  - middlewareには、画面が描画される前に実行したい処理を記載します。
+- `/middleware/Auth.js`を開きましょう。
+  - まだ何の処理も書かれていません。
+  ```
+  export default function () {
+  
+  }
+  ```
+
+---
+- `/middleware/Auth.js`を以下のように変更しましょう。
+```
+import firebase from '@/plugins/firebase.ts'
+export const skipAuthPaths = ['/signin', '/signup']
+
+export default function ({ redirect, route, store }) {
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      // User is signed in.
+      store.commit('signedIn', true);
+    } else {
+      // No user is signed in.
+      store.commit('signedIn', false);
+      if (!skipAuthPaths.includes(route.path)) {
+        redirect('/signin')
+      }
+    }
+  })
+}
+```
+---
+- `firebase.auth().onAuthStateChanged()`で現在ログインしているユーザーを取得し、ユーザーが取得できたかどうか(=ログインしているかどうか)で、その後の処理を分岐させています。
+  https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user
+- `store.commit()`で、アプリケーションの状態を管理するためのstoreという入れ物にログイン状態を保存します。
+  - storeはこの後で実装します。
+- ログインしていない状態で認証が必要な画面を表示しようとした場合、`redirect('/signin')`でログイン画面に遷移させます。
+
+---
+- `/store/index.ts`を開いて、以下のように変更しましょう。
+  ```
+  interface State {
+    signedIn: boolean
+  }
+    
+  export const state = () : State => ({
+    signedIn: false
+  })
+
+  export const mutations = {
+    signedIn(state: State, signedIn: boolean) {
+      state.signedIn = signedIn
+    }
+  }
+  ```
+  - `/middleware/Auth.js`に記載した`store.commit('signedIn', true)`でログイン状態を保存できるようになります。
+
+---
+
+- 作成した`/middleware/Auth.js`がデフォルトレイアウトの描画前に実行されるように、`/layouts/default.vue`に1行追記しましょう。
+```
+<script lang='ts'>
+import { defineComponent } from 'nuxt-composition-api'
+export default defineComponent({
+  middleware: ['Auth'], // この行を追加し、Auth.jsを読み込む
+  setup(_, { root: { $store } }) {
+  }
+})
+</script>
+```
+
+---
+- ブラウザをシークレットウインドウで開きましょう。
+  - そのままでは、先程ログインしたことをブラウザが記憶してしまっているためです。
+- 以下を確認しましょう。
+  - http://localhost:3000 (トップ)にアクセスすると、ログイン画面にリダイレクトされること。
+  - メンバーリスト、あなたのプロフィールに遷移しようとしても、ログイン画面にリダイレクトされること。
+  - ログインをすると、トップやメンバーリスト、あなたのプロフィールに遷移できるようになること。
+
+---
+
 - ログイン状態を保持しましょう。
 https://firebase.google.com/docs/auth/web/auth-state-persistence#modifying_the_auth_state_persistence
-
 
 ---
   - コードを説明して実装してもらう

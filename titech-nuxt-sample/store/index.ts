@@ -2,8 +2,8 @@ interface State {
   signedIn: boolean
 }
 
-export const state = () => ({
-    signedIn: false
+export const state = (): State => ({
+  signedIn: false
 })
 
 export const mutations = {

@@ -38,10 +38,12 @@ export default defineComponent({
       password: ''
     })
     function submit() {
-      firebase.auth().signInWithEmailAndPassword(state.email, state.password).catch(function(error) {
+      firebase.auth().signInWithEmailAndPassword(state.email, state.password)
+      .then(() => (location.href = '/users'))
+      .catch(function(error) {
         // Handle Errors here.
         alert('ログインが失敗しました。errorCode: ' + error.code + ', errorMessage:' + error.message)
-      }).then((res) => console.log(res))
+      });
     }
     return {
       props,
