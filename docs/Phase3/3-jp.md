@@ -214,7 +214,7 @@ http://localhost:3000/user/0001
   ![w:750px](images/3-19.png)
 
 ---
-- コピーした設定を、`/titech-nuxt-firebase-tutorial/plugins/firebase.ts`に貼り付けましょう。
+- Visual Studio Codeを開いて、コピーした設定を`/titech-nuxt-firebase-tutorial/plugins/firebase.ts`に貼り付けましょう。
   ![w:600px](images/3-20.png)
 - これで、Firebaseの初期設定は完了です。
 
@@ -239,15 +239,104 @@ http://localhost:3000/user/0001
   ![w:1000px](images/3-22.png)
 
 ---
-- 1つ目のスライドボタンを有効にして、「保存」をクリックしましょう。
+- 1つ目のスライダーをクリックして有効化し、「保存」をクリックしましょう。
 ![w:1000px](images/3-23.png)
 - これで、メールアドレスとパスワードによる認証機能が使えるようになります。
 ---
-#### プログラムの修正
+#### プログラムの編集
+- `/pages/signup.vue` を開きましょう。これが、ユーザー登録画面のファイルです。
+- 「登録する」ボタンを押した時に実行される `submit()` 関数の中身が空になっています。
+  ```
+      function submit() {
+        // TODO
+      }
+  ```
+  - この関数内で、Firebase Authenticationが提供している、メールアドレスとパスワードによるユーザー登録処理を呼び出すことで、ユーザー登録を行えるようにします。
+--- 
+- `/pages/signup.vue`内でFirebaseを扱えるようにするために、firebaseをインポートしましょう。
+  ```
+  <script lang="ts">
+  import { defineComponent, ref } from 'nuxt-composition-api'
+  import PageHeading from '@/components/page-heading.vue'
+  import firebase from '@/plugins/firebase.ts' // この行を追加
+  ```
 
 
+---
+- 以下のリンクを開いてください。
+  https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account
+  - メールアドレスとパスワードによるユーザー登録処理を呼び出すためのコードが記載されています。
+- コードブロック右上の「Copy code sample」アイコンをクリックして、コピーしてください。
+  ![w:600px](images/3-24.png)
 
 
+---
+- コピーしたコードを、`submit()`関数内に貼り付けてください。
+  ```
+      const state = reactive({
+        email: '',
+        password: ''
+      })
+      function submit() {
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        });
+      }
+  ```
+---
+- そのままだと動かないので、`createUserWithEmailAndPassword()`の引数`email`を`state.email`に、`password`を`state.password`に変更します。
+  ```
+      const state = reactive({
+        email: '',
+        password: ''
+      })
+      function submit() {
+        firebase.auth().createUserWithEmailAndPassword(state.email, state.password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        });
+      }
+  ```
+- 画面に入力した`email`,`password`が、`createUserWithEmailAndPassword()`に渡され、それらを含めたユーザー登録処理のリクエストが実行されるようになります。
+---
+- 画面を操作して実際にユーザーを登録してみましょう。
+  -  メールアドレスとパスワードを入力し、登録するボタンを押してみてください。
+    ![w:1000px](images/3-25.png)
+
+---
+- Firebase Authenticationで、ユーザーが登録されたことが確認できます。
+    ![w:1100px](images/3-26.png)
+
+
+---
+- ブラウザで開発者ツールを開きましょう(Chromeの場合、右クリックをして「検証」を選択)。
+- 上部のタブからNetworkタブ選択してください。
+  ![w:500px](images/3-26.5.png)
+- この状態で、先程と同じメールアドレスを使って再度ユーザー登録をしてみましょう。
+---
+- `EMAIL_EXISTS`というメッセージのエラーが起きています。
+![w:500px](images/3-27.png)
+  - 同じメールアドレスで複数のユーザーは登録できないように、Firebase Authenticationのデフォルト設定で制限されているためです。
+
+---
+- エラーが起きた場合、それが分かるようにしましょう。`submit()`を以下のように修正してください。
+```
+    function submit() {
+      firebase.auth().createUserWithEmailAndPassword(state.email, state.password).catch(function(error) {
+        // Handle Errors here.
+        alert('ユーザー登録が失敗しました。errorCode: ' + error.code + ', errorMessage:' + error.message)
+      });
+    }
+```
+  - エラーが出ると、以下のようなポップアップが出るようになります。再度同じメールアドレスでユーザー登録をしてみてください。
+    ![w:500px](images/3-28.png)
+
+---
 
 
 
