@@ -124,10 +124,7 @@ export default defineComponent({
         .doc(user.uid)
         .get()
         .then((doc) => {
-          if (!doc.exists) {
-            // eslint-disable-next-line no-console
-            console.log('No such document!')
-          } else {
+          if (doc.exists) {
             userData.name = doc.data().name
             userData.role = doc.data().role
             userData.iconUrl = doc.data().iconUrl
@@ -136,8 +133,7 @@ export default defineComponent({
           }
         })
         .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.log('Error getting document', err);
+          console.log('Error getting user document', err);
         })
     }
     const changeName = (name) => {

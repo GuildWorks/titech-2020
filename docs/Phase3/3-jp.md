@@ -663,18 +663,97 @@ export default defineComponent({
   ![w:900px](images/3-35.png)
 
 ---
-#### プロフィール編集
-- まずは自分のプロフィールを登録するため、プロフィール編集機能を作りましょう。
+#### プロフィール編集(アイコン画像は除く)
+- 自分のプロフィールを登録するため、プロフィール編集機能を作りましょう。
 - http://localhost:3000/profile/edit を表示してください。
 - `/pages/profile/edit.vue` を開きましょう。これが、プロフィール編集画面のファイルです。
-- firebaseをimportしておきましょう。
+
+---
+- 最初に、firebaseをimportしておきましょう。
   ```
   import firebase from '@/plugins/firebase.ts'
   ```
+- 次は、プロフィール登録のために必要となる自分のユーザーIDを取得していきます。
+---
+- `// TODO: ユーザーID、メールアドレス取得`というコメントを削除して、そこに以下のコードを貼り付けましょう。
+  ```
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          // User is signed in.
+          userData.id = user.uid
+          userData.email = user.email
+          getUserData(user)
+        } else {
+          // No user is signed in.
+        }
+      })
+  ```
+  - `/middleware/Auth.js`で使ったのと同じ`onAuthStateChanged()`を使ってユーザーID、メールアドレスを取得し、必要な箇所にセットしています。
 
 ---
+- `setProfile`を以下のように変更しましょう。
+  ```
+      const setProfile = (): void => {
+        const data = {
+          name: userData.name,
+          email: userData.email,
+          role: userData.role,
+          iconUrl: userData.iconUrl,
+          comment: userData.comment,
+          profile: userData.profile,
+        }
+        firebase
+          .firestore()
+          .collection('users') // usersコレクションの、
+          .doc(userData.id) // <ユーザーID>というドキュメントに、
+          .set(data) // dataをセットする
+          .then(() => {
+            window.location.href = '/profile' // 完了後、プロフィール画面へ遷移
+          })
+      }
+  ```
+---
+- 実際にプロフィールを入力して、「登録」ボタンを押してみましょう。
+  ![w:900px](images/3-36.png)
 
+---
+- Cloud Firestoreにデータが登録されたことを確認しましょう。 
+  ![w:1100px](images/3-37.png)
 
+---
+- 登録したデータをプロフィール編集画面に表示しましょう。
+  - `getUserData`を次のように変更してください。
+
+---
+```
+    const getUserData = (user) => {
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(user.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            userData.name = doc.data().name
+            userData.role = doc.data().role
+            userData.iconUrl = doc.data().iconUrl
+            userData.profile = doc.data().profile
+            userData.comment = doc.data().comment
+          }
+        })
+        .catch((err) => {
+          console.log('Error getting user document', err);
+        })
+    }
+```
+---
+- プロフィール編集画面を表示すると、登録済みのデータが表示されるようになっています。
+  ![w:900px](images/3-36.png)
+
+---
+#### やってみよう: あなたのプロフィール画面へのデータ表示
+- 同様に、あなたのプロフィール画面(http://localhost:3000/profile)でも登録済みのデータが表示されるようにしましょう。
+- あなたのプロフィール画面のファイルは、`/pages/profile/index.vue` です。
 
 
 ---
@@ -694,6 +773,7 @@ export default defineComponent({
   - Gmailのエイリアス機能(+でアドレスを増やせるやつ)
   - 作ったアプリをインターネット上に公開したい時の参考記事
   - nuxtのフォルダ構成とそれぞれの意味
+  - 複数行選択してTabを押すと、一気にインデントを整えてくれるよ。Shift + Tabでインデント削除もできるよ。
 --- 
 <!-- TODO: Delete -->
 # 参考にしたものをまとめておく

@@ -106,6 +106,9 @@ export default defineComponent({
         hobby: '',
       },
     })
+
+    // TODO: ユーザーID、メールアドレス取得
+
     const getUserData = (user) => {
       // TODO
     }

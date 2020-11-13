@@ -107,8 +107,35 @@ export default defineComponent({
         hobby: '',
       },
     })
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        userData.id = user.uid
+        userData.email = user.email
+        getUserData(user)
+      } else {
+        // No user is signed in.
+      }
+    })
     const getUserData = (user) => {
-      // TODO
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(user.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            userData.name = doc.data().name
+            userData.role = doc.data().role
+            userData.iconUrl = doc.data().iconUrl
+            userData.profile = doc.data().profile
+            userData.comment = doc.data().comment
+          }
+        })
+        .catch((err) => {
+          console.log('Error getting user document', err);
+        })
     }
     const changeName = (name) => {
       userData.name = name
@@ -117,8 +144,22 @@ export default defineComponent({
       // TODO
     }
     const setProfile = (): void => {
-      // TODO
-      window.location.href = '/profile'
+      const data = {
+        name: userData.name,
+        email: userData.email,
+        role: userData.role,
+        iconUrl: userData.iconUrl,
+        comment: userData.comment,
+        profile: userData.profile,
+      }
+      firebase
+        .firestore()
+        .collection('users') // usersコレクションの、
+        .doc(userData.id) // <ユーザーID>というドキュメントに、
+        .set(data) // dataをセットする
+        .then(() => {
+          window.location.href = '/profile' // 完了後、プロフィール画面へ遷移
+        })
     }
     return {
       userData,
