@@ -141,7 +141,19 @@ export default defineComponent({
       userData.name = name
     }
     const setIcon = (file: File): void => {
-      // TODO
+      // ストレージのルートへの参照を取得
+      const storageRef = firebase.storage().ref()
+      // プロフィール画像アップロード先への参照を取得
+      const fileRef = storageRef.child(
+        'images/profile/' + userData.id + '/' + file.name
+      )
+      // プロフィール画像をストレージにアップロード
+      fileRef.put(file).then(function (snapshot) {
+        // ユーザーデータのURLを更新する
+        snapshot.ref.getDownloadURL().then((url) => {
+          userData.iconUrl = url
+        })
+      })
     }
     const setProfile = (): void => {
       const data = {

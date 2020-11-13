@@ -162,7 +162,7 @@ http://localhost:3000/user/0001
 ## Firebaseってなに？
 - Firebase は Google が提供しているモバイルおよび Web アプリケーションのバックエンドサービスです。Firebase を使うことで、開発者はアプリケーションの開発に専念でき、バックエンドで動くサービスを作成する必要も管理する必要もありません。
 - サーバーやデプロイが不要で、簡単にバックエンド処理を利用できるようになります。
-- 無料枠がありますので、それを使っていきましょう。
+- 支払い情報の登録不要で利用できる無料プランがありますので、それを使っていきましょう。
 
 ---
 ## Firebaseを使う準備をしよう
@@ -286,6 +286,8 @@ http://localhost:3000/user/0001
         });
       }
   ```
+- 参考: コードを貼り付けてインデントが崩れた時は、複数の行を選択して[Tab]を押すと、選択した全ての行に対してインデントを追加できます。[Shift] + [Tab]でインデント削除もできます。
+
 ---
 - そのままだと動かないので、`createUserWithEmailAndPassword()`の引数`email`を`state.email`に、`password`を`state.password`に変更します。
   ```
@@ -900,25 +902,52 @@ export default defineComponent({
   ![w:1000px](images/3-40.png)
 
 ---
-- おまけ：写真をアップロードしよう
-  - Cloud Storage for Firebaseを使う
-    - 写真や動画などバイナリーデータを保存してくれるサービス。
-  - コードを説明して実装してもらう
-- もっと勉強したい人は、アプリを自由にカスタマイズしてみよう
-  - どんな機能があったら良さそう？
-    - プロフィール項目にプログラミング経験を追加するとか
-    - 他の人のプロフィール欄にコメントをつけられるようにするとか
-    - チャット機能をつけるとか
-- その他、紹介したいこと
-  - 作ったアプリをインターネット上に公開したい時の参考記事
-  - nuxtのフォルダ構成とそれぞれの意味
-  - 複数行選択してTabを押すと、一気にインデントを整えてくれるよ。Shift + Tabでインデント削除もできるよ。
---- 
-<!-- TODO: Delete -->
-# 参考にしたものをまとめておく
-https://www.topgate.co.jp/firebase01-what-is-firebase
+## おまけ
+- プロフィール編集画面で写真をアップロードできるようにしましょう。
+- Cloud Storage for Firebaseを使います。
+  https://firebase.google.com/docs/storage
+  - 写真や動画などのファイルを保存してくれるサービスです。
+- `/pages/profile/edit.vue`を開いてください。
 
-https://www.slideshare.net/KenjiroKubota/firebase-129555773
+---
+- 既に、ドラッグアンドドロップで画像をアプリに取得させることはできるようになっています。
+- `setIcon`を次のように変更しましょう。
 
-https://ja.wikipedia.org/wiki/Firebase
-Firebase Authenticationは、クライアント側のコードのみでユーザーを認証できるサービスである。ソーシャルログインプロバイダであるFacebook、GitHub、Twitter、Googleをはじめ、Google Play Games、Apple、Yahoo、Microsoftなどのサービスプロバイダをサポートしている。また、ユーザー管理システムを搭載しており、開発者はFirebaseに保存されている電子メールとパスワードによるユーザー認証を有効にすることができる
+---
+```
+    const setIcon = (file: File): void => {
+      const storageRef = firebase.storage().ref() 
+      // プロフィール画像アップロード先への参照を取得
+      const fileRef = storageRef.child(
+        'images/profile/' + userData.id + '/' + file.name
+      )
+      // プロフィール画像をストレージにアップロード
+      fileRef.put(file).then(function (snapshot) {
+        // ユーザーデータのURLを更新する
+        snapshot.ref.getDownloadURL().then((url) => {
+          userData.iconUrl = url
+        })
+      })
+    }
+```
+
+---  
+- 画像をドラッグアンドドロップした後に「登録」ボタンを押すと、アイコンが設定されます。
+  ![w:900px](images/3-41.png)
+
+---  
+- Cloud Storageを開くと、画像が保存されていることが確認できます。
+  ![w:1100px](images/3-42.png)
+
+---
+## まとめ
+:white_check_mark: 今回作ったアプリの完成形は、`titech-nuxt-firebase-day3-answer`ディレクトリに入っています。分からなかったところがある場合は、こちらを確認してください。
+
+:white_check_mark: 第1回から第3回までの内容を理解していれば、今回のようなシンプルなアプリの開発はできるようになっているはずです。
+
+:white_check_mark: 興味がある人は、今回作ったアプリを自由にカスタマイズしたり、自分で新しくアプリを作ったりしてみましょう！
+
+
+---
+# 以上です！
+# お疲れさまでした！
