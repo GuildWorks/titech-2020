@@ -755,6 +755,10 @@ export default defineComponent({
 - 同様に、あなたのプロフィール画面(http://localhost:3000/profile)でも登録済みのデータが表示されるようにしましょう。
 - あなたのプロフィール画面のファイルは、`/pages/profile/index.vue` です。
 
+---
+- 答えは[こちら](https://github.com/GuildWorks/titech-2020/blob/master/titech-nuxt-firebase-day3-answer/pages/profile/index.vue)。
+
+---
 
 ---
 - おまけ：写真をアップロードしよう
