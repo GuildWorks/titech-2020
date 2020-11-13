@@ -59,6 +59,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'nuxt-composition-api'
 import userlistJson from '@/mock/userlist.json'
+import firebase from '@/plugins/firebase.ts'
 type User = {
   id: string
   name: string
@@ -79,7 +80,24 @@ type User = {
 export default defineComponent({
   name: 'ListTable',
   setup(_) {
-    const userList = reactive<User[]>(userlistJson.userlistData)
+    const userList = reactive<User[]>([])
+    firebase
+      .firestore()
+      .collection('users')
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          userList.push({
+            id: doc.id,
+            name: doc.data().name,
+            email: doc.data().email,
+            role: doc.data().role,
+            iconUrl: doc.data().iconUrl,
+            comment: doc.data().comment,
+            profile: doc.data().profile,
+          })
+        })
+      })    
     const userLink = (userId: string): void => {
       window.location.href = '/users/' + userId
     }

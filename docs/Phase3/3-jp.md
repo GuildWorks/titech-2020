@@ -746,9 +746,9 @@ export default defineComponent({
     const getUserData = (user) => {
       firebase
         .firestore()
-        .collection('users')
-        .doc(user.uid)
-        .get()
+        .collection('users') // usersコレクションから、
+        .doc(user.uid) // 指定したuidのドキュメントを
+        .get() // 取得する
         .then((doc) => {
           if (doc.exists) {
             userData.name = doc.data().name
@@ -781,18 +781,61 @@ export default defineComponent({
 - メンバーリスト画面のpageファイルは、`/pages/users/index.vue`ですが、今回はその中で読み込まれている`/components/list-table.vue`を編集していきます。
 
 ---
-- ユーザーを追加して表示を確認しましょう。
+- firebaseをimportしてください。
+  ```
+  import firebase from '@/plugins/firebase.ts'
+  ```
+- `setup()`を次のように変更してください。
+
+---
+```
+  setup(_) {
+    const userList = reactive<User[]>([])
+    firebase
+      .firestore()
+      .collection('users') // usersコレクションから、
+      .get() // 全てのドキュメントを取得する
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) { // 取得したドキュメントの配列のそれぞれの要素で、
+          userList.push({ // 各フィールドの値を取り出して、userList配列にオブジェクトとして追加していく
+            id: doc.id,
+            name: doc.data().name,
+            email: doc.data().email,
+            role: doc.data().role,
+            iconUrl: doc.data().iconUrl,
+            comment: doc.data().comment,
+            profile: doc.data().profile,
+          })
+        })
+      })    
+    const userLink = (userId: string): void => {
+      window.location.href = '/users/' + userId
+    }
+    return {
+      userList,
+      userLink,
+    }
+  },
+```
+
+---
+- 登録したユーザーが表示されることを確認しましょう。
+  ![w:1100px](images/3-38.png)
+
+---
+- ユーザーを追加して、複数ユーザーがいる場合の表示を確認しましょう。
   - ログアウトをして、別のメールアドレスでユーザー登録をしてください。
-    - メールアドレスの存在チェックはしていませんので、適当なメールアドレスでも登録は可能です。
-    - ただし、アプリを修正してメール送信機能をつけた場合にメールが送られてしまうので、できれば自分のアドレスを使うことが望ましいです。
+    - メールアドレスの存在チェックはしていませんので、適当なメールアドレスでもユーザー登録は可能です。
+    - しかし、今後アプリを修正してメール送信機能をつけた場合にメールが送信されてしまうので、可能であれば自分のメールアドレスを使うことが望ましいです。
 
 ---
 参考
 - Gmailのエイリアス機能を使うと、1つのメールアドレスで複数のメールアドレスが使えて便利です。
-  - `imahashi@gmail.com` のアカウントを持っている場合、 `imahashi+1@gmail.com`、`imahashi+second@gmail.com`といったように、`@`の前に`+`と好きな英数字を追加すれば、同じメールアドレスにメールが届きます。
+  - `imahashi@gmail.com` のアカウントを持っている場合、 `imahashi+2@gmail.com`、`imahashi+second@gmail.com`といったように、`@`の前に`+`と好きな英数字を追加すれば、同じメールアドレスにメールが届きます。
 
 ---
-- メンバーリストから自分を選択した場合、あなたのプロフィール画面に遷移するようにしましょう。
+- 追加したユーザーも表示されることが確認できました。
+  ![w:1100px](images/3-39.png)
 
 ---
 #### メンバープロフィール(実際に登録したデータを表示)
@@ -811,11 +854,7 @@ export default defineComponent({
     - プロフィール項目にプログラミング経験を追加するとか
     - 他の人のプロフィール欄にコメントをつけられるようにするとか
     - チャット機能をつけるとか
-- 細かく説明しきれないところをざっくり
-  - ログイン前後のメニュー項目の変化
-    - middlewareで制御している
 - その他、紹介したいこと
-  - Gmailのエイリアス機能(+でアドレスを増やせるやつ)
   - 作ったアプリをインターネット上に公開したい時の参考記事
   - nuxtのフォルダ構成とそれぞれの意味
   - 複数行選択してTabを押すと、一気にインデントを整えてくれるよ。Shift + Tabでインデント削除もできるよ。
