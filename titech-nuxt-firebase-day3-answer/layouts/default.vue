@@ -14,31 +14,37 @@
         </p>
         <nav class="hidden md:flex text-lg">
           <a
+            v-if="isSignedIn()"
             href="/users"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
             メンバーリスト
           </a>
           <a
+            v-if="isSignedIn()"
             href="/profile"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
             あなたのプロフィール
           </a>
           <a
+            v-if="!isSignedIn()"
             href="/signup"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
             ユーザー登録
           </a>
           <a
+            v-if="!isSignedIn()"
             href="/signin"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
             ログイン
           </a>
           <a
+            v-if="isSignedIn()"
             href="#"
+            @click="signOut"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >
             ログアウト
@@ -68,9 +74,20 @@
 
 <script lang='ts'>
 import { defineComponent } from 'nuxt-composition-api'
+import firebase from '@/plugins/firebase.ts'
 export default defineComponent({
   middleware: ['Auth'],
   setup(_, { root: { $store } }) {
+    const isSignedIn = (): boolean => {
+      return $store.state.signedIn
+    }    
+    const signOut = (): void => {
+      firebase.auth().signOut()
+    }
+    return {
+      isSignedIn,
+      signOut
+    }
   }
 })
 </script>

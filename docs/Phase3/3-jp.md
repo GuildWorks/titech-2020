@@ -256,7 +256,7 @@ http://localhost:3000/user/0001
 - `/pages/signup.vue`内でFirebaseを扱えるようにするために、firebaseをインポートしましょう。
   ```
   <script lang="ts">
-  import { defineComponent, ref } from 'nuxt-composition-api'
+  import { defineComponent, reactive } from 'nuxt-composition-api'
   import PageHeading from '@/components/page-heading.vue'
   import firebase from '@/plugins/firebase.ts' // この行を追加
   ```
@@ -348,10 +348,10 @@ http://localhost:3000/user/0001
   ```
   - この関数内で、メールアドレスとパスワードによるログイン処理を呼び出すことで、ログインできるようにします。
 --- 
-- `/pages/signup.vue`内でFirebaseを扱えるようにするために、firebaseをインポートしましょう。
+- `/pages/signin.vue`内でFirebaseを扱えるようにするために、firebaseをインポートしましょう。
   ```
   <script lang="ts">
-  import { defineComponent, ref } from 'nuxt-composition-api'
+  import { defineComponent, reactive } from 'nuxt-composition-api'
   import PageHeading from '@/components/page-heading.vue'
   import firebase from '@/plugins/firebase.ts' // この行を追加
   ```
@@ -408,7 +408,7 @@ http://localhost:3000/user/0001
     - 先程作成したユーザーとメールアドレスが一致し、パスワードが異なっていれば、`auth/wrong-password`エラーが起きます。
 
 ---
-## ログイン状態による画面の表示制御、ログアウト
+## ログイン状態による画面の表示制御
 - `/layouts/default.vue`を開きましょう。
 - Nuxt.jsの仕組みにより、このファイルに記載した内容がデフォルトのレイアウトとして各ページに反映されます。
   https://ja.nuxtjs.org/docs/2.x/concepts/views/#default-layout
@@ -522,28 +522,139 @@ export default defineComponent({
 
 ---
 - ブラウザをシークレットウインドウで開きましょう。
-  - そのままでは、先程ログインしたことをブラウザが記憶してしまっているためです。
-- 以下を確認しましょう。
+  ![w:800px](images/3-30.png)
+  - そのままでは先程ログインしたことをブラウザが記憶してしまっているため、これによってログイン前の状態で画面を開き直します。
+
+---
+- シークレットウインドウで以下を確認しましょう。
   - http://localhost:3000 (トップ)にアクセスすると、ログイン画面にリダイレクトされること。
   - メンバーリスト、あなたのプロフィールに遷移しようとしても、ログイン画面にリダイレクトされること。
   - ログインをすると、トップやメンバーリスト、あなたのプロフィールに遷移できるようになること。
 
 ---
-
-- ログイン状態を保持しましょう。
-https://firebase.google.com/docs/auth/web/auth-state-persistence#modifying_the_auth_state_persistence
+#### メニューの表示制御
+- `/layouts/default.vue`の`setup()`を以下のように修正しましょう。
+  ```
+    setup(_, { root: { $store } }) {
+      const isSignedIn = (): boolean => {
+        return $store.state.signedIn
+      }    
+      return {
+        isSignedIn
+      }
+    }
+  ```
+  - ログイン状態を`isSignedIn`から判定できるようになります。
+- 次のページのコードを参考に、`<template>`内の`<a>`タグに`v-if`でログイン状態を判定する分岐を追加しましょう
+---
+```
+          <a
+            v-if="isSignedIn()"
+            href="/users"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            メンバーリスト
+          </a>
+          <a
+            v-if="isSignedIn()"
+            href="/profile"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            あなたのプロフィール
+          </a>
+          <a
+            href="/signup"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            ユーザー登録
+          </a>
+          <a
+            v-if="!isSignedIn()"
+            href="/signin"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            ログイン
+          </a>
+          <a
+            v-if="isSignedIn()"
+            href="#"
+            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+          >
+            ログアウト
+          </a>
+```
+---
+#### ログアウト
+- `/layouts/default.vue`の`<script>`内を次のページのように変更しましょう。変更内容は以下の通りです。
+  - firebaseをimportしています。
+  - `setup()`内に`signOut`を追加し、それをreturnして`template`から呼び出せるようにしています。
+  - `firebase.auth().signOut()`では、ログアウト処理が実行されます。
+    https://firebase.google.com/docs/auth/web/password-auth#next_steps
 
 ---
-  - コードを説明して実装してもらう
-- データベース連携をしよう
-  - Cloud Firestoreを使う
-    - データベースとそこへのアクセスを提供してくれる
-    - データベースとは
-      - TODO:データベースの説明
-    - そこへのアクセスとは
-      - TODO:CRUDの説明
-  - コードを説明して実装してもらう
-    - mock/userlist.jsonの構造が前回から変わっているので、要説明
+```
+import { defineComponent } from 'nuxt-composition-api'
+import firebase from '@/plugins/firebase.ts'
+export default defineComponent({
+  middleware: ['Auth'],
+  setup(_, { root: { $store } }) {
+    const isSignedIn = (): boolean => {
+      return $store.state.signedIn
+    }    
+    const signOut = (): void => {
+      firebase.auth().signOut()
+    }
+    return {
+      isSignedIn,
+      signOut
+    }
+  }
+})
+```
+
+---
+- ログアウトの`<a>`タグに`@click="signOut"`を追加しましょう。
+  ```
+            <a
+              v-if="isSignedIn()"
+              href="#"
+              @click="signOut"
+              class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
+            >
+              ログアウト
+            </a>
+  ```
+  - ログアウトをクリックすると、ログアウト処理が実行されるようになります。
+
+---
+- メニューの表示が以下のように変わることを確認しましょう。
+  - ログインしている時
+    ![w:1100px](images/3-6.png)
+  - ログアウトした時
+    ![w:1100px](images/3-6.5.png)
+
+---
+## データベース連携をしよう
+- Cloud Firestoreを使います。
+  https://firebase.google.com/docs/firestore?hl=ja
+  - データベースと、データベースに対する基本操作を提供してくれます。
+
+---
+- データベースとは
+  - TODO:データベースの説明
+
+---
+- データベースに対する基本操作とは
+  - TODO:CRUDの説明
+
+---
+- コードを説明して実装してもらう
+  - mock/userlist.jsonの構造が前回から変わっているので、要説明
+
+
+
+
+---
 - おまけ：写真をアップロードしよう
   - Cloud Storage for Firebaseを使う
     - 写真や動画などバイナリーデータを保存してくれるサービス。
