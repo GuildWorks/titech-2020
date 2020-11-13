@@ -667,8 +667,10 @@ export default defineComponent({
 - まずは自分のプロフィールを登録するため、プロフィール編集機能を作りましょう。
 - http://localhost:3000/profile/edit を表示してください。
 - `/pages/profile/edit.vue` を開きましょう。これが、プロフィール編集画面のファイルです。
-
-
+- firebaseをimportしておきましょう。
+  ```
+  import firebase from '@/plugins/firebase.ts'
+  ```
 
 ---
 

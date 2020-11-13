@@ -4,7 +4,7 @@
       プロフィール編集
       <button
         class="w-20 text-center text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 mt-2 rounded focus:outline-none focus:shadow-outline"
-        @click="updateProfile"
+        @click="setProfile"
       >
         登録
       </button>
@@ -16,7 +16,7 @@
           :user-name="userData.name"
           :email="userData.email"
           @changeName="changeName"
-          @updateIcon="updateIcon"
+          @setIcon="setIcon"
         />
         <div class="pt-2">
           <label class="text-sm title-font text-gray-500">
@@ -63,6 +63,7 @@ import { defineComponent, reactive, SetupContext, onBeforeMount } from 'nuxt-com
 import PageHeading from '@/components/page-heading.vue'
 import ProfileNameIconEdit from '@/components/profile-name-icon-edit.vue'
 import ProfileTableEdit from '@/components/profile-table-edit.vue'
+import firebase from '@/plugins/firebase.ts'
 
 type User = {
   id: string
@@ -112,17 +113,17 @@ export default defineComponent({
     const changeName = (name) => {
       userData.name = name
     }
-    const updateIcon = (file: File): void => {
+    const setIcon = (file: File): void => {
       // TODO
     }
-    const updateProfile = (): void => {
+    const setProfile = (): void => {
       // TODO
       window.location.href = '/profile'
     }
     return {
       userData,
-      updateIcon,
-      updateProfile,
+      setIcon,
+      setProfile,
       changeName,
     }
   },
