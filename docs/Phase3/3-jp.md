@@ -636,18 +636,34 @@ export default defineComponent({
 ---
 ## データベース連携をしよう
 - Cloud Firestoreを使います。
-  https://firebase.google.com/docs/firestore?hl=ja
-  - データベースと、データベースに対する基本操作を提供してくれます。
+  https://firebase.google.com/docs/firestore
+  - データを保存するデータベースと、データを扱うための基本操作を提供してくれます。
+  - データは階層型の構造で格納されます。
 
 ---
-- データベースとは
-  - TODO:データベースの説明
+- データの格納イメージ
+![w:1100px](images/3-31.png)
 
 ---
-- データベースに対する基本操作とは
-  - TODO:CRUDの説明
+#### Firebase側の設定
+- 左側のメニューで「Cloud Firestore」を選んで、「データベースの作成」をクリックしましょう。
+    ![w:1100px](images/3-32.png)
 
 ---
+- 「テストモードで開始する」を選んで「次へ」をクリック。
+  ![w:800px](images/3-33.png)
+
+---
+- 「asia-northeast1」(東京)を選んで「有効にする」をクリック。
+  ![w:800px](images/3-34.png)
+  https://firebase.google.com/docs/firestore/locations#location-r
+
+---
+- データベースの準備ができました。
+  ![w:900px](images/3-35.png)
+
+---
+#### プログラムの編集
 - コードを説明して実装してもらう
   - mock/userlist.jsonの構造が前回から変わっているので、要説明
 
