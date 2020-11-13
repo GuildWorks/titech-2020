@@ -72,10 +72,7 @@ export default defineComponent({
       .doc(root.$route.params.id) // URLからIDを取得
       .get()
       .then((doc) => {
-        if (!doc.exists) {
-          // eslint-disable-next-line no-console
-          console.log('No such document!')
-        } else {
+        if (doc.exists) {
           userData.id = root.$route.params.id
           userData.name = doc.data().name
           userData.email = doc.data().email
@@ -86,8 +83,7 @@ export default defineComponent({
         }
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log('Error getting document', err);
+        console.log('Error getting document', err)
       })
     return {
       userData,

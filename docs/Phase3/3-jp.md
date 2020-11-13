@@ -839,10 +839,65 @@ export default defineComponent({
 
 ---
 #### メンバープロフィール(実際に登録したデータを表示)
-- メンバープロフィール画面(http://localhost:3000/users/_id)でも登録済みのデータが表示されるようにしましょう。
-- メンバーリスト画面のファイルは、`/pages/users/_id.vue` です。
+- メンバープロフィール画面でも登録済みのデータが表示されるようにしましょう。
+  - パス(http://localhost:3000/users/_id)の`_id`部分にユーザーIDが必要なので、ユーザーリスト画面から遷移して表示してください。
+- メンバープロフィール画面のファイルは、`/pages/users/_id.vue` です。
 
 ---
+- firebaseをimportしてください。
+  ```
+  import firebase from '@/plugins/firebase.ts'
+  ```
+- `setup()`を次のように変更してください。
+
+---
+```
+  setup(_, { root }: SetupContext) {
+    const userData = reactive<User>({
+      id: '',
+      name: '',
+      email: '',
+      role: '',
+      iconUrl: '',
+      comment: '',
+      profile: {
+        belongs: '',
+        nickname: '',
+        birthplace: '',
+        birthday: '',
+        bloodType: '',
+        sign: '',
+        hobby: '',
+      },
+    })
+    firebase
+      .firestore()
+      .collection('users')
+      .doc(root.$route.params.id) // URLからIDを取得して、そのIDのドキュメントを取得する
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          userData.id = root.$route.params.id
+          userData.name = doc.data().name
+          userData.email = doc.data().email
+          userData.role = doc.data().role
+          userData.iconUrl = doc.data().iconUrl
+          userData.profile = doc.data().profile
+          userData.comment = doc.data().comment
+        }
+      })
+      .catch((err) => {
+        console.log('Error getting document', err)
+      })
+    return {
+      userData,
+    }
+  },
+```
+
+---
+- メンバープロフィールが表示されることが確認できます。
+  ![w:1000px](images/3-40.png)
 
 ---
 - おまけ：写真をアップロードしよう
