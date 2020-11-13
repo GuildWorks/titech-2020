@@ -30,7 +30,6 @@ paginate: true
 - ユーザー登録をしよう
 - ユーザー認証をしよう
 - データベース連携をしよう
-- 参考
 
 ---
 ## 前回までのふりかえり
@@ -105,11 +104,11 @@ http://localhost:3000/user/0001
 
 ---
 #### ユーザー登録
-![w:800px](images/3-4.png)
+![w:900px](images/3-4.png)
 
 ---
 #### ログイン
-![w:800px](images/3-5.png)
+![w:900px](images/3-5.png)
 
 ---
 #### ログイン状態による画面の表示制御、ログアウト
@@ -121,19 +120,19 @@ http://localhost:3000/user/0001
 
 ---
 #### プロフィール編集
-![w:800px](images/3-7.png)
+![w:900px](images/3-7.png)
 
 ---
 #### あなたのプロフィール
-![w:800px](images/3-8.png)
+![w:900px](images/3-8.png)
 
 ---
 #### メンバーリスト(実際に登録したデータを表示)
-![w:800px](images/3-9.png)
+![w:900px](images/3-9.png)
 
 ---
 #### メンバープロフィール(実際に登録したデータを表示)
-![w:800px](images/3-10.png)
+![w:900px](images/3-10.png)
 
 ---
 - 今回修正していくアプリの現在の状態を確認しておきましょう。
@@ -182,6 +181,7 @@ http://localhost:3000/user/0001
 
 ---
 - プロジェクトに名前をつけて、「続行」をクリックしましょう。
+  - 名前は何でもOKです。
 ![w:1100px](images/3-12.png)
 
 ---
@@ -199,7 +199,7 @@ http://localhost:3000/user/0001
 ---
 #### 今回開発するアプリでFirebaseの初期設定をしよう
 - 画面左上の歯車アイコンをクリックして、「プロジェクトを設定」を選択しましょう。
-  ![w:500px](images/3-16.png)
+  ![w:800px](images/3-16.png)
 
 ---
 - 画面下部マイアプリ欄の 「</>」アイコンをクリックして、プロジェクトにWebアプリを作成しましょう。
@@ -207,6 +207,7 @@ http://localhost:3000/user/0001
 
 ---
 - アプリのニックネームを入力して、「アプリを登録」をクリックしましょう。
+  - ニックネームは何でもOKです。
   ![w:800px](images/3-18.png)
 
 ---
@@ -232,7 +233,7 @@ http://localhost:3000/user/0001
 ---
 #### Firebase側の設定
 - 左側のメニューで「Authentication」を選んで、「始める」をクリックしましょう。
-    ![w:600px](images/3-21.png)
+    ![w:800px](images/3-21.png)
 
 ---
 - 今回は、メールアドレスとパスワードによる認証を使うため、「メール/パスワード」をクリックしましょう。
@@ -286,7 +287,7 @@ http://localhost:3000/user/0001
         });
       }
   ```
-- 参考: コードを貼り付けてインデントが崩れた時は、複数の行を選択して[Tab]を押すと、選択した全ての行に対してインデントを追加できます。[Shift] + [Tab]でインデント削除もできます。
+  - 参考: コードを貼り付けてインデントが崩れた時は、複数の行を選択して[Tab]を押すと、選択した全ての行に対してインデントを追加できます。[Shift] + [Tab]でインデント削除もできます。
 
 ---
 - そのままだと動かないので、`createUserWithEmailAndPassword()`の引数`email`を`state.email`に、`password`を`state.password`に変更します。
@@ -304,7 +305,7 @@ http://localhost:3000/user/0001
         });
       }
   ```
-- 画面に入力した`email`,`password`が、`createUserWithEmailAndPassword()`に渡され、それらを含めたユーザー登録処理のリクエストが実行されるようになります。
+- 画面に入力した`email`、`password`が、`createUserWithEmailAndPassword()`に渡され、それらを含めたユーザー登録処理のリクエストが実行されるようになります。
 ---
 - ユーザー登録完了後は、プロフィール編集画面に遷移するようにしておきましょう。
   ```
@@ -337,7 +338,7 @@ http://localhost:3000/user/0001
 ---
 - ブラウザで開発者ツールを開きましょう(Chromeの場合、右クリックをして「検証」を選択)。
 - 上部のタブからNetworkタブ選択してください。
-  ![w:500px](images/3-26.5.png)
+  ![w:1000px](images/3-26.5.png)
 - この状態で、先程と同じメールアドレスを使って再度ユーザー登録をしてみましょう。
 ---
 - `EMAIL_EXISTS`というメッセージのエラーが起きています。
@@ -346,14 +347,14 @@ http://localhost:3000/user/0001
 
 ---
 - エラーが起きた場合、それが分かるようにしましょう。`catch()`の中を以下のように修正してください。
-```
-        .catch(function(error) {
-          // Handle Errors here.
-          alert('ユーザー登録が失敗しました。errorCode: ' + error.code + ', errorMessage:' + error.message)
-        });
-```
-  - エラーが出ると、以下のようなポップアップが出るようになります。再度同じメールアドレスでユーザー登録をしてみてください。
-    ![w:500px](images/3-28.png)
+  ```
+          .catch(function(error) {
+            // Handle Errors here.
+            alert('ユーザー登録が失敗しました。errorCode: ' + error.code + ', errorMessage:' + error.message)
+          });
+  ```
+- エラーが出ると、以下のようなポップアップが出るようになります。再度同じメールアドレスでユーザー登録をしてみてください。
+  ![w:700px](images/3-28.png)
 
 ---
 ## ユーザー認証(ログイン)機能を作ろう
@@ -409,7 +410,7 @@ http://localhost:3000/user/0001
       })
       function submit() {
         firebase.auth().signInWithEmailAndPassword(state.email, state.password)
-        .then(() => (location.href = '/users'))
+        .then(() => (location.href = '/users')) // ログイン完了後にユーザーリスト画面へ遷移させる
         .catch(function(error) {
           // Handle Errors here.
           alert('ログインが失敗しました。errorCode: ' + error.code + ', errorMessage:' + error.message)
@@ -427,49 +428,13 @@ http://localhost:3000/user/0001
     - 先程作成したユーザーとメールアドレスが一致し、パスワードが異なっていれば、`auth/wrong-password`エラーが起きます。
 
 ---
-## ログイン状態による画面の表示制御
-- `/layouts/default.vue`を開きましょう。
-- Nuxt.jsの仕組みにより、このファイルに記載した内容がデフォルトのレイアウトとして各ページに反映されます。
-  https://ja.nuxtjs.org/docs/2.x/concepts/views/#default-layout
-
----
-ログイン状態に応じて、表示するメニューを変えましょう。
-```
-          <a
-            href="/users"
-            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
-          >
-            メンバーリスト
-          </a>
-          <a
-            href="/profile"
-            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
-          >
-            あなたのプロフィール
-          </a>
-          <a
-            href="/signup"
-            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
-          >
-            ユーザー登録
-          </a>
-          <a
-            href="/signin"
-            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
-          >
-            ログイン
-          </a>
-          <a
-            href="#"
-            class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
-          >
-            ログアウト
-          </a>
-```
---- 
+#### ログイン状態による画面の表示制御
+- ログイン状態に応じて、各画面を表示させるかどうかを制御していきましょう。
 - ログイン状態の判定には、Nuxt.jsのmiddlewareという仕組みを使います。
   https://ja.nuxtjs.org/docs/2.x/directory-structure/middleware/
   - middlewareには、画面が描画される前に実行したい処理を記載します。
+
+---
 - `/middleware/Auth.js`を開きましょう。
   - まだ何の処理も書かれていません。
   ```
@@ -552,7 +517,13 @@ export default defineComponent({
 
 ---
 #### メニューの表示制御
-- `/layouts/default.vue`の`setup()`を以下のように修正しましょう。
+- `/layouts/default.vue`を開きましょう。
+- Nuxt.jsの仕組みにより、このファイルに記載した内容がデフォルトのレイアウトとして各ページに反映されます。
+  https://ja.nuxtjs.org/docs/2.x/concepts/views/#default-layout
+
+---
+- ログイン状態に応じて、表示するメニューを変えましょう。
+- `setup()`を以下のように修正しましょう。
   ```
     setup(_, { root: { $store } }) {
       const isSignedIn = (): boolean => {
@@ -565,6 +536,7 @@ export default defineComponent({
   ```
   - ログイン状態を`isSignedIn`から判定できるようになります。
 - 次のページのコードを参考に、`<template>`内の`<a>`タグに`v-if`でログイン状態を判定する分岐を追加しましょう
+
 ---
 ```
           <a
@@ -710,7 +682,7 @@ export default defineComponent({
   - `/middleware/Auth.js`で使ったのと同じ`onAuthStateChanged()`を使ってユーザーID、メールアドレスを取得し、必要な箇所にセットしています。
 
 ---
-- `setProfile`を以下のように変更しましょう。
+- `setProfile`を次のように変更してください。
   ```
       const setProfile = (): void => {
         const data = {
@@ -770,12 +742,14 @@ export default defineComponent({
   ![w:900px](images/3-36.png)
 
 ---
-#### やってみよう: あなたのプロフィール画面へのデータ表示
+#### あなたのプロフィール画面へのデータ表示
 - 同様に、あなたのプロフィール画面(http://localhost:3000/profile)でも登録済みのデータが表示されるようにしましょう。
 - あなたのプロフィール画面のファイルは、`/pages/profile/index.vue` です。
+- プロフィール編集画面でやったことを参考に、ご自身でコードを修正してみてください。
 
 ---
-- 答えは[こちら](https://github.com/GuildWorks/titech-2020/blob/master/titech-nuxt-firebase-day3-answer/pages/profile/index.vue)。
+- 答えはこちら。
+  https://github.com/GuildWorks/titech-2020/blob/master/titech-nuxt-firebase-day3-answer/pages/profile/index.vue
 
 ---
 #### メンバーリスト(実際に登録したデータを表示)
@@ -833,7 +807,7 @@ export default defineComponent({
 ---
 参考
 - Gmailのエイリアス機能を使うと、1つのメールアドレスで複数のメールアドレスが使えて便利です。
-  - `imahashi@gmail.com` のアカウントを持っている場合、 `imahashi+2@gmail.com`、`imahashi+second@gmail.com`といったように、`@`の前に`+`と好きな英数字を追加すれば、同じメールアドレスにメールが届きます。
+  - `imahashi@gmail.com` のアカウントを持っている場合、 `imahashi+2@gmail.com`、`imahashi+third@gmail.com`といったように、`@`の前に`+`と好きな英数字を追加すれば、同じメールアドレスにメールが届きます。
 
 ---
 - 追加したユーザーも表示されることが確認できました。
@@ -941,9 +915,11 @@ export default defineComponent({
 
 ---
 ## まとめ
-:white_check_mark: 今回作ったアプリの完成形は、`titech-nuxt-firebase-day3-answer`ディレクトリに入っています。分からなかったところがある場合は、こちらを確認してください。
+:white_check_mark: 今回は、Firebaseを使ってユーザー登録、ログイン、データの登録・読み取り・更新などができるようになりました。
 
-:white_check_mark: 第1回から第3回までの内容を理解していれば、今回のようなシンプルなアプリの開発はできるようになっているはずです。
+:white_check_mark: アプリの完成形は、`titech-nuxt-firebase-day3-answer`ディレクトリに入っています。分からなかったところがある場合は、こちらを確認してください。
+
+:white_check_mark: 第1回から第3回までの内容を理解すれば、今回のようなシンプルなアプリの開発はできるようになります。
 
 :white_check_mark: 興味がある人は、今回作ったアプリを自由にカスタマイズしたり、自分で新しくアプリを作ったりしてみましょう！
 
