@@ -33,7 +33,9 @@ export default defineComponent({
       password: ''
     })
     function submit() {
-      firebase.auth().createUserWithEmailAndPassword(state.email, state.password).catch(function(error) {
+      firebase.auth().createUserWithEmailAndPassword(state.email, state.password)
+      .then(() => (location.href = '/profile/edit'))
+      .catch(function(error) {
         // Handle Errors here.
         alert('ユーザー登録が失敗しました。errorCode: ' + error.code + ', errorMessage:' + error.message)
       });

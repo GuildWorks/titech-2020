@@ -304,6 +304,25 @@ http://localhost:3000/user/0001
   ```
 - 画面に入力した`email`,`password`が、`createUserWithEmailAndPassword()`に渡され、それらを含めたユーザー登録処理のリクエストが実行されるようになります。
 ---
+- ユーザー登録完了後は、プロフィール編集画面に遷移するようにしておきましょう。
+  ```
+      const state = reactive({
+        email: '',
+        password: ''
+      })
+      function submit() {
+        firebase.auth().createUserWithEmailAndPassword(state.email, state.password)
+        .then(() => (location.href = '/profile/edit')) // 改行してこの行を追加
+        .catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        });
+      }
+  ```
+
+---
 - 画面を操作して実際にユーザーを登録してみましょう。
   -  メールアドレスとパスワードを入力し、登録するボタンを押してみてください。
     ![w:1000px](images/3-25.png)
@@ -324,14 +343,12 @@ http://localhost:3000/user/0001
   - 同じメールアドレスで複数のユーザーは登録できないように、Firebase Authenticationのデフォルト設定で制限されているためです。
 
 ---
-- エラーが起きた場合、それが分かるようにしましょう。`submit()`を以下のように修正してください。
+- エラーが起きた場合、それが分かるようにしましょう。`catch()`の中を以下のように修正してください。
 ```
-    function submit() {
-      firebase.auth().createUserWithEmailAndPassword(state.email, state.password).catch(function(error) {
-        // Handle Errors here.
-        alert('ユーザー登録が失敗しました。errorCode: ' + error.code + ', errorMessage:' + error.message)
-      });
-    }
+        .catch(function(error) {
+          // Handle Errors here.
+          alert('ユーザー登録が失敗しました。errorCode: ' + error.code + ', errorMessage:' + error.message)
+        });
 ```
   - エラーが出ると、以下のようなポップアップが出るようになります。再度同じメールアドレスでユーザー登録をしてみてください。
     ![w:500px](images/3-28.png)
@@ -759,6 +776,30 @@ export default defineComponent({
 - 答えは[こちら](https://github.com/GuildWorks/titech-2020/blob/master/titech-nuxt-firebase-day3-answer/pages/profile/index.vue)。
 
 ---
+#### メンバーリスト(実際に登録したデータを表示)
+- メンバーリスト画面(http://localhost:3000/users)でも登録済みのデータが表示されるようにしましょう。
+- メンバーリスト画面のpageファイルは、`/pages/users/index.vue`ですが、今回はその中で読み込まれている`/components/list-table.vue`を編集していきます。
+
+---
+- ユーザーを追加して表示を確認しましょう。
+  - ログアウトをして、別のメールアドレスでユーザー登録をしてください。
+    - メールアドレスの存在チェックはしていませんので、適当なメールアドレスでも登録は可能です。
+    - ただし、アプリを修正してメール送信機能をつけた場合にメールが送られてしまうので、できれば自分のアドレスを使うことが望ましいです。
+
+---
+参考
+- Gmailのエイリアス機能を使うと、1つのメールアドレスで複数のメールアドレスが使えて便利です。
+  - `imahashi@gmail.com` のアカウントを持っている場合、 `imahashi+1@gmail.com`、`imahashi+second@gmail.com`といったように、`@`の前に`+`と好きな英数字を追加すれば、同じメールアドレスにメールが届きます。
+
+---
+- メンバーリストから自分を選択した場合、あなたのプロフィール画面に遷移するようにしましょう。
+
+---
+#### メンバープロフィール(実際に登録したデータを表示)
+- メンバープロフィール画面(http://localhost:3000/users/_id)でも登録済みのデータが表示されるようにしましょう。
+- メンバーリスト画面のファイルは、`/pages/users/_id.vue` です。
+
+---
 
 ---
 - おまけ：写真をアップロードしよう
@@ -767,7 +808,7 @@ export default defineComponent({
   - コードを説明して実装してもらう
 - もっと勉強したい人は、アプリを自由にカスタマイズしてみよう
   - どんな機能があったら良さそう？
-    - プロフィール項目にプラグラミング経験を追加するとか
+    - プロフィール項目にプログラミング経験を追加するとか
     - 他の人のプロフィール欄にコメントをつけられるようにするとか
     - チャット機能をつけるとか
 - 細かく説明しきれないところをざっくり
