@@ -663,9 +663,14 @@ export default defineComponent({
   ![w:900px](images/3-35.png)
 
 ---
-#### プログラムの編集
-- コードを説明して実装してもらう
-  - mock/userlist.jsonの構造が前回から変わっているので、要説明
+#### プロフィール編集
+- まずは自分のプロフィールを登録するため、プロフィール編集機能を作りましょう。
+- http://localhost:3000/profile/edit を表示してください。
+- `/pages/profile/edit.vue` を開きましょう。これが、プロフィール編集画面のファイルです。
+
+
+
+---
 
 
 

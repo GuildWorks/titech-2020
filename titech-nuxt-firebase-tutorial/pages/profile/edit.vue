@@ -16,7 +16,7 @@
           :user-name="userData.name"
           :email="userData.email"
           @changeName="changeName"
-          @onFileChange="onFileChange"
+          @updateIcon="updateIcon"
         />
         <div class="pt-2">
           <label class="text-sm title-font text-gray-500">
@@ -106,10 +106,13 @@ export default defineComponent({
         hobby: '',
       },
     })
+    const getUserData = (user) => {
+      // TODO
+    }
     const changeName = (name) => {
       userData.name = name
     }
-    const onFileChange = (file: File): void => {
+    const updateIcon = (file: File): void => {
       // TODO
     }
     const updateProfile = (): void => {
@@ -118,7 +121,7 @@ export default defineComponent({
     }
     return {
       userData,
-      onFileChange,
+      updateIcon,
       updateProfile,
       changeName,
     }

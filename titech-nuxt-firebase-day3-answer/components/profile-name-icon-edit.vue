@@ -3,7 +3,7 @@
     <div
       class="relative shadow-lg h-20 w-20 sm:h-24 sm:w-24 border-white rounded-full overflow-hidden border-4 mr-4 flex justify-center items-center"
     >
-      <div class="drag-area" @dragover.prevent @drop.prevent="onFileChange">
+      <div class="drag-area" @dragover.prevent @drop.prevent="updateIcon">
         <span> {{ iconUploadAreaMessage }} </span>
       </div>
     </div>
@@ -84,11 +84,11 @@ export default defineComponent({
     const clearShadow = (): void => {
       cleared.value = false
     }
-    const onFileChange = (event: any) => {
+    const updateIcon = (event: any) => {
       event.stopPropagation()
       const files = event.target.files || event.dataTransfer.files
       createImage(files[0])
-      context.emit('onFileChange', files[0])
+      context.emit('updateIcon', files[0])
     }
     const createImage = (file: any) => {
       const reader = new FileReader()
@@ -106,7 +106,7 @@ export default defineComponent({
       cleared,
       clearIcon,
       clearShadow,
-      onFileChange,
+      updateIcon,
       createImage,
       userNameEmitter,
     }
