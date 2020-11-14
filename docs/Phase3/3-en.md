@@ -27,7 +27,7 @@ paginate: true
 - Get ready to use Firebase
 - User Registration
 - User Authentication
-- Database linkage
+- Database Integration
 
 ---
 ## Review previous sessions
@@ -629,7 +629,7 @@ export default defineComponent({
      ![w:1100px](images/3-6.5.png)
 
 ---
-## Database linkage.
+## Database integration.
 - Use Cloud Firestore.
   https://firebase.google.com/docs/firestore
   - It provides a database for storing data and the basic operations for handling data.
