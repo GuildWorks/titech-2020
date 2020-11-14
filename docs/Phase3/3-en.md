@@ -31,7 +31,7 @@ paginate: true
 
 ---
 ## Review previous sessions
-- In the first session, students learned the basics of HTML, CSS, and Javascript.
+- In the first session, we learned the basics of HTML, CSS, and Javascript.
   - [Reference: 1st handout](https://github.com/GuildWorks/titech-2020/blob/master/docs/Phase1)
 - In the second session, we learned the basics of Vue.js (Nuxt.js).
   - [Reference: 2nd edition](https://github.com/GuildWorks/titech-2020/blob/master/docs/Phase2)
@@ -39,16 +39,16 @@ paginate: true
 
 ---
 #### Get your development environment ready
-- If this is your first time participating in this event, set up an environment to develop on your own PC. The GuildWorks members will follow up with you, so please give them a shout.
-  - [Reference: environment building resources](https://github.com/GuildWorks/titech-2020/blob/master/docs/Phase1/1-1.md)
-- If you're ready to build your environment, drop the latest code from [remote repository on GitHub] (https://github.com/GuildWorks/titech-2020).
-  - Open GitBash(Terminal) in the `titech-2020` directory and run the following command: `titech-2020`.
+- If this is your first time participating in this event, set up an environment to develop on your own PC. The GuildWorks members will support you, so please ask them.
+  - [Reference: Environment building](https://github.com/GuildWorks/titech-2020/blob/master/docs/Phase1/1-1.md)
+- If you're ready, download the latest code from [remote repository on GitHub] (https://github.com/GuildWorks/titech-2020).
+  - Open GitBash(Terminal) in the `titech-2020` directory and run the following command.
     ````
     git pull
     ````
   
 ---
-#### Check out the app we created
+#### Confirm the app we created
 - To recap, let's run the app we created last time to see how it works.
   - Let's run the following command in GitBash (Terminal)
   ```
@@ -83,33 +83,33 @@ http://localhost:3000/user/0001
 ---
 #### where I'm concerned.
 - The content of the display does not change.
-  - The data displayed is not the actual registration, but [dummy data](https://github.com/GuildWorks/titech-2020/blob/master/titech-nuxt-day2-anser/mock/userlist.json) You can't add a user.
-    - I can't add a user.
-    - I can't update my profile.
+  - Displayed data is [dummy](https://github.com/GuildWorks/titech-2020/blob/master/titech-nuxt-day2-anser/mock/userlist.json). 
+    - We can't add a user.
+    - We can't update our profile.
 - Anyone can see the data without logging in.
 
 ---
 ## Overview of what we do today
 The functions and screens to be developed are as follows
 - User registration
-- login
-- Screen display control by login status
-- logout
+- Signin
+- Access control by sign-in status
+- Signout
 - Edit Profile
 - Your Profile
-- Member list (shows the actual data you have registered)
-- Member Profile (shows actual registered data)
+- Member list
+- Member Profile
 
 ---
-#### user registration
+#### User registration
  ![w:900px](images/3-4.png)
 
 ---
-#### Log in
+#### Signin
  ![w:900px](images/3-5.png)
 
 ---
-#### Screen display control and logout by login status
+#### Access control by sign-in status, Signout
 When you are logged in.
  ![w:1200px](images/3-6.png)
 
@@ -125,11 +125,11 @@ When you are not logged in
  ![w:900px](images/3-8.png)
 
 ---
-#### member list (showing the actual data registered)
+#### Member list
  ![w:900px](images/3-9.png)
 
 ---
-#### member profile (showing the actual data of your registration)
+#### Member profile
  ![w:900px](images/3-10.png)
 
 ---
@@ -145,7 +145,7 @@ When you are not logged in
     npm run dev # Start the app
     ````
   - Then go to http://localhost:3000/.
-    - You'll see that I've added a template for each screen and feature.
+    - You'll see each pages we modify today.
 ---
 - Let's make it possible to use the backend process of the application, which is necessary for the function we will develop in this article.
   - What we created in the first and second part of this article is the front end (application). It works on the browser side.
@@ -431,7 +431,7 @@ When you are not logged in
     - If the email address is the same as the user we just created and the password is different, the `auth/wrong-password` error will occur.
 
 ---
-#### Screen display control by login status
+#### Access control by sign-in status
 - Let's control whether or not to display each screen according to the login status.
 - We'll use the middleware mechanism in Nuxt.js to determine the login status.
   https://ja.nuxtjs.org/docs/2.x/directory-structure/middleware/ ...
