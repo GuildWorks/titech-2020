@@ -3,13 +3,13 @@
     <PageHeading>ログイン</PageHeading>
     <div class="signin">
       <input
-        v-model="email"
+        v-model="state.email"
         type="text"
         required="true"
         placeholder="email"
       />
       <input
-        v-model="password"
+        v-model="state.password"
         type="password"
         required="true"
         placeholder="Password"
@@ -24,23 +24,30 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'nuxt-composition-api'
+import { defineComponent, reactive } from 'nuxt-composition-api'
 import PageHeading from '@/components/page-heading.vue'
+import firebase from '@/plugins/firebase.ts'
 
 export default defineComponent({
   components: {
     PageHeading,
   },
   setup(props) {
-    const email = ref('')
-    const password = ref('')
+    const state = reactive({
+      email: '',
+      password: ''
+    })
     function submit() {
-      // TODO
+      firebase.auth().signInWithEmailAndPassword(state.email, state.password)
+      .then(() => (location.href = '/users'))
+      .catch(function(error) {
+        // Handle Errors here.
+        alert('ログインが失敗しました。errorCode: ' + error.code + ', errorMessage:' + error.message)
+      });
     }
     return {
       props,
-      email,
-      password,
+      state,
       submit,
     }
   },

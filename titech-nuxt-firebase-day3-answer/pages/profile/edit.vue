@@ -4,7 +4,7 @@
       プロフィール編集
       <button
         class="w-20 text-center text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 mt-2 rounded focus:outline-none focus:shadow-outline"
-        @click="updateProfile"
+        @click="setProfile"
       >
         登録
       </button>
@@ -16,7 +16,7 @@
           :user-name="userData.name"
           :email="userData.email"
           @changeName="changeName"
-          @onFileChange="onFileChange"
+          @setIcon="setIcon"
         />
         <div class="pt-2">
           <label class="text-sm title-font text-gray-500">
@@ -63,6 +63,7 @@ import { defineComponent, reactive, SetupContext, onBeforeMount } from 'nuxt-com
 import PageHeading from '@/components/page-heading.vue'
 import ProfileNameIconEdit from '@/components/profile-name-icon-edit.vue'
 import ProfileTableEdit from '@/components/profile-table-edit.vue'
+import firebase from '@/plugins/firebase.ts'
 
 type User = {
   id: string
@@ -106,20 +107,76 @@ export default defineComponent({
         hobby: '',
       },
     })
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        userData.id = user.uid
+        userData.email = user.email
+        getUserData(user)
+      } else {
+        // No user is signed in.
+      }
+    })
+    const getUserData = (user) => {
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(user.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            userData.name = doc.data().name
+            userData.role = doc.data().role
+            userData.iconUrl = doc.data().iconUrl
+            userData.profile = doc.data().profile
+            userData.comment = doc.data().comment
+          }
+        })
+        .catch((err) => {
+          console.log('Error getting user document', err);
+        })
+    }
     const changeName = (name) => {
       userData.name = name
     }
-    const onFileChange = (file: File): void => {
-      // TODO
+    const setIcon = (file: File): void => {
+      // ストレージのルートへの参照を取得
+      const storageRef = firebase.storage().ref()
+      // プロフィール画像アップロード先への参照を取得
+      const fileRef = storageRef.child(
+        'images/profile/' + userData.id + '/' + file.name
+      )
+      // プロフィール画像をストレージにアップロード
+      fileRef.put(file).then(function (snapshot) {
+        // ユーザーデータのURLを更新する
+        snapshot.ref.getDownloadURL().then((url) => {
+          userData.iconUrl = url
+        })
+      })
     }
-    const updateProfile = (): void => {
-      // TODO
-      window.location.href = '/profile'
+    const setProfile = (): void => {
+      const data = {
+        name: userData.name,
+        email: userData.email,
+        role: userData.role,
+        iconUrl: userData.iconUrl,
+        comment: userData.comment,
+        profile: userData.profile,
+      }
+      firebase
+        .firestore()
+        .collection('users') // usersコレクションの、
+        .doc(userData.id) // <ユーザーID>というドキュメントに、
+        .set(data) // dataをセットする
+        .then(() => {
+          window.location.href = '/profile' // 完了後、プロフィール画面へ遷移
+        })
     }
     return {
       userData,
-      onFileChange,
-      updateProfile,
+      setIcon,
+      setProfile,
       changeName,
     }
   },

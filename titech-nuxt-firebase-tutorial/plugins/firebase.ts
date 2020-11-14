@@ -11,8 +11,7 @@ if (!firebase.apps.length) {
     projectId: "",
     storageBucket: "",
     messagingSenderId: "",
-    appId: "",
-    measurementId: ""
+    appId: ""
   })
 }
 

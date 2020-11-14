@@ -3,13 +3,13 @@
     <PageHeading>ログイン</PageHeading>
     <div class="signin">
       <input
-        v-model="email"
+        v-model="state.email"
         type="text"
         required="true"
         placeholder="email"
       />
       <input
-        v-model="password"
+        v-model="state.password"
         type="password"
         required="true"
         placeholder="Password"
@@ -24,7 +24,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'nuxt-composition-api'
+import { defineComponent, reactive } from 'nuxt-composition-api'
 import PageHeading from '@/components/page-heading.vue'
 
 export default defineComponent({
@@ -32,15 +32,16 @@ export default defineComponent({
     PageHeading,
   },
   setup(props) {
-    const email = ref('')
-    const password = ref('')
+    const state = reactive({
+      email: '',
+      password: ''
+    })
     function submit() {
       // TODO
     }
     return {
       props,
-      email,
-      password,
+      state,
       submit,
     }
   },

@@ -28,6 +28,7 @@
             あなたのプロフィール
           </a>
           <a
+            v-if="!isSignedIn()"
             href="/signup"
             class="text-blue-900 hover:text-blue-600 py-3 px-6 text-sm font-bold"
           >

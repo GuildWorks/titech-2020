@@ -4,7 +4,7 @@
       プロフィール編集
       <button
         class="w-20 text-center text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 mt-2 rounded focus:outline-none focus:shadow-outline"
-        @click="updateProfile"
+        @click="setProfile"
       >
         登録
       </button>
@@ -16,7 +16,7 @@
           :user-name="userData.name"
           :email="userData.email"
           @changeName="changeName"
-          @onFileChange="onFileChange"
+          @setIcon="setIcon"
         />
         <div class="pt-2">
           <label class="text-sm title-font text-gray-500">
@@ -124,10 +124,7 @@ export default defineComponent({
         .doc(user.uid)
         .get()
         .then((doc) => {
-          if (!doc.exists) {
-            // eslint-disable-next-line no-console
-            console.log('No such document!')
-          } else {
+          if (doc.exists) {
             userData.name = doc.data().name
             userData.role = doc.data().role
             userData.iconUrl = doc.data().iconUrl
@@ -136,14 +133,13 @@ export default defineComponent({
           }
         })
         .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.log('Error getting document', err);
+          console.log('Error getting user document', err);
         })
     }
     const changeName = (name) => {
       userData.name = name
     }
-    const onFileChange = (file: File): void => {
+    const setIcon = (file: File): void => {
       // ストレージのルートへの参照を取得
       const storageRef = firebase.storage().ref()
       // プロフィール画像アップロード先への参照を取得
@@ -158,7 +154,7 @@ export default defineComponent({
         })
       })
     }
-    const updateProfile = (): void => {
+    const setProfile = (): void => {
       const data = {
         name: userData.name,
         email: userData.email,
@@ -180,8 +176,8 @@ export default defineComponent({
     }
     return {
       userData,
-      onFileChange,
-      updateProfile,
+      setIcon,
+      setProfile,
       changeName,
     }
   },

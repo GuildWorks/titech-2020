@@ -6,8 +6,8 @@
       <!-- <img v-show="uploadedImage" class="object-cover w-full h-full"
         :src="uploadedImage" 
         @dragover.prevent 
-        @drop.prevent="onFileChange" /> -->
-      <div class="drag-area" @dragover.prevent @drop.prevent="onFileChange">
+        @drop.prevent="setIcon" /> -->
+      <div class="drag-area" @dragover.prevent @drop.prevent="setIcon">
         <span> {{ iconUploadAreaMessage }} </span>
       </div>
     </div>
@@ -89,11 +89,11 @@ export default defineComponent({
     const clearShadow = (): void => {
       cleared.value = false
     }
-    const onFileChange = (event: any) => {
+    const setIcon = (event: any) => {
       event.stopPropagation()
       const files = event.target.files || event.dataTransfer.files
       createImage(files[0])
-      context.emit('onFileChange', files[0])
+      context.emit('setIcon', files[0])
     }
     const createImage = (file: any) => {
       const reader = new FileReader()
@@ -111,7 +111,7 @@ export default defineComponent({
       cleared,
       clearIcon,
       clearShadow,
-      onFileChange,
+      setIcon,
       createImage,
       userNameEmitter,
     }
