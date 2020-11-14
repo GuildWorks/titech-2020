@@ -7,15 +7,6 @@
         <span> {{ iconUploadAreaMessage }} </span>
       </div>
     </div>
-    <div class="absolute flex bottom-0">
-      <button
-        class="w-24 text-center text-xs bg-blue-500 hover:bg-blue-700 text-white 1 px-2 mt-1 rounded"
-        v-bind:class="{ 'focus:outline-none': !cleared, 'focus:shadow-outline': cleared }"
-        @mousedown="clearIcon"
-        @mouseup="clearShadow"
-      >画像クリア
-      </button>
-    </div>
     <div>
       <h3 class="text-sm title-font text-gray-500 tracking-widest">
         NAME
@@ -77,10 +68,6 @@ export default defineComponent({
       uploadedImage.value = props.iconUrl
     })
 
-    const clearIcon = (): void => {
-      uploadedImage.value = ''
-      cleared.value = true
-    }
     const clearShadow = (): void => {
       cleared.value = false
     }
@@ -104,7 +91,6 @@ export default defineComponent({
       props,
       uploadedImage,
       cleared,
-      clearIcon,
       clearShadow,
       setIcon,
       createImage,
