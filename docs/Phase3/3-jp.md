@@ -85,7 +85,7 @@ http://localhost:3000/user/0001
 ---
 #### 気になるところ
 - 表示内容が変わりません。
-  - 表示しているデータは実際に登録したものではなく、[ダミーデータ](https://github.com/GuildWorks/titech-2020/blob/master/titech-nuxt-day2-anser/mock/userlist.json)です。
+  - 表示しているデータは実際に登録したものではなく、[サンプルデータ](https://github.com/GuildWorks/titech-2020/blob/master/titech-nuxt-day2-answer/mock/userlist.json)です。
     - ユーザーの追加ができません。
     - プロフィールの更新ができません。
 - ログインをしなくても、誰でもデータを見ることができてしまいます。

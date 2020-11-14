@@ -83,7 +83,7 @@ http://localhost:3000/user/0001
 ---
 #### where I'm concerned.
 - The content of the display does not change.
-  - Displayed data is [dummy](https://github.com/GuildWorks/titech-2020/blob/master/titech-nuxt-day2-anser/mock/userlist.json). 
+  - Displayed data is [sample](https://github.com/GuildWorks/titech-2020/blob/master/titech-nuxt-day2-answer/mock/userlist.json). 
     - We can't add a user.
     - We can't update our profile.
 - Anyone can see the data without logging in.
