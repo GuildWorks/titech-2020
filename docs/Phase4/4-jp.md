@@ -66,7 +66,7 @@ paginate: true
 
 ※第 1 回講義資料より
 
-![gitイメージ](https://www.ricksoft.jp/blog/wp-content/uploads/2018/11/Subversion02.png)
+![w:800px](https://www.ricksoft.jp/blog/wp-content/uploads/2018/11/Subversion02.png)
 
 出典：[GitとSubversionの構造的な違い - Ricksoft Blog](https://www.ricksoft.jp/blog/archives/9483/)
 
@@ -99,63 +99,105 @@ Git がどういう物なのかを学んで行きます。
 
 まずみなさんが本講義を受ける時に初めて叩いたコマンドがこれでした。
 
-```git clone https://github.com/GuildWorks/titech-2020.git`
-
-----
-
-※今までの講義で編集したファイルたちが残っているとこの後の commit / push の時に大変だと思うので、別名でもう一回 clone してきた方がよいかも。
+```bash
+git clone https://github.com/GuildWorks/titech-2020.git`
+```
 
 ----
 
 このコマンドが何をやっているかというと... :thinking:
 
 * `git` で Git のコマンドであることを示します
-* 次に Git の `clone` コマンドを実行します。
-* この `clone` は、その後に続く「リモートリポジトリ」の内容をもとに「ローカルリポジトリ」を作るコマンドになります。
-* その時、リモートリポジトリから **どのブランチ** の状態を持ってくるかが重要になってきます
-* 最初に叩いたコマンドではブランチ名を特に指定していませんでした
-* ブランチ名が省略された場合、対象となるリモートリポジトリに設定されているデフォルトブランチ（今回なら `master` ブランチ）の状態を持ってきます
-* もし、特定のブランチの状態を指定してリモートリポジトリの内容を持ってきたい場合はこんな感じになります。
-
-```git clone -b feature/phase4 git@github.com:GuildWorks/titech-2020.git```
-
-※リモートとローカルの作業ディレクトリの絵
+* 次に Git の `clone` コマンドを実行します
+* この `clone` は、その後に続く「リモートリポジトリ」の内容をもとに「ローカルリポジトリ」を作るコマンドになります
+* この時、リモートリポジトリから **どのブランチ** の状態を持ってくるかが重要になってきます
+* 最初に叩いたコマンドではブランチ名を省略していますが、この場合は、対象となるリモートリポジトリに設定されているデフォルトブランチ（今回なら `master` ブランチ）の状態を持ってきます
 
 ----
 
-もう 1 つ。
+* もし、特定のブランチの状態を指定してリモートリポジトリの内容を持ってきたい場合はこんな感じになります
+
+```bash
+git clone -b feature/phase4 https://github.com/GuildWorks/titech-2020.git
+```
+
+----
+
+![bg w:600px left:45%](images/git_clone_before.png)
+
+![bgw:600px](images/git_clone_after.png)
+
+----
+
+今までの #1 ~ #3 までで利用していた titech-2020 のディレクトリを
+そのまま利用すると、過去の編集でたくさんの差分が発生しています
+
+なので、今日のワークショップ用に下記コマンドを叩いて新しくローカルリポジトリを取得しましょう
+
+----
+
+⚠️このコマンドを実行するのは、今まで利用していた titech-2020 の
+一つ上の階層で実行してください！
+
+```bash
+# titech-2020 のディレクトリに移動
+
+# 一つ上の階層に移動
+cd ../
+
+# 今日のワークショップ用に再度 clone
+git clone https://github.com/GuildWorks/titech-2020.git titech-2020-day4
+```
+
+実行できましたかね？
+まだの人ーー 🙋‍♀️ ？
+
+----
+
+OK。もう 1 つ。
 
 みなさんが馴染みのあるコマンドを見てみましょう。
 
-`git pull`
+```bash
+git pull
+```
 
 ----
 
 このコマンドが何をやっているかというと... :thinking:
 
-* Git の `pull` コマンドを実行しています。
+* Git の `pull` コマンドを実行しています
 * この `pull` は、今見ている **ブランチ** の内容を最新化するコマンドになります
-  * 今見ているブランチは先ほど述べた通り `master` ブランチとなります
-
-※内部的には
-* リモートリポジトリからローカルリポジトリへ
-* そして、ローカルリポジトリから作業ディレクトリへ
-を一発で行っているコマンドになります
+* 先程の例だと、今見ている **ブランチ** は `master` ブランチとなります
 
 ----
 
-（画像）
+内部的には...
+
+1. リモートリポジトリからローカルリポジトリへ
+  `git fetch`
+2. そして、ローカルリポジトリから作業ディレクトリへ
+  `git merge`
+
+を一発で行っているコマンドになります💪
+
+![bg w:600px right:50%](images/git_pull_after.png)
 
 ----
 
-では、本当に今見ているブランチが `master` ブランチなのか確かめてみましょう
+では、今見ているブランチが本当に `master` ブランチなのか確かめてみましょう👀
 
-ルートで `git branch` コマンドを実行してみましょう
+先程 clone してきた `titech-2020-day4` の直下で `git branch` コマンドを実行してみましょう
+
+----
 
 すると、今のブランチ名の横に `*` が付いていると思います。
-（GitBash や Terminal を使っていれば、文字色も変わっているはず :smile:）
+GitBash や Terminal を使っていれば、文字色も変わっているはず :smile:
 
-このコマンドは、現在「ローカルリポジトリ」にどういったブランチが存在するかを確認するコマンドになります。
+![w:900px](images/git_branch_before.png)
+
+
+このコマンドは、現在「ローカルリポジトリ」にどういったブランチが存在し、現在はどのブランチを向いているのかを確認するコマンドになります。
 
 ----
 
@@ -164,17 +206,28 @@ Git がどういう物なのかを学んで行きます。
 ----
 
 では、今度は新しいブランチを作成してみましょう。
-新しいブランチを作成するイメージは文字通り枝分かれするイメージとなります。
+新しいブランチを作成するイメージは、文字通り枝分かれするイメージとなります。
 
-※今の master ブランチから feature ブランチが枝分かれするイメージを
+![w:700px](images/branch_feature.png)
+
+これは `master` ブランチから `feature` ブランチが枝分かれするイメージ
 
 ----
 
 では早速ブランチを作成してみましょう。
 
-`git branch feature/{your-name}`
+```bash
+git branch feature/{your-name}
+```
 
-※君の名はのポスター
+`{your-name}` の部分はご自身の苗字を当てはめてください。
+例えば私なら `feature/kyogoku` となるので
+
+```bash
+git branch feature/kyogoku
+```
+
+![bg w:400px right:45%](images/your-name.jpg)
 
 ----
 
@@ -188,9 +241,15 @@ Git がどういう物なのかを学んで行きます。
 
 ----
 
-```git branch```
+```bash
+git branch
+```
 
 すると、最初に `git branch` を叩いた時にあった `master` ブランチの他に、先ほど作成した `feature/{your-name}` ブランチが存在しているはずです！
+
+![w:900px](images/git_branch_after.png)
+
+----
 
 これで新しいブランチが「ローカルリポジトリ」に作成されたことになります。
 ただ `*` のマークは相変わらず `master` ブランチに付いていますよね？
@@ -199,12 +258,25 @@ Git がどういう物なのかを学んで行きます。
 ----
 
 そこで、作成したブランチに移動してみましょう。
+実行するのは `git checkout` コマンドになります。
 
-次は `git checkout feature/{your-name}`
+```bash
+git checkout feature/{your-name}
+```
+
+このように `checkout` の後に移動したいブランチ名を指定します。
+
+私の場合はこんな感じですね。
+
+```bash
+git checkout feature/kyogoku
+```
+
+----
 
 このコマンドを叩くと
 ```git
-Switched to branch 'feature/kyogoku'
+Switched to branch 'feature/{your-name}'
 ```
 
 というメッセージが表示されたはずです！
@@ -214,25 +286,35 @@ Switched to branch 'feature/kyogoku'
 
 では本当にブランチを移動したのか確認してみましょう。
 
-...何のコマンドを使えば良いかわかりますよね（しつこい） :kiss:？
+...何のコマンドを使えば良いかわかりますよね :kiss::kiss:？
 
 そうです！
 三度登場！ `git branch` コマンドになります。
+
+```bash
+git branch
+```
+
+----
 
 `git branch` を実行すると `*` の位置が変わっていますよね？
 先ほどまでは `master` ブランチに `*` が付いていたはずですが
 今叩いてみると `feature/{your-name}` ブランチに `*` がついているはずです。
 
-これで、作業ブランチが `feature/{your-name}` ブランチに移動しました。
+![w:900px](images/git_checkout_after.png)
+
+これで無事に作業ブランチが `feature/{your-name}` ブランチに移動しました。
 
 ----
 
 ここまで学んだコマンドをおさらいしてみましょう。
 
-`clone`
-`pull`
-`branch`
-`checkout`
+コマンド|用途|
+:-|:-|
+`clone`|リモートリポジトリからローカルリポジトリを作成|
+`pull`|現在のブランチ内容を最新化|
+`branch`|ブランチを作成|
+`checkout`|ブランチを移動|
 
 ----
 
@@ -240,15 +322,47 @@ Switched to branch 'feature/kyogoku'
 
 流れとしてはこんな感じになります。
 
-1. 作業ディレクトリでファイルの変更を行う
-2. 変更内容を「ローカルリポジトリ」へ反映
-3. 「ローカルリポジトリ」の内容を「リモートリポジトリ」へ反映
+0. :black_square_button: 本日新たに `clone` したディレクトリを VS Code に追加
+1. :black_square_button: 作業ディレクトリでファイルの変更を行う
+2. :black_square_button: 変更内容を「ローカルリポジトリ」へ反映
+3. :black_square_button: 「ローカルリポジトリ」の内容を「リモートリポジトリ」へ反映
 
 ----
 
-### 作業ディレクトリでファイルの変更を行う
+### 0. 本日新たに `clone` したディレクトリを VS Code に追加
+
+まず事前準備として、本日新たに `clone` してきたディレクトリを VS Code に追加し、VS Code 上で編集できるようにします。
+
+----
+
+まず VS Code の左パネルの `GITHUB (WORKSPACE)` となっているところが表示されていることを確認。
+
+そして、その領域に本日新たに `clone` してきたディレクトリを Drag & Drop します。
+
+ディレクトリの名前はみなさん `titech-2020-day4` のはず！
+
+![bg w:600px right:50%](images/vscode_add_to_workspace.png)
+
+----
+
+Drag & Drop が成功すると、こんな確認ダイアログが表示されるはずなので一番上の `Add Folder to Workspace` をクリック。
+
+![bg w:500px right:50%](images/vscode_add_to_workspace_confirm.png)
+
+----
+
+すると VS Code 左パネルの `GITHUB (WORKSPACE)` のところに `titech-2020-day4` が増えているはずです！
+
+増えていないひとー 🙋‍♀️ ？
+
+![bg w:500px right:50%](images/vscode_add_to_workspace_after.png)
+
+----
+
+### 1. 作業ディレクトリでファイルの変更を行う
 
 VS Code で下記のディレクトリを選択してください。
+
 そして、右クリックのメニューから `New File` を選択して新規ファイルを作成します。
 
 （画像）
