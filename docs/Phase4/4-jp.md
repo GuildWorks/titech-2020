@@ -118,7 +118,7 @@ Git では **ブランチ（枝）** と呼ばれるものを使って
 まずみなさんが本講義を受ける時に初めて叩いたコマンドがこれでした。
 
 ```bash
-git clone https://github.com/GuildWorks/titech-2020.git`
+git clone https://github.com/GuildWorks/titech-2020.git
 ```
 
 ----
