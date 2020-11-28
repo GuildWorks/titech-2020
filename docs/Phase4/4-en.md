@@ -116,7 +116,7 @@ What this branch is...
 First of all, this was the first command you hit when you took this course.
 
 ```bash
-git clone https://github.com/GuildWorks/titech-2020.git`
+git clone https://github.com/GuildWorks/titech-2020.git
 ```
 
 ----
